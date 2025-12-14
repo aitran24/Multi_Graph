@@ -1,0 +1,51 @@
+{
+  "technique_id": "T1218.011",
+  "technique_name": "Rundll32 Execution",
+  "description": "System Binary Proxy Execution: Rundll32",
+  
+  "event_ids": {
+    "sysmon": [1, 3, 7, 11],
+    "security": [4688]
+  },
+  
+  "focus_processes": [
+    "rundll32.exe"
+  ],
+  
+  "suspicious_patterns": {
+    "process_names": [
+      "rundll32.exe",
+      "notrundll32.exe"
+    ],
+    "command_patterns": [
+      "javascript:",
+      "http://",
+      "https://",
+      "comsvcs.dll",
+      "MiniDump",
+      "DllRegisterServer",
+      "shell32.dll",
+      "advpack.dll",
+      "ieadvpack.dll"
+    ],
+    "dll_patterns": [
+      "comsvcs.dll",
+      "pcwutl.dll",
+      "advpack.dll",
+      "ieadvpack.dll",
+      "setupapi.dll",
+      "syssetup.dll"
+    ]
+  },
+  
+  "detection_logic": {
+    "type": "lolbin_execution",
+    "require_suspicious_dll": true,
+    "require_network": false
+  },
+  
+  "node_labels": {
+    "rundll32.exe": "Rundll32 (LOLBin)",
+    "notrundll32.exe": "Fake Rundll32"
+  }
+}

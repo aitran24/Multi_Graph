@@ -1,0 +1,44 @@
+{
+  "technique_id": "T1003.001",
+  "technique_name": "LSASS Memory Dumping",
+  "description": "OS Credential Dumping: LSASS Memory",
+  
+  "event_ids": {
+    "sysmon": [1, 10, 11],
+    "security": [4688, 4656, 4663]
+  },
+  
+  "focus_processes": [
+    "lsass.exe"
+  ],
+  
+  "suspicious_patterns": {
+    "process_names": [
+      "procdump.exe",
+      "createdump.exe",
+      "mimikatz.exe",
+      "dumpert.exe",
+      "sqldumper.exe"
+    ],
+    "command_patterns": [
+      "lsass",
+      "sekurlsa",
+      "-ma lsass",
+      "comsvcs.dll MiniDump"
+    ],
+    "target_process": "lsass.exe"
+  },
+  
+  "detection_logic": {
+    "type": "process_access",
+    "target_pid_name": "lsass.exe",
+    "access_rights": ["0x1410", "0x1010", "0x1438"],
+    "file_creation_patterns": [".dmp", "lsass", "dump"]
+  },
+  
+  "node_labels": {
+    "lsass.exe": "LSASS (Target)",
+    "procdump.exe": "ProcDump Tool",
+    "createdump.exe": "CreateDump Tool"
+  }
+}

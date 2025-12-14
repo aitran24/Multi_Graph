@@ -1,0 +1,70 @@
+{
+  "technique_id": "T1204.002",
+  "technique_name": "Malicious File Execution",
+  "description": "User Execution: Malicious File",
+  
+  "event_ids": {
+    "sysmon": [1, 11, 15],
+    "security": [4688, 4663]
+  },
+  
+  "focus_processes": [
+    "explorer.exe",
+    "outlook.exe",
+    "winword.exe",
+    "excel.exe",
+    "powerpnt.exe"
+  ],
+  
+  "suspicious_patterns": {
+    "parent_processes": [
+      "explorer.exe",
+      "outlook.exe",
+      "winword.exe",
+      "excel.exe",
+      "powerpnt.exe",
+      "iexplore.exe",
+      "chrome.exe",
+      "firefox.exe"
+    ],
+    "child_lolbins": [
+      "powershell.exe",
+      "cmd.exe",
+      "wscript.exe",
+      "cscript.exe",
+      "mshta.exe",
+      "rundll32.exe",
+      "regsvr32.exe",
+      "certutil.exe"
+    ],
+    "suspicious_paths": [
+      "Downloads",
+      "Temp",
+      "AppData\\Local\\Temp",
+      "AppData\\Roaming",
+      "Public",
+      "ProgramData"
+    ],
+    "file_extensions": [
+      ".exe",
+      ".dll",
+      ".ps1",
+      ".bat",
+      ".vbs",
+      ".js",
+      ".hta",
+      ".scr"
+    ]
+  },
+  
+  "detection_logic": {
+    "type": "user_initiated_execution",
+    "require_parent_child": true,
+    "require_suspicious_path": false
+  },
+  
+  "node_labels": {
+    "explorer.exe": "Windows Explorer (User)",
+    "rundll32.exe": "Rundll32 (LOLBin)"
+  }
+}

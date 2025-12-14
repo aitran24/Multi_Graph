@@ -1,0 +1,57 @@
+{
+  "technique_id": "T1548.002",
+  "technique_name": "Bypass User Account Control",
+  "description": "Abuse Elevation Control Mechanism: Bypass UAC",
+  
+  "event_ids": {
+    "sysmon": [1, 12, 13, 14],
+    "security": [4688, 4657]
+  },
+  
+  "focus_processes": [
+    "fodhelper.exe",
+    "eventvwr.exe",
+    "computerdefaults.exe",
+    "sdclt.exe"
+  ],
+  
+  "suspicious_patterns": {
+    "registry_keys": [
+      "HKCU\\Software\\Classes\\ms-settings",
+      "HKCU\\Software\\Classes\\mscfile",
+      "HKCU\\Software\\Classes\\.exe",
+      "HKCU\\Software\\Classes\\exefile",
+      "HKCU\\Software\\Classes\\Folder\\shell\\open\\command"
+    ],
+    "process_names": [
+      "fodhelper.exe",
+      "eventvwr.exe",
+      "computerdefaults.exe",
+      "sdclt.exe",
+      "slui.exe"
+    ],
+    "command_patterns": [
+      "fodhelper",
+      "eventvwr",
+      "ms-settings",
+      "Software\\Classes"
+    ],
+    "high_integrity_parent": [
+      "explorer.exe",
+      "cmd.exe",
+      "powershell.exe"
+    ]
+  },
+  
+  "detection_logic": {
+    "type": "uac_bypass",
+    "require_registry_hijack": true,
+    "require_auto_elevate_process": true
+  },
+  
+  "node_labels": {
+    "fodhelper.exe": "FodHelper (Auto-Elevate)",
+    "eventvwr.exe": "Event Viewer (Auto-Elevate)",
+    "ms-settings": "MS-Settings Hijack"
+  }
+}

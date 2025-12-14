@@ -1,0 +1,2324 @@
+{
+  "nodes": [
+    {
+      "id": "Process:{D0D4CC13-1673-5FA5-FA02-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1673-5FA5-FA02-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1673-5FA5-F902-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1673-5FA5-F902-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:c9a163891006e106",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_5d5nukdh.twh.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1673-5FA5-F802-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1673-5FA5-F802-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1673-5FA5-F602-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-1673-5FA5-F602-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1505-5FA5-0C00-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "svchost",
+        "image": "%WINDIR%\\System32\\svchost.exe",
+        "guid": "{D0D4CC13-1505-5FA5-0C00-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1674-5FA5-0203-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1674-5FA5-0203-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1674-5FA5-0103-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1674-5FA5-0103-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:84517fb169de6a34",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_exwja4ws.ry1.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1674-5FA5-0003-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1674-5FA5-0003-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1674-5FA5-FE02-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-1674-5FA5-FE02-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1676-5FA5-0A03-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1676-5FA5-0A03-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1676-5FA5-0903-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1676-5FA5-0903-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:fe2e648c103d1e7a",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_o3aevl0f.i2l.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1676-5FA5-0803-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1676-5FA5-0803-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1675-5FA5-0603-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-1675-5FA5-0603-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1677-5FA5-1903-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "PowerShell  -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: (Get-WmiObject -ClassName Win32_OperatingSystem).LastBootUpTime]",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1677-5FA5-1903-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1677-5FA5-1803-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1677-5FA5-1803-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1677-5FA5-1603-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-1677-5FA5-1603-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1677-5FA5-1403-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: Set-StrictMode -Version Latest\nshutdown /r /t 2 /c \"Reboot initiated by Ansible\"\nIf (-not $?) { If (Get-Variable LASTEXITCODE -ErrorAction SilentlyContinue) { exit $LASTEXITCODE } Else { exit 1 } }]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1677-5FA5-1403-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1677-5FA5-1303-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1677-5FA5-1303-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:a02eca80dfef9d5e",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_quoztje1.mjx.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1677-5FA5-1203-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1677-5FA5-1203-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1677-5FA5-0E03-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-1677-5FA5-0E03-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1677-5FA5-1103-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "PowerShell  -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: (Get-WmiObject -ClassName Win32_OperatingSystem).LastBootUpTime]",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1677-5FA5-1103-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1677-5FA5-1003-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1677-5FA5-1003-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:6a2a6a99f39b9f49",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_rz2fwqc0.hdx.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1679-5FA5-1D03-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "PowerShell  -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: (Get-WmiObject -ClassName Win32_OperatingSystem).LastBootUpTime]",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1679-5FA5-1D03-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1679-5FA5-1C03-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1679-5FA5-1C03-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1679-5FA5-1A03-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-1679-5FA5-1A03-000000008701}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:7cc88234954cfae6",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_hkjtjffv.zns.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-169C-5FA5-0A00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "services",
+        "image": "%WINDIR%\\System32\\services.exe",
+        "guid": "{D0D4CC13-169C-5FA5-0A00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-169E-5FA5-1A00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-169E-5FA5-1A00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:9234f70040fcc47f",
+      "type": "File",
+      "properties": {
+        "path": "%USER%\\splunkd.exe",
+        "path_normalized": "c:\\users\\[user]\\splunkd.exe"
+      }
+    },
+    {
+      "id": "File:7f280e8ce77e0db3",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\windows\\temp\\__psscriptpolicytest_3lowmpjh.1wq.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-169E-5FA5-0C00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "svchost",
+        "image": "%WINDIR%\\System32\\svchost.exe",
+        "command_line": "C:\\Windows\\system32\\svchost.exe -k DcomLaunch",
+        "parent_image": "%WINDIR%\\System32\\services.exe",
+        "guid": "{D0D4CC13-169E-5FA5-0C00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-169C-5FA5-0700-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "wininit",
+        "image": "%WINDIR%\\System32\\wininit.exe",
+        "guid": "{D0D4CC13-169C-5FA5-0700-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-169C-5FA5-0400-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "smss",
+        "image": "%WINDIR%\\System32\\smss.exe",
+        "guid": "{D0D4CC13-169C-5FA5-0400-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-169B-5FA5-0200-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "smss",
+        "image": "%WINDIR%\\System32\\smss.exe",
+        "guid": "{D0D4CC13-169B-5FA5-0200-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16D1-5FA5-7D00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "PowerShell  -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -EncodedCommand dwBoAG8AYQBtAGkA",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16D1-5FA5-7D00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16D1-5FA5-7C00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16D1-5FA5-7C00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16D1-5FA5-7A00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-16D1-5FA5-7A00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16D1-5FA5-7900-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "PowerShell  -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: (Get-WmiObject -ClassName Win32_OperatingSystem).LastBootUpTime]",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16D1-5FA5-7900-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16D1-5FA5-7800-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16D1-5FA5-7800-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16D1-5FA5-7600-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-16D1-5FA5-7600-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16D6-5FA5-8300-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16D6-5FA5-8300-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16D6-5FA5-8200-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16D6-5FA5-8200-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:0c5c6dec2d5c229a",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_bgqpsrj2.d03.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16D6-5FA5-8100-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16D6-5FA5-8100-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16D6-5FA5-7F00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-16D6-5FA5-7F00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:a7dc29716400d3da",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_aqhhrcpd.voh.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16DC-5FA5-8800-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "reg",
+        "image": "%WINDIR%\\System32\\reg.exe",
+        "command_line": "C:\\Windows\\system32\\reg.exe  query hklm\\software\\microsoft\\windows\\softwareinventorylogging /v collectionstate /reg:64",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16DC-5FA5-8800-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16DC-5FA5-8700-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16DC-5FA5-8700-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16DB-5FA5-8500-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16DB-5FA5-8500-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:9472171786e6f15c",
+      "type": "Network",
+      "properties": {
+        "address": "10.0.1.14",
+        "port": "389",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16DF-5FA5-8E00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16DF-5FA5-8E00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16DF-5FA5-8D00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16DF-5FA5-8D00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:d14152dc9878cd36",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_2xk53a0v.jyn.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16DF-5FA5-8C00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16DF-5FA5-8C00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16DF-5FA5-8A00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-16DF-5FA5-8A00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E0-5FA5-9300-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "PowerShell  -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: PowerShell -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -EncodedCommand JgBjAGgAYwBwAC4AYwBvAG0AIAA2ADUAMAAwADEAIAA+ACAAJABuAHUAbABsAAoAJABlAHgAZQBjAF8AdwByAGEAcABwAGUAcgBfAHMAdAByACAAPQAg...]",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16E0-5FA5-9300-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E0-5FA5-9200-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16E0-5FA5-9200-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:5a40b42a6bc04fef",
+      "type": "Network",
+      "properties": {
+        "address": "0:0:0:0:0:0:0:1",
+        "port": "47001",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E1-5FA5-9400-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16E1-5FA5-9400-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E2-5FA5-9C00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16E2-5FA5-9C00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E2-5FA5-9B00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16E2-5FA5-9B00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:8920a27fa850b2b2",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_5enohlwz.mo4.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E2-5FA5-9A00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16E2-5FA5-9A00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E2-5FA5-9800-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-16E2-5FA5-9800-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E3-5FA5-A000-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Get-PackageProvider]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16E3-5FA5-A000-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E4-5FA5-A600-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "PowerShell  -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: PowerShell -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -EncodedCommand JgBjAGgAYwBwAC4AYwBvAG0AIAA2ADUAMAAwADEAIAA+ACAAJABuAHUAbABsAAoAJABlAHgAZQBjAF8AdwByAGEAcABwAGUAcgBfAHMAdAByACAAPQAg...]",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16E4-5FA5-A600-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E4-5FA5-A500-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16E4-5FA5-A500-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E4-5FA5-A300-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-16E4-5FA5-A300-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:2ced273598704605",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\uc1i3kow\\uc1i3kow.dll",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\uc1i3kow\\uc1i3kow.dll"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E5-5FA5-A700-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16E5-5FA5-A700-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:ff189e3c8bad4609",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_paiqrymw.jav.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E6-5FA5-AB00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16E6-5FA5-AB00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:ad563bf11f43fb38",
+      "type": "Network",
+      "properties": {
+        "type": "IP",
+        "address": "2.8.5.201"
+      }
+    },
+    {
+      "id": "Network:8fb93a8279883392",
+      "type": "Network",
+      "properties": {
+        "address": "152.199.19.161",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:3e3e3bd0de98b3b3",
+      "type": "Network",
+      "properties": {
+        "address": "172.227.168.22",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "File:6a51935ba2b25c52",
+      "type": "File",
+      "properties": {
+        "path": "%PROGRAMFILES%\\PackageManagement\\ProviderAssemblies\\nuget\\2.8.5.208\\Microsoft.PackageManagement.NuGetProvider.dll",
+        "path_normalized": "c:\\program files\\packagemanagement\\providerassemblies\\nuget\\2.8.5.208\\microsoft.packagemanagement.nugetprovider.dll"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E8-5FA5-B200-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16E8-5FA5-B200-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E8-5FA5-B100-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16E8-5FA5-B100-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:212826d9f9ebcb44",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_ty5dqwaq.ecf.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E8-5FA5-B000-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16E8-5FA5-B000-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E8-5FA5-AE00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-16E8-5FA5-AE00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E9-5FA5-B600-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Set-ItemProperty -Path \"HKLM:\\SOFTWARE\\Microsoft\\Internet Explorer\\Main\" -Name \"DisableFirstRunCustomize\" -Value 2\nIEX (IWR https://raw....]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16E9-5FA5-B600-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:798dc1fb3e3498f1",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://raw"
+      }
+    },
+    {
+      "id": "File:87224e0a8e6a4676",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\5x3b1py0\\5x3b1py0.dll",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\5x3b1py0\\5x3b1py0.dll"
+      }
+    },
+    {
+      "id": "Network:8d3c0e76a4d3e171",
+      "type": "Network",
+      "properties": {
+        "address": "151.101.112.133",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:d75cbebb819749a0",
+      "type": "Network",
+      "properties": {
+        "address": "140.82.121.9",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:04d1a7cf9bf3e76d",
+      "type": "Network",
+      "properties": {
+        "address": "140.82.121.4",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:22060179e5cfc182",
+      "type": "Network",
+      "properties": {
+        "address": "168.61.186.235",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "File:d78a18eb467e4ce5",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\0distvzl\\Load-Assemblies.ps1",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\0distvzl\\load-assemblies.ps1"
+      }
+    },
+    {
+      "id": "File:d86db078776e1597",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_ijas1l43.vkb.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16FD-5FA5-C400-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16FD-5FA5-C400-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16FD-5FA5-C300-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16FD-5FA5-C300-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:bd1840a1b53729e6",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_z5crsl4v.buv.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16FD-5FA5-C200-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16FD-5FA5-C200-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16FD-5FA5-C000-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-16FD-5FA5-C000-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16FE-5FA5-C800-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Import-Module \"C:\\AtomicRedTeam\\invoke-atomicredteam\\Invoke-AtomicRedTeam.psd1\" -Force\nInvoke-AtomicTest \"T1112\" -GetPrereqs]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16FE-5FA5-C800-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16FF-5FA5-D100-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16FF-5FA5-D100-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16FF-5FA5-D000-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16FF-5FA5-D000-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:6d606210298f2b06",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_qumv41ah.nbg.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16FF-5FA5-CF00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16FF-5FA5-CF00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16FF-5FA5-CD00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-16FF-5FA5-CD00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1700-5FA5-D500-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Import-Module \"C:\\AtomicRedTeam\\invoke-atomicredteam\\Invoke-AtomicRedTeam.psd1\" -Force\nInvoke-AtomicTest \"T1112\" -Confirm:$false -Timeou...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1700-5FA5-D500-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1701-5FA5-DD00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "reg",
+        "image": "%WINDIR%\\System32\\reg.exe",
+        "command_line": "reg  add HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /t REG_EXPAND_SZ /v SecurityHealth /d calc.exe /f ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1701-5FA5-DD00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1701-5FA5-DC00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1701-5FA5-DC00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1701-5FA5-DB00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "reg",
+        "image": "%WINDIR%\\System32\\reg.exe",
+        "command_line": "reg  add HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced /t REG_DWORD /v HideFileExt /d 1 /f ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1701-5FA5-DB00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1701-5FA5-DA00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1701-5FA5-DA00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:d54f3c644c6c54f2",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\1qjrj0cn\\1qjrj0cn.dll",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\1qjrj0cn\\1qjrj0cn.dll"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1702-5FA5-E200-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope LocalMachine} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1702-5FA5-E200-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1702-5FA5-E100-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {New-ItemProperty \\\"\"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\\"\" -Name T1112 -Value \\\"\"<script>\\\"\"} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1702-5FA5-E100-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1702-5FA5-E000-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {$key= \\\"\"HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\Domains\\bad-domain.com\\\\\"\"\n$name =\\\"\"bad-subdomain\\\"\"\nnew-item $key -Name $name -Force\nnew-itemproperty $key$name -Name https -Value 2 -Type DWORD;\nnew-itemproperty $key$name -Name http  -Value 2 -Type DWORD;\nnew-itemproperty $key$name -Name *     -Value 2 -Type DWORD;} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1702-5FA5-E000-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1702-5FA5-DF00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "reg",
+        "image": "%WINDIR%\\System32\\reg.exe",
+        "command_line": "reg  add HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest /v UseLogonCredential /t REG_DWORD /d 1 /f ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1702-5FA5-DF00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1702-5FA5-DE00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1702-5FA5-DE00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1703-5FA5-E700-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1703-5FA5-E700-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1703-5FA5-E600-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1703-5FA5-E600-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:5ad9ce7a6a93ed2c",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_ud0urmbd.ygt.ps1"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1703-5FA5-E500-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1703-5FA5-E500-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1703-5FA5-E300-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D0D4CC13-1703-5FA5-E300-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1704-5FA5-EB00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Import-Module \"C:\\AtomicRedTeam\\invoke-atomicredteam\\Invoke-AtomicRedTeam.psd1\" -Force\nInvoke-AtomicTest \"T1112\" -Cleanup]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1704-5FA5-EB00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1705-5FA5-F400-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\system32\\cmd.exe\" /c \"reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest /v UseLogonCredential /t REG_DWORD /d 0 /f >nul 2>&1\" ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1705-5FA5-F400-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1705-5FA5-F300-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "reg",
+        "image": "%WINDIR%\\System32\\reg.exe",
+        "command_line": "reg  delete HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v SecurityHealth /f  ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1705-5FA5-F300-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1705-5FA5-F200-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1705-5FA5-F200-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1705-5FA5-F100-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "reg",
+        "image": "%WINDIR%\\System32\\reg.exe",
+        "command_line": "reg  delete HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced /v HideFileExt /f  ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1705-5FA5-F100-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1705-5FA5-F000-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1705-5FA5-F000-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:e672993ad6f865d4",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\qz0dhnxo\\qz0dhnxo.dll",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\qz0dhnxo\\qz0dhnxo.dll"
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1706-5FA5-F800-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {Set-ExecutionPolicy -ExecutionPolicy Default -Scope LocalMachine} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1706-5FA5-F800-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1706-5FA5-F700-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {Remove-ItemProperty \\\"\"HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\\"\" -Name T1112 -ErrorAction Ignore} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1706-5FA5-F700-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1706-5FA5-F600-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {$key = \\\"\"HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ZoneMap\\Domains\\bad-domain.com\\\\\"\"\nRemove-item  $key -Recurse -ErrorAction Ignore} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1706-5FA5-F600-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1705-5FA5-F500-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "reg",
+        "image": "%WINDIR%\\System32\\reg.exe",
+        "command_line": "reg  add HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest /v UseLogonCredential /t REG_DWORD /d 0 /f  ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1705-5FA5-F500-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:30de4e4d97f4b08e",
+      "type": "File",
+      "properties": {
+        "path": "%PROGRAMFILES%\\SplunkUniversalForwarder\\etc\\apps\\Splunk_TA_stream\\windows_x86_64\\bin\\concrt140.dll",
+        "path_normalized": "c:\\program files\\splunkuniversalforwarder\\etc\\apps\\splunk_ta_stream\\windows_x86_64\\bin\\concrt140.dll"
+      }
+    },
+    {
+      "id": "Registry:81cd471ee085837b",
+      "type": "Registry",
+      "properties": {
+        "path": "HKLM\\SOFTWARE\\MICROSOFT\\WINDOWS\\SOFTWAREINVENTORYLOGGING"
+      }
+    },
+    {
+      "id": "Registry:f8d48b2c3099a4ec",
+      "type": "Registry",
+      "properties": {
+        "path": "HKLM\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\RUN"
+      }
+    },
+    {
+      "id": "Registry:1ee056adf6d36773",
+      "type": "Registry",
+      "properties": {
+        "path": "HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\EXPLORER\\ADVANCED"
+      }
+    },
+    {
+      "id": "Registry:228a41a2263226e3",
+      "type": "Registry",
+      "properties": {
+        "path": "HKLM\\SYSTEM\\CURRENTCONTROLSET\\CONTROL\\SECURITYPROVIDERS\\WDIGEST"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "Process:{D0D4CC13-1673-5FA5-F902-000000008701}",
+      "target": "Process:{D0D4CC13-1673-5FA5-FA02-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:07.442011800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1673-5FA5-F902-000000008701}",
+      "target": "File:c9a163891006e106",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:25:07.348677100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1673-5FA5-F802-000000008701}",
+      "target": "Process:{D0D4CC13-1673-5FA5-F902-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:07.311216600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1673-5FA5-F602-000000008701}",
+      "target": "Process:{D0D4CC13-1673-5FA5-F802-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:07.298256200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1505-5FA5-0C00-000000008701}",
+      "target": "Process:{D0D4CC13-1673-5FA5-F602-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:07.253987100Z",
+      "access_count": 6,
+      "last_timestamp": "2020-11-06T09:25:13.948789600Z"
+    },
+    {
+      "source": "Process:{D0D4CC13-1674-5FA5-0103-000000008701}",
+      "target": "Process:{D0D4CC13-1674-5FA5-0203-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:08.829107500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1674-5FA5-0103-000000008701}",
+      "target": "File:84517fb169de6a34",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:25:08.737289000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1674-5FA5-0003-000000008701}",
+      "target": "Process:{D0D4CC13-1674-5FA5-0103-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:08.699786600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1674-5FA5-FE02-000000008701}",
+      "target": "Process:{D0D4CC13-1674-5FA5-0003-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:08.693737900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1676-5FA5-0903-000000008701}",
+      "target": "Process:{D0D4CC13-1676-5FA5-0A03-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:10.166402300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1676-5FA5-0903-000000008701}",
+      "target": "File:fe2e648c103d1e7a",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:25:10.074269600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1676-5FA5-0803-000000008701}",
+      "target": "Process:{D0D4CC13-1676-5FA5-0903-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:10.035912000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1675-5FA5-0603-000000008701}",
+      "target": "Process:{D0D4CC13-1676-5FA5-0803-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:10.029558400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1677-5FA5-1803-000000008701}",
+      "target": "Process:{D0D4CC13-1677-5FA5-1903-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:11.984041500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1677-5FA5-1603-000000008701}",
+      "target": "Process:{D0D4CC13-1677-5FA5-1803-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:11.978432300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1677-5FA5-1303-000000008701}",
+      "target": "Process:{D0D4CC13-1677-5FA5-1403-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:11.724915700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1677-5FA5-1303-000000008701}",
+      "target": "File:a02eca80dfef9d5e",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:25:11.632217600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1677-5FA5-1203-000000008701}",
+      "target": "Process:{D0D4CC13-1677-5FA5-1303-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:11.594297000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1677-5FA5-0E03-000000008701}",
+      "target": "Process:{D0D4CC13-1677-5FA5-1203-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:11.589034700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1677-5FA5-1003-000000008701}",
+      "target": "Process:{D0D4CC13-1677-5FA5-1103-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:11.327626800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1677-5FA5-0E03-000000008701}",
+      "target": "Process:{D0D4CC13-1677-5FA5-1003-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:11.322388600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1677-5FA5-1903-000000008701}",
+      "target": "File:6a2a6a99f39b9f49",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:25:12.021653500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1679-5FA5-1C03-000000008701}",
+      "target": "Process:{D0D4CC13-1679-5FA5-1D03-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:13.987391600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1679-5FA5-1A03-000000008701}",
+      "target": "Process:{D0D4CC13-1679-5FA5-1C03-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:13.981992100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1679-5FA5-1D03-000000008701}",
+      "target": "File:7cc88234954cfae6",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:25:14.025643700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-169E-5FA5-1A00-000000008801}",
+      "target": "File:9234f70040fcc47f",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:26:07.273206000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-169E-5FA5-1A00-000000008801}",
+      "target": "File:7f280e8ce77e0db3",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:26:07.208060600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-169C-5FA5-0A00-000000008801}",
+      "target": "Process:{D0D4CC13-169E-5FA5-0C00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:07.144473000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-169C-5FA5-0700-000000008801}",
+      "target": "Process:{D0D4CC13-169C-5FA5-0A00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:07.139619600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-169C-5FA5-0400-000000008801}",
+      "target": "Process:{D0D4CC13-169C-5FA5-0700-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:07.134698000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-169B-5FA5-0200-000000008801}",
+      "target": "Process:{D0D4CC13-169C-5FA5-0400-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:07.124825700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16D1-5FA5-7C00-000000008801}",
+      "target": "Process:{D0D4CC13-16D1-5FA5-7D00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:41.597965600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16D1-5FA5-7A00-000000008801}",
+      "target": "Process:{D0D4CC13-16D1-5FA5-7C00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:41.592803800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-169E-5FA5-0C00-000000008801}",
+      "target": "Process:{D0D4CC13-1673-5FA5-F602-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:41.558475800Z",
+      "access_count": 10,
+      "last_timestamp": "2020-11-06T09:27:31.714329200Z"
+    },
+    {
+      "source": "Process:{D0D4CC13-16D1-5FA5-7800-000000008801}",
+      "target": "Process:{D0D4CC13-16D1-5FA5-7900-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:41.248740100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16D1-5FA5-7600-000000008801}",
+      "target": "Process:{D0D4CC13-16D1-5FA5-7800-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:41.243321100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16D6-5FA5-8200-000000008801}",
+      "target": "Process:{D0D4CC13-16D6-5FA5-8300-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:46.832245600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16D6-5FA5-8200-000000008801}",
+      "target": "File:0c5c6dec2d5c229a",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:26:46.735412500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16D6-5FA5-8100-000000008801}",
+      "target": "Process:{D0D4CC13-16D6-5FA5-8200-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:46.696822600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16D6-5FA5-7F00-000000008801}",
+      "target": "Process:{D0D4CC13-16D6-5FA5-8100-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:46.691322100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16D6-5FA5-8300-000000008801}",
+      "target": "File:a7dc29716400d3da",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:26:48.173137500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16DC-5FA5-8700-000000008801}",
+      "target": "Process:{D0D4CC13-16DC-5FA5-8800-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:52.224272600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16DB-5FA5-8500-000000008801}",
+      "target": "Process:{D0D4CC13-16DC-5FA5-8700-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:52.215900500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16D6-5FA5-8300-000000008801}",
+      "target": "Network:9472171786e6f15c",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:26:54.431186300Z",
+      "access_count": 3,
+      "last_timestamp": "2020-11-06T09:26:54.431035200Z"
+    },
+    {
+      "source": "Process:{D0D4CC13-16DF-5FA5-8D00-000000008801}",
+      "target": "Process:{D0D4CC13-16DF-5FA5-8E00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:55.668765400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16DF-5FA5-8D00-000000008801}",
+      "target": "File:d14152dc9878cd36",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:26:55.573522700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16DF-5FA5-8C00-000000008801}",
+      "target": "Process:{D0D4CC13-16DF-5FA5-8D00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:55.534206100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16DF-5FA5-8A00-000000008801}",
+      "target": "Process:{D0D4CC13-16DF-5FA5-8C00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:55.528396800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E0-5FA5-9200-000000008801}",
+      "target": "Process:{D0D4CC13-16E0-5FA5-9300-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:56.934207100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16DF-5FA5-8A00-000000008801}",
+      "target": "Process:{D0D4CC13-16E0-5FA5-9200-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:56.928515700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16D6-5FA5-8300-000000008801}",
+      "target": "Network:5a40b42a6bc04fef",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:26:56.497953000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E0-5FA5-9300-000000008801}",
+      "target": "Process:{D0D4CC13-16E1-5FA5-9400-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:57.066984600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E2-5FA5-9B00-000000008801}",
+      "target": "Process:{D0D4CC13-16E2-5FA5-9C00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:58.350058000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E2-5FA5-9B00-000000008801}",
+      "target": "File:8920a27fa850b2b2",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:26:58.256325300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E2-5FA5-9A00-000000008801}",
+      "target": "Process:{D0D4CC13-16E2-5FA5-9B00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:58.216369000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E2-5FA5-9800-000000008801}",
+      "target": "Process:{D0D4CC13-16E2-5FA5-9A00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:58.210897100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E2-5FA5-9C00-000000008801}",
+      "target": "Process:{D0D4CC13-16E3-5FA5-A000-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:59.293001500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E4-5FA5-A500-000000008801}",
+      "target": "Process:{D0D4CC13-16E4-5FA5-A600-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:00.972629600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E4-5FA5-A300-000000008801}",
+      "target": "Process:{D0D4CC13-16E4-5FA5-A500-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:00.967107400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E3-5FA5-A000-000000008801}",
+      "target": "File:2ced273598704605",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:27:00.159623400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E4-5FA5-A600-000000008801}",
+      "target": "Process:{D0D4CC13-16E5-5FA5-A700-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:01.109528800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E4-5FA5-A600-000000008801}",
+      "target": "File:ff189e3c8bad4609",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:27:01.012575500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E5-5FA5-A700-000000008801}",
+      "target": "Process:{D0D4CC13-16E6-5FA5-AB00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:02.035170700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E6-5FA5-AB00-000000008801}",
+      "target": "Network:ad563bf11f43fb38",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:02.035170700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E3-5FA5-A000-000000008801}",
+      "target": "Network:8fb93a8279883392",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:02.009516600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E3-5FA5-A000-000000008801}",
+      "target": "Network:3e3e3bd0de98b3b3",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:02.009437500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E6-5FA5-AB00-000000008801}",
+      "target": "File:6a51935ba2b25c52",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:27:03.999667900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E8-5FA5-B100-000000008801}",
+      "target": "Process:{D0D4CC13-16E8-5FA5-B200-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:04.656940600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E8-5FA5-B100-000000008801}",
+      "target": "File:212826d9f9ebcb44",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:27:04.561011000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E8-5FA5-B000-000000008801}",
+      "target": "Process:{D0D4CC13-16E8-5FA5-B100-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:04.521980200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E8-5FA5-AE00-000000008801}",
+      "target": "Process:{D0D4CC13-16E8-5FA5-B000-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:04.516345900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E6-5FA5-AB00-000000008801}",
+      "target": "Network:8fb93a8279883392",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:04.357922500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E6-5FA5-AB00-000000008801}",
+      "target": "Network:3e3e3bd0de98b3b3",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:04.357878000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E8-5FA5-B200-000000008801}",
+      "target": "Process:{D0D4CC13-16E9-5FA5-B600-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:05.576895500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E9-5FA5-B600-000000008801}",
+      "target": "Network:798dc1fb3e3498f1",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:05.576895500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E9-5FA5-B600-000000008801}",
+      "target": "File:87224e0a8e6a4676",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:27:07.557688900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E9-5FA5-B600-000000008801}",
+      "target": "Network:8d3c0e76a4d3e171",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:07.473257500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E9-5FA5-B600-000000008801}",
+      "target": "Network:d75cbebb819749a0",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:08.490878400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E9-5FA5-B600-000000008801}",
+      "target": "Network:04d1a7cf9bf3e76d",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:08.490798900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E9-5FA5-B600-000000008801}",
+      "target": "Network:8fb93a8279883392",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:09.805819700Z",
+      "access_count": 2,
+      "last_timestamp": "2020-11-06T09:27:16.818489200Z"
+    },
+    {
+      "source": "Process:{D0D4CC13-16E9-5FA5-B600-000000008801}",
+      "target": "Network:3e3e3bd0de98b3b3",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:09.805775300Z",
+      "access_count": 4,
+      "last_timestamp": "2020-11-06T09:27:12.670489100Z"
+    },
+    {
+      "source": "Process:{D0D4CC13-16E9-5FA5-B600-000000008801}",
+      "target": "Network:22060179e5cfc182",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:11.637320100Z",
+      "access_count": 7,
+      "last_timestamp": "2020-11-06T09:27:16.818407500Z"
+    },
+    {
+      "source": "Process:{D0D4CC13-16E9-5FA5-B600-000000008801}",
+      "target": "File:d78a18eb467e4ce5",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:27:15.526708000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E9-5FA5-B600-000000008801}",
+      "target": "File:d86db078776e1597",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:27:16.232410700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16FD-5FA5-C300-000000008801}",
+      "target": "Process:{D0D4CC13-16FD-5FA5-C400-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:25.328659800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16FD-5FA5-C300-000000008801}",
+      "target": "File:bd1840a1b53729e6",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:27:25.234691200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16FD-5FA5-C200-000000008801}",
+      "target": "Process:{D0D4CC13-16FD-5FA5-C300-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:25.186215300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16FD-5FA5-C000-000000008801}",
+      "target": "Process:{D0D4CC13-16FD-5FA5-C200-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:25.178474000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16FD-5FA5-C400-000000008801}",
+      "target": "Process:{D0D4CC13-16FE-5FA5-C800-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:26.259312500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16FF-5FA5-D000-000000008801}",
+      "target": "Process:{D0D4CC13-16FF-5FA5-D100-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:27.854066400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16FF-5FA5-D000-000000008801}",
+      "target": "File:6d606210298f2b06",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:27:27.759127000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16FF-5FA5-CF00-000000008801}",
+      "target": "Process:{D0D4CC13-16FF-5FA5-D000-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:27.720585400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16FF-5FA5-CD00-000000008801}",
+      "target": "Process:{D0D4CC13-16FF-5FA5-CF00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:27.715116800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16FF-5FA5-D100-000000008801}",
+      "target": "Process:{D0D4CC13-1700-5FA5-D500-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:28.796168900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1701-5FA5-DC00-000000008801}",
+      "target": "Process:{D0D4CC13-1701-5FA5-DD00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:29.995794400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1700-5FA5-D500-000000008801}",
+      "target": "Process:{D0D4CC13-1701-5FA5-DC00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:29.989285800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1701-5FA5-DA00-000000008801}",
+      "target": "Process:{D0D4CC13-1701-5FA5-DB00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:29.936868100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1700-5FA5-D500-000000008801}",
+      "target": "Process:{D0D4CC13-1701-5FA5-DA00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:29.930200300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1700-5FA5-D500-000000008801}",
+      "target": "File:d54f3c644c6c54f2",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:27:29.393240400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1700-5FA5-D500-000000008801}",
+      "target": "Process:{D0D4CC13-1702-5FA5-E200-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:30.629535300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1700-5FA5-D500-000000008801}",
+      "target": "Process:{D0D4CC13-1702-5FA5-E100-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:30.394749400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1700-5FA5-D500-000000008801}",
+      "target": "Process:{D0D4CC13-1702-5FA5-E000-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:30.032871900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1702-5FA5-DE00-000000008801}",
+      "target": "Process:{D0D4CC13-1702-5FA5-DF00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:30.016802100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1700-5FA5-D500-000000008801}",
+      "target": "Process:{D0D4CC13-1702-5FA5-DE00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:30.010687100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1703-5FA5-E600-000000008801}",
+      "target": "Process:{D0D4CC13-1703-5FA5-E700-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:31.885685400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1703-5FA5-E600-000000008801}",
+      "target": "File:5ad9ce7a6a93ed2c",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:27:31.792716800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1703-5FA5-E500-000000008801}",
+      "target": "Process:{D0D4CC13-1703-5FA5-E600-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:31.754534800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1703-5FA5-E300-000000008801}",
+      "target": "Process:{D0D4CC13-1703-5FA5-E500-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:31.748796200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1703-5FA5-E700-000000008801}",
+      "target": "Process:{D0D4CC13-1704-5FA5-EB00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:32.826383800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1704-5FA5-EB00-000000008801}",
+      "target": "Process:{D0D4CC13-1705-5FA5-F400-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:33.995061000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F200-000000008801}",
+      "target": "Process:{D0D4CC13-1705-5FA5-F300-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:33.981703200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1704-5FA5-EB00-000000008801}",
+      "target": "Process:{D0D4CC13-1705-5FA5-F200-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:33.975419800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F000-000000008801}",
+      "target": "Process:{D0D4CC13-1705-5FA5-F100-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:33.944030100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1704-5FA5-EB00-000000008801}",
+      "target": "Process:{D0D4CC13-1705-5FA5-F000-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:33.936879400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1704-5FA5-EB00-000000008801}",
+      "target": "File:e672993ad6f865d4",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:27:33.416711100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1704-5FA5-EB00-000000008801}",
+      "target": "Process:{D0D4CC13-1706-5FA5-F800-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:34.464288000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1704-5FA5-EB00-000000008801}",
+      "target": "Process:{D0D4CC13-1706-5FA5-F700-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:34.241727400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1704-5FA5-EB00-000000008801}",
+      "target": "Process:{D0D4CC13-1706-5FA5-F600-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:34.015025100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F400-000000008801}",
+      "target": "Process:{D0D4CC13-1705-5FA5-F500-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:34.001401200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16DC-5FA5-8800-000000008801}",
+      "target": "Registry:81cd471ee085837b",
+      "relation": "QUERY_REGISTRY",
+      "timestamp": "2020-11-06T09:26:52.224272600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1701-5FA5-DD00-000000008801}",
+      "target": "Registry:f8d48b2c3099a4ec",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-06T09:27:29.995794400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1701-5FA5-DC00-000000008801}",
+      "target": "Registry:f8d48b2c3099a4ec",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-06T09:27:29.989285800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1701-5FA5-DB00-000000008801}",
+      "target": "Registry:1ee056adf6d36773",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-06T09:27:29.936868100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1701-5FA5-DA00-000000008801}",
+      "target": "Registry:1ee056adf6d36773",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-06T09:27:29.930200300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1702-5FA5-DF00-000000008801}",
+      "target": "Registry:228a41a2263226e3",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-06T09:27:30.016802100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1702-5FA5-DE00-000000008801}",
+      "target": "Registry:228a41a2263226e3",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-06T09:27:30.010687100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F400-000000008801}",
+      "target": "Registry:228a41a2263226e3",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-06T09:27:33.995061000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F300-000000008801}",
+      "target": "Registry:f8d48b2c3099a4ec",
+      "relation": "DELETE_REGISTRY",
+      "timestamp": "2020-11-06T09:27:33.981703200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F200-000000008801}",
+      "target": "Registry:f8d48b2c3099a4ec",
+      "relation": "DELETE_REGISTRY",
+      "timestamp": "2020-11-06T09:27:33.975419800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F100-000000008801}",
+      "target": "Registry:1ee056adf6d36773",
+      "relation": "DELETE_REGISTRY",
+      "timestamp": "2020-11-06T09:27:33.944030100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F000-000000008801}",
+      "target": "Registry:1ee056adf6d36773",
+      "relation": "DELETE_REGISTRY",
+      "timestamp": "2020-11-06T09:27:33.936879400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F500-000000008801}",
+      "target": "Registry:228a41a2263226e3",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-06T09:27:34.001401200Z",
+      "access_count": 1
+    }
+  ]
+}

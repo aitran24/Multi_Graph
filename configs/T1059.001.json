@@ -1,0 +1,63 @@
+{
+  "technique_id": "T1059.001",
+  "technique_name": "PowerShell Execution",
+  "description": "Command and Scripting Interpreter: PowerShell",
+  
+  "event_ids": {
+    "sysmon": [1, 3, 7, 17, 18],
+    "security": [4688, 4104],
+    "powershell": [4103, 4104]
+  },
+  
+  "focus_processes": [
+    "powershell.exe",
+    "pwsh.exe"
+  ],
+  
+  "suspicious_patterns": {
+    "command_patterns": [
+      "-enc",
+      "-encodedcommand",
+      "invoke-expression",
+      "iex",
+      "downloadstring",
+      "downloadfile",
+      "webclient",
+      "bypass",
+      "-nop",
+      "-noprofile",
+      "-w hidden",
+      "-windowstyle hidden",
+      "invoke-mimikatz",
+      "invoke-shellcode"
+    ],
+    "script_block_patterns": [
+      "System.Net.WebClient",
+      "Net.WebClient",
+      "[Convert]::FromBase64String",
+      "Invoke-Expression",
+      "IEX"
+    ],
+    "network_destinations": ["external"]
+  },
+  
+  "detection_logic": {
+    "type": "process_chain",
+    "require_suspicious_cmdline": true,
+    "require_network_connection": false,
+    "exclude_interactive": false
+  },
+  
+  "whitelist_cmdlines": [
+    "SplunkUniversalForwarder",
+    "-File \\\"C:\\\\Program Files\\\\",
+    "Update-Help",
+    "Get-Service"
+  ],
+  
+  "node_labels": {
+    "powershell.exe": "PowerShell",
+    "csc.exe": "C# Compiler (Suspicious)",
+    "cvtres.exe": "Resource Compiler"
+  }
+}

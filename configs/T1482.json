@@ -1,0 +1,60 @@
+{
+  "technique_id": "T1482",
+  "technique_name": "Domain Trust Discovery",
+  "description": "Domain Trust Discovery via Network Enumeration",
+  
+  "event_ids": {
+    "sysmon": [1, 3, 10, 13, 22],
+    "security": [4688, 4656]
+  },
+  
+  "focus_processes": [
+    "nltest.exe",
+    "dsquery.exe",
+    "net.exe",
+    "whoami.exe"
+  ],
+  
+  "suspicious_patterns": {
+    "process_names": [
+      "nltest.exe",
+      "dsquery.exe",
+      "net.exe",
+      "whoami.exe",
+      "adsiedit.msc"
+    ],
+    "command_patterns": [
+      "/domain_trusts",
+      "/all_trusts",
+      "/dclist",
+      "dsquery",
+      "net view /domain",
+      "net group",
+      "whoami /all"
+    ],
+    "registry_keys": [
+      "domain",
+      "trust",
+      "kerberos",
+      "ldap"
+    ],
+    "dns_queries": [
+      "_ldap",
+      "_kerberos",
+      "dc",
+      "domain controller"
+    ]
+  },
+  
+  "detection_logic": {
+    "type": "temporal_correlation",
+    "time_window_minutes": 30,
+    "require_multiple_events": true
+  },
+  
+  "node_labels": {
+    "nltest.exe": "NLTest (Domain Tool)",
+    "dsquery.exe": "DSQuery (AD Tool)",
+    "net.exe": "Net Command"
+  }
+}

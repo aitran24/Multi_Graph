@@ -1,0 +1,105 @@
+{
+  "description": "Global whitelist configuration for filtering out benign processes",
+  "version": "1.0",
+  
+  "ignore_paths": [
+    "C:\\Program Files\\Splunk",
+    "C:\\Program Files\\SplunkUniversalForwarder",
+    "C:\\Windows\\CCM",
+    "C:\\ProgramData\\Microsoft\\Windows Defender",
+    "C:\\Windows\\System32\\CompatTelRunner.exe",
+    "C:\\Windows\\System32\\backgroundTaskHost.exe"
+  ],
+  
+  "ignore_processes": [
+    "splunk-admon.exe",
+    "splunk-powershell.exe",
+    "splunk-regmon.exe",
+    "splunk-netmon.exe",
+    "splunk-MonitorNoHandle.exe",
+    "splunk-winprintmon.exe",
+    "splunkd.exe",
+    "btool.exe",
+    "amazon-ssm-agent.exe",
+    "ssm-agent-worker.exe",
+    "WmiPrvSE.exe",
+    "unsecapp.exe",
+    "conhost.exe",
+    "dllhost.exe"
+  ],
+  
+  "whitelist_system_processes": {
+    "svchost.exe": {
+      "allowed_paths": ["C:\\Windows\\System32\\svchost.exe"],
+      "description": "Windows Service Host - only from System32"
+    },
+    "services.exe": {
+      "allowed_paths": ["C:\\Windows\\System32\\services.exe"],
+      "description": "Windows Service Control Manager"
+    },
+    "lsass.exe": {
+      "allowed_paths": ["C:\\Windows\\System32\\lsass.exe"],
+      "description": "Local Security Authority Subsystem"
+    },
+    "csrss.exe": {
+      "allowed_paths": ["C:\\Windows\\System32\\csrss.exe"],
+      "description": "Client Server Runtime Process"
+    },
+    "system": {
+      "allowed_paths": ["System"],
+      "description": "Windows Kernel"
+    }
+  },
+  
+  "lolbins": [
+    "powershell.exe",
+    "cmd.exe",
+    "wscript.exe",
+    "cscript.exe",
+    "mshta.exe",
+    "rundll32.exe",
+    "regsvr32.exe",
+    "certutil.exe",
+    "bitsadmin.exe",
+    "wmic.exe",
+    "msiexec.exe"
+  ],
+  
+  "artifact_patterns": [
+    "__PSScriptPolicyTest_.*\\.ps1$",
+    "ConsoleHost_history\\.txt$",
+    "\\.tmp$",
+    "\\\\Temp\\\\[0-9a-f]{8,16}\\.",
+    "\\\\Temp\\\\[a-z0-9]{8}\\.(dll|cmdline|ps1)$",
+    "\\\\Temp\\\\tmp[A-F0-9]{4,8}\\.",
+    "\\.etl$",
+    "\\.pf$",
+    "\\\\Prefetch\\\\",
+    "ConsoleHost_history"
+  ],
+  
+  "noise_file_patterns": {
+    "powershell_artifacts": "__PSScriptPolicyTest_",
+    "temp_random": "\\\\Temp\\\\tmp[A-F0-9]{4,8}\\.",
+    "console_history": "ConsoleHost_history.txt"
+  },
+  
+  "low_priority_system_processes": [
+    "csrss.exe",
+    "lsass.exe",
+    "svchost.exe",
+    "services.exe",
+    "wininit.exe",
+    "winlogon.exe",
+    "WmiPrvSE.exe",
+    "taskhostw.exe",
+    "dwm.exe",
+    "RuntimeBroker.exe",
+    "sihost.exe",
+    "conhost.exe",
+    "dllhost.exe",
+    "unsecapp.exe",
+    "SearchIndexer.exe",
+    "SearchProtocolHost.exe"
+  ]
+}

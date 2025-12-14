@@ -1,0 +1,46 @@
+{
+  "technique_id": "T1003.002",
+  "technique_name": "SAM Registry Dumping",
+  "description": "OS Credential Dumping: Security Account Manager",
+  
+  "event_ids": {
+    "sysmon": [1, 12, 13, 14],
+    "security": [4657, 4663]
+  },
+  
+  "focus_processes": [
+    "reg.exe",
+    "regedit.exe"
+  ],
+  
+  "suspicious_patterns": {
+    "registry_keys": [
+      "HKLM\\SAM\\SAM\\Domains\\Account",
+      "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa",
+      "HKLM\\SECURITY"
+    ],
+    "command_patterns": [
+      "reg save",
+      "reg export",
+      "HKLM\\SAM",
+      "HKLM\\SYSTEM",
+      "HKLM\\SECURITY"
+    ],
+    "file_patterns": [
+      "SAM.save",
+      "SYSTEM.save",
+      "SECURITY.save"
+    ]
+  },
+  
+  "detection_logic": {
+    "type": "registry_access",
+    "require_registry_event": true,
+    "require_file_creation": false
+  },
+  
+  "node_labels": {
+    "reg.exe": "Registry Tool",
+    "SAM": "SAM Registry Hive"
+  }
+}

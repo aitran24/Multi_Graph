@@ -1,0 +1,294 @@
+{
+  "nodes": [
+    {
+      "id": "Process:{732C744F-EA4B-600E-797B-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "nltest",
+        "image": "%WINDIR%\\System32\\nltest.exe",
+        "command_line": "nltest  /domain_trusts ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{732C744F-EA4B-600E-797B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-EA4B-600E-787B-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{732C744F-EA4B-600E-787B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-1C72-600B-C805-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{732C744F-1C72-600B-C805-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:a9abe70364480e79",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\art-err.txt",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\art-err.txt"
+      }
+    },
+    {
+      "id": "File:732f8e2af3e43fa4",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\art-out.txt",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\art-out.txt"
+      }
+    },
+    {
+      "id": "Process:{732C744F-EA4B-600E-777B-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "whoami",
+        "image": "%WINDIR%\\System32\\whoami.exe",
+        "command_line": "\"C:\\Windows\\system32\\whoami.exe\"",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{732C744F-EA4B-600E-777B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-EA53-600E-7A7B-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "nltest",
+        "image": "%WINDIR%\\System32\\nltest.exe",
+        "command_line": "\"C:\\Windows\\system32\\nltest.exe\" /domain_trusts /all_trusts",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{732C744F-EA53-600E-7A7B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-EACC-600E-8C7B-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "dsquery",
+        "image": "%WINDIR%\\System32\\dsquery.exe",
+        "command_line": "dsquery  * -filter \"(objectClass=trustedDomain)\" -attr * ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{732C744F-EACC-600E-8C7B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-EACC-600E-8B7B-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{732C744F-EACC-600E-8B7B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-EACC-600E-8A7B-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "whoami",
+        "image": "%WINDIR%\\System32\\whoami.exe",
+        "command_line": "\"C:\\Windows\\system32\\whoami.exe\"",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{732C744F-EACC-600E-8A7B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-EACD-600E-8F7B-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {Import-Module \\\"\"$env:TEMP\\PowerView.ps1\\\"\"\nGet-NetDomainTrust\nGet-NetForestTrust\nGet-ADDomain\nGet-ADGroupMember Administrators -Recursive} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{732C744F-EACD-600E-8F7B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-EACD-600E-8E7B-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "nltest",
+        "image": "%WINDIR%\\System32\\nltest.exe",
+        "command_line": "nltest  /domain_trusts ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{732C744F-EACD-600E-8E7B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-EACD-600E-8D7B-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{732C744F-EACD-600E-8D7B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:95de72615d164a60",
+      "type": "File",
+      "properties": {
+        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_tz1mg0nv.ydj.ps1"
+      }
+    },
+    {
+      "id": "Process:{732C744F-EAD0-600E-937B-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "AdFind",
+        "image": "C:\\AtomicRedTeam\\atomics\\T1087.002\\src\\AdFind.exe",
+        "command_line": "C:\\AtomicRedTeam\\atomics\\T1087.002\\src\\AdFind.exe  -gcb -sc trustdmp ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{732C744F-EAD0-600E-937B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{732C744F-EAD0-600E-927B-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{732C744F-EAD0-600E-927B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:845bf50cba7c9d5e",
+      "type": "Network",
+      "properties": {
+        "address": "fe80:0:0:0:f505:ba55:d74d:8172",
+        "port": "9389",
+        "protocol": "tcp"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "Process:{732C744F-EA4B-600E-787B-00000000A301}",
+      "target": "Process:{732C744F-EA4B-600E-797B-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-25T15:56:59.621711600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-1C72-600B-C805-00000000A301}",
+      "target": "Process:{732C744F-EA4B-600E-787B-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-25T15:56:59.614382300Z",
+      "access_count": 2,
+      "last_timestamp": "2021-01-25T15:59:09.109179800Z"
+    },
+    {
+      "source": "Process:{732C744F-1C72-600B-C805-00000000A301}",
+      "target": "File:a9abe70364480e79",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-25T15:56:59.603532900Z",
+      "access_count": 6,
+      "last_timestamp": "2021-01-25T15:59:12.665219300Z"
+    },
+    {
+      "source": "Process:{732C744F-1C72-600B-C805-00000000A301}",
+      "target": "File:732f8e2af3e43fa4",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-25T15:56:59.602535200Z",
+      "access_count": 6,
+      "last_timestamp": "2021-01-25T15:59:12.664074300Z"
+    },
+    {
+      "source": "Process:{732C744F-1C72-600B-C805-00000000A301}",
+      "target": "Process:{732C744F-EA4B-600E-777B-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-25T15:56:59.503660900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-1C72-600B-C805-00000000A301}",
+      "target": "Process:{732C744F-EA53-600E-7A7B-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-25T15:57:07.394563700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-EACC-600E-8B7B-00000000A301}",
+      "target": "Process:{732C744F-EACC-600E-8C7B-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-25T15:59:08.958247400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-1C72-600B-C805-00000000A301}",
+      "target": "Process:{732C744F-EACC-600E-8B7B-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-25T15:59:08.940914500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-1C72-600B-C805-00000000A301}",
+      "target": "Process:{732C744F-EACC-600E-8A7B-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-25T15:59:08.835940500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-1C72-600B-C805-00000000A301}",
+      "target": "Process:{732C744F-EACD-600E-8F7B-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-25T15:59:09.210921700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-EACD-600E-8D7B-00000000A301}",
+      "target": "Process:{732C744F-EACD-600E-8E7B-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-25T15:59:09.116484800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-EACD-600E-8F7B-00000000A301}",
+      "target": "File:95de72615d164a60",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-01-25T15:59:10.360620600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-EAD0-600E-927B-00000000A301}",
+      "target": "Process:{732C744F-EAD0-600E-937B-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-25T15:59:12.993117800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-1C72-600B-C805-00000000A301}",
+      "target": "Process:{732C744F-EAD0-600E-927B-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-01-25T15:59:12.985338900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{732C744F-EACD-600E-8F7B-00000000A301}",
+      "target": "Network:845bf50cba7c9d5e",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2021-01-25T15:59:13.888694800Z",
+      "access_count": 7,
+      "last_timestamp": "2021-01-25T15:59:13.106947400Z"
+    }
+  ]
+}

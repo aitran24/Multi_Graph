@@ -1,0 +1,51 @@
+{
+  "technique_id": "T1547.001",
+  "technique_name": "Registry Run Keys Persistence",
+  "description": "Boot or Logon Autostart Execution: Registry Run Keys",
+  
+  "event_ids": {
+    "sysmon": [12, 13, 14],
+    "security": [4657]
+  },
+  
+  "focus_processes": [
+    "reg.exe",
+    "regedit.exe",
+    "powershell.exe"
+  ],
+  
+  "suspicious_patterns": {
+    "registry_keys": [
+      "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce",
+      "HKLM\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders",
+      "\\Startup\\"
+    ],
+    "command_patterns": [
+      "reg add",
+      "\\\\Run",
+      "\\\\RunOnce",
+      "Set-ItemProperty",
+      "New-ItemProperty"
+    ],
+    "event_types": [
+      "SetValue",
+      "CreateKey"
+    ]
+  },
+  
+  "detection_logic": {
+    "type": "registry_modification",
+    "require_registry_event": true,
+    "require_run_key": true
+  },
+  
+  "node_labels": {
+    "Run": "Run Key (Persistence)",
+    "RunOnce": "RunOnce Key"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "technique_id": "T1112",
+  "technique_name": "Modify Registry",
+  "description": "Modify Registry for Defense Evasion",
+  
+  "event_ids": {
+    "sysmon": [12, 13, 14],
+    "security": [4657]
+  },
+  
+  "focus_processes": [
+    "reg.exe",
+    "regedit.exe",
+    "powershell.exe",
+    "cmd.exe"
+  ],
+  
+  "suspicious_patterns": {
+    "registry_keys": [
+      "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SafeBoot",
+      "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies",
+      "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest",
+      "WDigest",
+      "UseLogonCredential",
+      "DisableAntiSpyware",
+      "DisableRealtimeMonitoring",
+      "Windows Defender",
+      "Security Center",
+      "Firewall"
+    ],
+    "registry_values": [
+      "UseLogonCredential",
+      "DisableAntiSpyware",
+      "DisableRealtimeMonitoring",
+      "UseTPMKey",
+      "UseTPMKeyPIN"
+    ],
+    "command_patterns": [
+      "reg add",
+      "reg delete",
+      "Set-ItemProperty",
+      "New-ItemProperty",
+      "REG_DWORD",
+      "HKLM\\SYSTEM",
+      "HKCU\\Software"
+    ]
+  },
+  
+  "detection_logic": {
+    "type": "registry_modification",
+    "require_registry_event": true,
+    "event_types": ["SetValue", "CreateKey"]
+  },
+  
+  "node_labels": {
+    "SafeBoot": "SafeBoot Registry Key",
+    "Policies": "Group Policy Registry"
+  }
+}
