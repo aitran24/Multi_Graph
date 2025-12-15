@@ -23,14 +23,6 @@
       }
     },
     {
-      "id": "File:5817f4f013590052",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_g5zv3olr.ekl.ps1"
-      }
-    },
-    {
       "id": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
       "type": "Process",
       "properties": {
@@ -71,14 +63,6 @@
       }
     },
     {
-      "id": "File:8466b841aebb8186",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_re1vc20x.p1b.ps1"
-      }
-    },
-    {
       "id": "Process:{31314CAD-F207-5FB4-0000-001030C21000}",
       "type": "Process",
       "properties": {
@@ -106,14 +90,6 @@
         "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "guid": "{31314CAD-F208-5FB4-0000-00105BED1000}",
         "malicious": true
-      }
-    },
-    {
-      "id": "File:d177b654223e3191",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_kv44dyzk.oma.ps1"
       }
     },
     {
@@ -156,14 +132,6 @@
         "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "guid": "{31314CAD-F20A-5FB4-0000-0010442A1100}",
         "malicious": true
-      }
-    },
-    {
-      "id": "File:8057037f60f58632",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_brphey1k.3iu.ps1"
       }
     },
     {
@@ -271,32 +239,6 @@
       }
     },
     {
-      "id": "Process:{31314CAD-F22F-5FB4-0000-001078420100}",
-      "type": "Process",
-      "properties": {
-        "label": "powershell",
-        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "guid": "{31314CAD-F22F-5FB4-0000-001078420100}",
-        "malicious": true
-      }
-    },
-    {
-      "id": "File:9234f70040fcc47f",
-      "type": "File",
-      "properties": {
-        "path": "%USER%\\splunkd.exe",
-        "path_normalized": "c:\\users\\[user]\\splunkd.exe"
-      }
-    },
-    {
-      "id": "File:28b66c37ee1145fc",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\windows\\temp\\__psscriptpolicytest_sj55suh1.01a.ps1"
-      }
-    },
-    {
       "id": "Process:{31314CAD-F264-5FB4-0000-0010CBA80500}",
       "type": "Process",
       "properties": {
@@ -361,14 +303,6 @@
       }
     },
     {
-      "id": "File:f54f441037ff35c4",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_z5ul4rux.2py.ps1"
-      }
-    },
-    {
       "id": "Process:{31314CAD-F287-5FB4-0000-0010CAE40500}",
       "type": "Process",
       "properties": {
@@ -396,14 +330,6 @@
         "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "guid": "{31314CAD-F28C-5FB4-0000-0010E8660600}",
         "malicious": true
-      }
-    },
-    {
-      "id": "File:1ee2ecd9a4e09e64",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_l2jfrusu.fqt.ps1"
       }
     },
     {
@@ -437,14 +363,6 @@
       }
     },
     {
-      "id": "File:f691ed27db6f7dad",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_xztkko24.i15.ps1"
-      }
-    },
-    {
       "id": "Process:{31314CAD-F28D-5FB4-0000-00104D8B0600}",
       "type": "Process",
       "properties": {
@@ -462,14 +380,6 @@
         "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "guid": "{31314CAD-F28F-5FB4-0000-001019B40600}",
         "malicious": true
-      }
-    },
-    {
-      "id": "File:cf4823156f983eec",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_lmcsxbta.juf.ps1"
       }
     },
     {
@@ -515,14 +425,6 @@
       }
     },
     {
-      "id": "File:be5ba3d3026493bf",
-      "type": "File",
-      "properties": {
-        "path": "%USER%%TEMP%\\koes4hus\\koes4hus.dll",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\koes4hus\\koes4hus.dll"
-      }
-    },
-    {
       "id": "Network:8fb93a8279883392",
       "type": "Network",
       "properties": {
@@ -548,14 +450,6 @@
         "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "guid": "{31314CAD-F292-5FB4-0000-001003090700}",
         "malicious": true
-      }
-    },
-    {
-      "id": "File:6a353e0accc2d981",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_i4los3q3.otc.ps1"
       }
     },
     {
@@ -609,14 +503,6 @@
       }
     },
     {
-      "id": "File:4dad6c8068149133",
-      "type": "File",
-      "properties": {
-        "path": "%USER%%TEMP%\\ptt50lfz\\ptt50lfz.dll",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\ptt50lfz\\ptt50lfz.dll"
-      }
-    },
-    {
       "id": "File:6a51935ba2b25c52",
       "type": "File",
       "properties": {
@@ -632,14 +518,6 @@
         "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "guid": "{31314CAD-F296-5FB4-0000-0010B0680700}",
         "malicious": true
-      }
-    },
-    {
-      "id": "File:b986bdd7a9bea2a3",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_m4ao42vv.nc3.ps1"
       }
     },
     {
@@ -690,14 +568,6 @@
       "properties": {
         "type": "URL",
         "address": "https://raw"
-      }
-    },
-    {
-      "id": "File:851159dcd3942042",
-      "type": "File",
-      "properties": {
-        "path": "%USER%%TEMP%\\ykau5aqn\\ykau5aqn.dll",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\ykau5aqn\\ykau5aqn.dll"
       }
     },
     {
@@ -765,14 +635,6 @@
       }
     },
     {
-      "id": "File:30de4e4d97f4b08e",
-      "type": "File",
-      "properties": {
-        "path": "%PROGRAMFILES%\\SplunkUniversalForwarder\\etc\\apps\\Splunk_TA_stream\\windows_x86_64\\bin\\concrt140.dll",
-        "path_normalized": "c:\\program files\\splunkuniversalforwarder\\etc\\apps\\splunk_ta_stream\\windows_x86_64\\bin\\concrt140.dll"
-      }
-    },
-    {
       "id": "Process:{31314CAD-F2AE-5FB4-0000-00108C4E0800}",
       "type": "Process",
       "properties": {
@@ -780,14 +642,6 @@
         "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "guid": "{31314CAD-F2AE-5FB4-0000-00108C4E0800}",
         "malicious": true
-      }
-    },
-    {
-      "id": "File:73ace0acba849ab9",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_a2ipchjh.jg4.ps1"
       }
     },
     {
@@ -820,14 +674,6 @@
         "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "guid": "{31314CAD-F2B2-5FB4-0000-00104AB90800}",
         "malicious": true
-      }
-    },
-    {
-      "id": "File:c160170fd3e3a251",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_vy0ycytx.hhf.ps1"
       }
     },
     {
@@ -962,14 +808,6 @@
       }
     },
     {
-      "id": "File:8e9b39a0a2808555",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_sngm4koj.kre.ps1"
-      }
-    },
-    {
       "id": "Process:{31314CAD-F2B4-5FB4-0000-0010D7240900}",
       "type": "Process",
       "properties": {
@@ -1060,14 +898,6 @@
       }
     },
     {
-      "id": "File:328d7454674b64f3",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_ehkhfwtu.i3d.ps1"
-      }
-    },
-    {
       "id": "Process:{31314CAD-F2B5-5FB4-0000-001022740900}",
       "type": "Process",
       "properties": {
@@ -1100,14 +930,6 @@
       }
     },
     {
-      "id": "File:bfae59c9e19f3f72",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_1th5om3z.ruu.ps1"
-      }
-    },
-    {
       "id": "Registry:00b679520cb46e5a",
       "type": "Registry",
       "properties": {
@@ -1134,14 +956,6 @@
         "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "guid": "{31314CAD-F2BB-5FB4-0000-001070020A00}",
         "malicious": true
-      }
-    },
-    {
-      "id": "File:c524a4c5e5a275ec",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_5cm2zfx0.vev.ps1"
       }
     },
     {
@@ -1269,14 +1083,6 @@
       }
     },
     {
-      "id": "File:8d6920bd73239a4c",
-      "type": "File",
-      "properties": {
-        "path": "%USER%%TEMP%\\xsepovsu\\xsepovsu.dll",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\xsepovsu\\xsepovsu.dll"
-      }
-    },
-    {
       "id": "Process:{31314CAD-F2BE-5FB4-0000-0010A6980A00}",
       "type": "Process",
       "properties": {
@@ -1350,13 +1156,6 @@
       "access_count": 1
     },
     {
-      "source": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
-      "target": "File:5817f4f013590052",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:05:57.604759900Z",
-      "access_count": 1
-    },
-    {
       "source": "Process:{31314CAD-F205-5FB4-0000-001082941000}",
       "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
       "relation": "CREATED",
@@ -1386,13 +1185,6 @@
       "access_count": 1
     },
     {
-      "source": "Process:{31314CAD-F207-5FB4-0000-001034C31000}",
-      "target": "File:8466b841aebb8186",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:05:59.217546400Z",
-      "access_count": 1
-    },
-    {
       "source": "Process:{31314CAD-F207-5FB4-0000-001030C21000}",
       "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
       "relation": "CREATED",
@@ -1414,13 +1206,6 @@
       "access_count": 1
     },
     {
-      "source": "Process:{31314CAD-F208-5FB4-0000-00105BED1000}",
-      "target": "File:d177b654223e3191",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:06:00.884623600Z",
-      "access_count": 1
-    },
-    {
       "source": "Process:{31314CAD-F208-5FB4-0000-001090EC1000}",
       "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
       "relation": "CREATED",
@@ -1439,13 +1224,6 @@
       "target": "Process:{31314CAD-F20A-5FB4-0000-001010361100}",
       "relation": "CREATED",
       "timestamp": "2020-11-18T10:06:02.842113000Z",
-      "access_count": 1
-    },
-    {
-      "source": "Process:{31314CAD-F20A-5FB4-0000-0010442A1100}",
-      "target": "File:8057037f60f58632",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:06:02.752564300Z",
       "access_count": 1
     },
     {
@@ -1512,20 +1290,6 @@
       "access_count": 1
     },
     {
-      "source": "Process:{31314CAD-F22F-5FB4-0000-001078420100}",
-      "target": "File:9234f70040fcc47f",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:06:56.117283500Z",
-      "access_count": 1
-    },
-    {
-      "source": "Process:{31314CAD-F22F-5FB4-0000-001078420100}",
-      "target": "File:28b66c37ee1145fc",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:06:56.049150100Z",
-      "access_count": 1
-    },
-    {
       "source": "Process:{31314CAD-F264-5FB4-0000-0010CBA80500}",
       "target": "Process:{31314CAD-F20A-5FB4-0000-001038141100}",
       "relation": "CREATED",
@@ -1562,13 +1326,6 @@
       "access_count": 1
     },
     {
-      "source": "Process:{31314CAD-F287-5FB4-0000-00109BE50500}",
-      "target": "File:f54f441037ff35c4",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:07.311901000Z",
-      "access_count": 1
-    },
-    {
       "source": "Process:{31314CAD-F287-5FB4-0000-0010CAE40500}",
       "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
       "relation": "CREATED",
@@ -1587,13 +1344,6 @@
       "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
       "relation": "CREATED",
       "timestamp": "2020-11-18T10:08:12.339782800Z",
-      "access_count": 1
-    },
-    {
-      "source": "Process:{31314CAD-F28C-5FB4-0000-0010E8660600}",
-      "target": "File:1ee2ecd9a4e09e64",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:12.248607100Z",
       "access_count": 1
     },
     {
@@ -1619,13 +1369,6 @@
       "access_count": 1
     },
     {
-      "source": "Process:{31314CAD-F28D-5FB4-0000-0010128C0600}",
-      "target": "File:f691ed27db6f7dad",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:13.868117800Z",
-      "access_count": 1
-    },
-    {
       "source": "Process:{31314CAD-F28D-5FB4-0000-00104D8B0600}",
       "target": "Process:{31314CAD-F205-5FB4-0000-00103B951000}",
       "relation": "CREATED",
@@ -1637,13 +1380,6 @@
       "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
       "relation": "CREATED",
       "timestamp": "2020-11-18T10:08:15.464365600Z",
-      "access_count": 1
-    },
-    {
-      "source": "Process:{31314CAD-F28F-5FB4-0000-001019B40600}",
-      "target": "File:cf4823156f983eec",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:15.374028000Z",
       "access_count": 1
     },
     {
@@ -1669,13 +1405,6 @@
     },
     {
       "source": "Process:{31314CAD-F290-5FB4-0000-0010ABD70600}",
-      "target": "File:be5ba3d3026493bf",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:17.264360000Z",
-      "access_count": 1
-    },
-    {
-      "source": "Process:{31314CAD-F290-5FB4-0000-0010ABD70600}",
       "target": "Network:8fb93a8279883392",
       "relation": "CONNECTED_TO",
       "timestamp": "2020-11-18T10:08:18.885771500Z",
@@ -1693,13 +1422,6 @@
       "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
       "relation": "CREATED",
       "timestamp": "2020-11-18T10:08:18.516099000Z",
-      "access_count": 1
-    },
-    {
-      "source": "Process:{31314CAD-F292-5FB4-0000-001003090700}",
-      "target": "File:6a353e0accc2d981",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:18.425143500Z",
       "access_count": 1
     },
     {
@@ -1732,13 +1454,6 @@
     },
     {
       "source": "Process:{31314CAD-F293-5FB4-0000-0010912C0700}",
-      "target": "File:4dad6c8068149133",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:20.132937900Z",
-      "access_count": 1
-    },
-    {
-      "source": "Process:{31314CAD-F293-5FB4-0000-0010912C0700}",
       "target": "File:6a51935ba2b25c52",
       "relation": "CREATED_FILE",
       "timestamp": "2020-11-18T10:08:21.481832900Z",
@@ -1749,13 +1464,6 @@
       "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
       "relation": "CREATED",
       "timestamp": "2020-11-18T10:08:22.453169400Z",
-      "access_count": 1
-    },
-    {
-      "source": "Process:{31314CAD-F296-5FB4-0000-0010B0680700}",
-      "target": "File:b986bdd7a9bea2a3",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:22.363870800Z",
       "access_count": 1
     },
     {
@@ -1798,13 +1506,6 @@
       "target": "Network:798dc1fb3e3498f1",
       "relation": "CONNECTED_TO",
       "timestamp": "2020-11-18T10:08:23.352420100Z",
-      "access_count": 1
-    },
-    {
-      "source": "Process:{31314CAD-F297-5FB4-0000-00101A8C0700}",
-      "target": "File:851159dcd3942042",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:25.946939800Z",
       "access_count": 1
     },
     {
@@ -1881,13 +1582,6 @@
       "access_count": 1
     },
     {
-      "source": "Process:{31314CAD-F2AE-5FB4-0000-00108C4E0800}",
-      "target": "File:73ace0acba849ab9",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:47.013091700Z",
-      "access_count": 1
-    },
-    {
       "source": "Process:{31314CAD-F2AF-5FB4-0000-0010E35A0800}",
       "target": "Process:{31314CAD-F2B0-5FB4-0000-00102B830800}",
       "relation": "CREATED",
@@ -1899,13 +1593,6 @@
       "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
       "relation": "CREATED",
       "timestamp": "2020-11-18T10:08:50.217537100Z",
-      "access_count": 1
-    },
-    {
-      "source": "Process:{31314CAD-F2B2-5FB4-0000-00104AB90800}",
-      "target": "File:c160170fd3e3a251",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:50.125915500Z",
       "access_count": 1
     },
     {
@@ -1969,13 +1656,6 @@
       "target": "Registry:7c56aa38aae4a569",
       "relation": "MODIFIED_REGISTRY",
       "timestamp": "2020-11-18T10:08:52.714745800Z",
-      "access_count": 1
-    },
-    {
-      "source": "Process:{31314CAD-F2B4-5FB4-0000-001059260900}",
-      "target": "File:8e9b39a0a2808555",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:52.477273100Z",
       "access_count": 1
     },
     {
@@ -2049,13 +1729,6 @@
       "access_count": 1
     },
     {
-      "source": "Process:{31314CAD-F2B5-5FB4-0000-001059740900}",
-      "target": "File:328d7454674b64f3",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:53.446470700Z",
-      "access_count": 1
-    },
-    {
       "source": "Process:{31314CAD-F2B3-5FB4-0000-00105AE30800}",
       "target": "Process:{31314CAD-F2B5-5FB4-0000-001059740900}",
       "relation": "CREATED",
@@ -2091,13 +1764,6 @@
       "access_count": 1
     },
     {
-      "source": "Process:{31314CAD-F2B5-5FB4-0000-0010E2540900}",
-      "target": "File:bfae59c9e19f3f72",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:53.115807200Z",
-      "access_count": 1
-    },
-    {
       "source": "Process:{31314CAD-F2B3-5FB4-0000-00105AE30800}",
       "target": "Process:{31314CAD-F2B5-5FB4-0000-0010E2540900}",
       "relation": "CREATED",
@@ -2130,13 +1796,6 @@
       "target": "Process:{31314CAD-F205-5FB4-0000-0010F7A01000}",
       "relation": "CREATED",
       "timestamp": "2020-11-18T10:08:59.143535600Z",
-      "access_count": 1
-    },
-    {
-      "source": "Process:{31314CAD-F2BB-5FB4-0000-001070020A00}",
-      "target": "File:c524a4c5e5a275ec",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:08:59.052812900Z",
       "access_count": 1
     },
     {
@@ -2215,13 +1874,6 @@
       "target": "Process:{31314CAD-F2BD-5FB4-0000-00101C560A00}",
       "relation": "CREATED",
       "timestamp": "2020-11-18T10:09:01.601504100Z",
-      "access_count": 1
-    },
-    {
-      "source": "Process:{31314CAD-F2BC-5FB4-0000-00104D310A00}",
-      "target": "File:8d6920bd73239a4c",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-11-18T10:09:01.034676900Z",
       "access_count": 1
     },
     {

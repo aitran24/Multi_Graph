@@ -114,14 +114,6 @@
       }
     },
     {
-      "id": "File:73c90c62a2dcc4f8",
-      "type": "File",
-      "properties": {
-        "path": "%TEMP%\\PSScriptPolicyTest\\[Aggregated]",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\__psscriptpolicytest_kf5l2vvr.rud.ps1"
-      }
-    },
-    {
       "id": "Process:{96128EA2-F210-5F7E-D900-000000007F01}",
       "type": "Process",
       "properties": {
@@ -197,22 +189,6 @@
         "parent_image": "%WINDIR%\\System32\\cmd.exe",
         "guid": "{96128EA2-F212-5F7E-E500-000000007F01}",
         "malicious": true
-      }
-    },
-    {
-      "id": "File:7771d1f5fc853bc0",
-      "type": "File",
-      "properties": {
-        "path": "%USER%%TEMP%\\k3jqc5fr\\k3jqc5fr.dll",
-        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\k3jqc5fr\\k3jqc5fr.dll"
-      }
-    },
-    {
-      "id": "File:30de4e4d97f4b08e",
-      "type": "File",
-      "properties": {
-        "path": "%PROGRAMFILES%\\SplunkUniversalForwarder\\etc\\apps\\Splunk_TA_stream\\windows_x86_64\\bin\\concrt140.dll",
-        "path_normalized": "c:\\program files\\splunkuniversalforwarder\\etc\\apps\\splunk_ta_stream\\windows_x86_64\\bin\\concrt140.dll"
       }
     },
     {
@@ -409,13 +385,6 @@
       "access_count": 1
     },
     {
-      "source": "Process:{96128EA2-F210-5F7E-DA00-000000007F01}",
-      "target": "File:73c90c62a2dcc4f8",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-10-08T11:03:44.540704300Z",
-      "access_count": 1
-    },
-    {
       "source": "Process:{96128EA2-F210-5F7E-D900-000000007F01}",
       "target": "Process:{96128EA2-F210-5F7E-DA00-000000007F01}",
       "relation": "CREATED",
@@ -469,13 +438,6 @@
       "target": "Process:{96128EA2-F212-5F7E-E400-000000007F01}",
       "relation": "CREATED",
       "timestamp": "2020-10-08T11:03:46.617920300Z",
-      "access_count": 1
-    },
-    {
-      "source": "Process:{96128EA2-F211-5F7E-DF00-000000007F01}",
-      "target": "File:7771d1f5fc853bc0",
-      "relation": "CREATED_FILE",
-      "timestamp": "2020-10-08T11:03:46.110357900Z",
       "access_count": 1
     },
     {
