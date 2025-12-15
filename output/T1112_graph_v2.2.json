@@ -43,6 +43,16 @@
       }
     },
     {
+      "id": "Process:{D0D4CC13-1505-5FA5-0C00-000000008701}",
+      "type": "Process",
+      "properties": {
+        "label": "svchost",
+        "image": "%WINDIR%\\System32\\svchost.exe",
+        "guid": "{D0D4CC13-1505-5FA5-0C00-000000008701}",
+        "malicious": true
+      }
+    },
+    {
       "id": "Process:{D0D4CC13-1674-5FA5-0203-000000008701}",
       "type": "Process",
       "properties": {
@@ -191,6 +201,58 @@
       }
     },
     {
+      "id": "Process:{D0D4CC13-169C-5FA5-0A00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "services",
+        "image": "%WINDIR%\\System32\\services.exe",
+        "guid": "{D0D4CC13-169C-5FA5-0A00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-169E-5FA5-0C00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "svchost",
+        "image": "%WINDIR%\\System32\\svchost.exe",
+        "command_line": "C:\\Windows\\system32\\svchost.exe -k DcomLaunch",
+        "parent_image": "%WINDIR%\\System32\\services.exe",
+        "guid": "{D0D4CC13-169E-5FA5-0C00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-169C-5FA5-0700-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "wininit",
+        "image": "%WINDIR%\\System32\\wininit.exe",
+        "guid": "{D0D4CC13-169C-5FA5-0700-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-169C-5FA5-0400-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "smss",
+        "image": "%WINDIR%\\System32\\smss.exe",
+        "guid": "{D0D4CC13-169C-5FA5-0400-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-169B-5FA5-0200-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "smss",
+        "image": "%WINDIR%\\System32\\smss.exe",
+        "guid": "{D0D4CC13-169B-5FA5-0200-000000008801}",
+        "malicious": true
+      }
+    },
+    {
       "id": "Process:{D0D4CC13-16D6-5FA5-8300-000000008801}",
       "type": "Process",
       "properties": {
@@ -241,6 +303,16 @@
         "command_line": "C:\\Windows\\system32\\reg.exe  query hklm\\software\\microsoft\\windows\\softwareinventorylogging /v collectionstate /reg:64",
         "parent_image": "%WINDIR%\\System32\\cmd.exe",
         "guid": "{D0D4CC13-16DC-5FA5-8800-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16DC-5FA5-8700-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-16DC-5FA5-8700-000000008801}",
         "malicious": true
       }
     },
@@ -391,6 +463,18 @@
       }
     },
     {
+      "id": "Process:{D0D4CC13-16E3-5FA5-A000-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Get-PackageProvider]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16E3-5FA5-A000-000000008801}",
+        "malicious": true
+      }
+    },
+    {
       "id": "Process:{D0D4CC13-16E4-5FA5-A600-000000008801}",
       "type": "Process",
       "properties": {
@@ -431,6 +515,18 @@
         "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
         "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "guid": "{D0D4CC13-16E5-5FA5-A700-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-16E6-5FA5-AB00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"powershell.exe\" -noninteractive [DECODED: [Console]::InputEncoding = New-Object Text.UTF8Encoding $false; Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-16E6-5FA5-AB00-000000008801}",
         "malicious": true
       }
     },
@@ -695,6 +791,16 @@
       }
     },
     {
+      "id": "Process:{D0D4CC13-1701-5FA5-DC00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1701-5FA5-DC00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
       "id": "Process:{D0D4CC13-1701-5FA5-DB00-000000008801}",
       "type": "Process",
       "properties": {
@@ -703,6 +809,16 @@
         "command_line": "reg  add HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced /t REG_DWORD /v HideFileExt /d 1 /f ",
         "parent_image": "%WINDIR%\\System32\\cmd.exe",
         "guid": "{D0D4CC13-1701-5FA5-DB00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1701-5FA5-DA00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1701-5FA5-DA00-000000008801}",
         "malicious": true
       }
     },
@@ -751,6 +867,16 @@
         "command_line": "reg  add HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest /v UseLogonCredential /t REG_DWORD /d 1 /f ",
         "parent_image": "%WINDIR%\\System32\\cmd.exe",
         "guid": "{D0D4CC13-1702-5FA5-DF00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1702-5FA5-DE00-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1702-5FA5-DE00-000000008801}",
         "malicious": true
       }
     },
@@ -809,6 +935,18 @@
       }
     },
     {
+      "id": "Process:{D0D4CC13-1705-5FA5-F400-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "command_line": "\"C:\\Windows\\system32\\cmd.exe\" /c \"reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest /v UseLogonCredential /t REG_DWORD /d 0 /f >nul 2>&1\" ",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{D0D4CC13-1705-5FA5-F400-000000008801}",
+        "malicious": true
+      }
+    },
+    {
       "id": "Process:{D0D4CC13-1705-5FA5-F300-000000008801}",
       "type": "Process",
       "properties": {
@@ -821,6 +959,16 @@
       }
     },
     {
+      "id": "Process:{D0D4CC13-1705-5FA5-F200-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1705-5FA5-F200-000000008801}",
+        "malicious": true
+      }
+    },
+    {
       "id": "Process:{D0D4CC13-1705-5FA5-F100-000000008801}",
       "type": "Process",
       "properties": {
@@ -829,6 +977,16 @@
         "command_line": "reg  delete HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced /v HideFileExt /f  ",
         "parent_image": "%WINDIR%\\System32\\cmd.exe",
         "guid": "{D0D4CC13-1705-5FA5-F100-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:{D0D4CC13-1705-5FA5-F000-000000008801}",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D0D4CC13-1705-5FA5-F000-000000008801}",
         "malicious": true
       }
     },
@@ -888,6 +1046,20 @@
       }
     },
     {
+      "id": "Registry:f8d48b2c3099a4ec",
+      "type": "Registry",
+      "properties": {
+        "path": "HKLM\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\RUN"
+      }
+    },
+    {
+      "id": "Registry:1ee056adf6d36773",
+      "type": "Registry",
+      "properties": {
+        "path": "HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\EXPLORER\\ADVANCED"
+      }
+    },
+    {
       "id": "Registry:228a41a2263226e3",
       "type": "Registry",
       "properties": {
@@ -916,6 +1088,14 @@
       "relation": "CREATED",
       "timestamp": "2020-11-06T09:25:07.298256200Z",
       "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1505-5FA5-0C00-000000008701}",
+      "target": "Process:{D0D4CC13-1673-5FA5-F602-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:25:07.253987100Z",
+      "access_count": 6,
+      "last_timestamp": "2020-11-06T09:25:13.948789600Z"
     },
     {
       "source": "Process:{D0D4CC13-1674-5FA5-0103-000000008701}",
@@ -995,6 +1175,42 @@
       "access_count": 1
     },
     {
+      "source": "Process:{D0D4CC13-169C-5FA5-0A00-000000008801}",
+      "target": "Process:{D0D4CC13-169E-5FA5-0C00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:07.144473000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-169C-5FA5-0700-000000008801}",
+      "target": "Process:{D0D4CC13-169C-5FA5-0A00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:07.139619600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-169C-5FA5-0400-000000008801}",
+      "target": "Process:{D0D4CC13-169C-5FA5-0700-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:07.134698000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-169B-5FA5-0200-000000008801}",
+      "target": "Process:{D0D4CC13-169C-5FA5-0400-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:07.124825700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-169E-5FA5-0C00-000000008801}",
+      "target": "Process:{D0D4CC13-1673-5FA5-F602-000000008701}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:41.558475800Z",
+      "access_count": 10,
+      "last_timestamp": "2020-11-06T09:27:31.714329200Z"
+    },
+    {
       "source": "Process:{D0D4CC13-16D6-5FA5-8200-000000008801}",
       "target": "Process:{D0D4CC13-16D6-5FA5-8300-000000008801}",
       "relation": "CREATED",
@@ -1013,6 +1229,20 @@
       "target": "Process:{D0D4CC13-16D6-5FA5-8100-000000008801}",
       "relation": "CREATED",
       "timestamp": "2020-11-06T09:26:46.691322100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16DC-5FA5-8700-000000008801}",
+      "target": "Process:{D0D4CC13-16DC-5FA5-8800-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:52.224272600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16DB-5FA5-8500-000000008801}",
+      "target": "Process:{D0D4CC13-16DC-5FA5-8700-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:52.215900500Z",
       "access_count": 1
     },
     {
@@ -1094,6 +1324,13 @@
       "access_count": 1
     },
     {
+      "source": "Process:{D0D4CC13-16E2-5FA5-9C00-000000008801}",
+      "target": "Process:{D0D4CC13-16E3-5FA5-A000-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:26:59.293001500Z",
+      "access_count": 1
+    },
+    {
       "source": "Process:{D0D4CC13-16E4-5FA5-A500-000000008801}",
       "target": "Process:{D0D4CC13-16E4-5FA5-A600-000000008801}",
       "relation": "CREATED",
@@ -1115,6 +1352,41 @@
       "access_count": 1
     },
     {
+      "source": "Process:{D0D4CC13-16E5-5FA5-A700-000000008801}",
+      "target": "Process:{D0D4CC13-16E6-5FA5-AB00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:02.035170700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E6-5FA5-AB00-000000008801}",
+      "target": "Network:ad563bf11f43fb38",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:02.035170700Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E3-5FA5-A000-000000008801}",
+      "target": "Network:8fb93a8279883392",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:02.009516600Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E3-5FA5-A000-000000008801}",
+      "target": "Network:3e3e3bd0de98b3b3",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:02.009437500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E6-5FA5-AB00-000000008801}",
+      "target": "File:6a51935ba2b25c52",
+      "relation": "CREATED_FILE",
+      "timestamp": "2020-11-06T09:27:03.999667900Z",
+      "access_count": 1
+    },
+    {
       "source": "Process:{D0D4CC13-16E8-5FA5-B100-000000008801}",
       "target": "Process:{D0D4CC13-16E8-5FA5-B200-000000008801}",
       "relation": "CREATED",
@@ -1133,6 +1405,20 @@
       "target": "Process:{D0D4CC13-16E8-5FA5-B000-000000008801}",
       "relation": "CREATED",
       "timestamp": "2020-11-06T09:27:04.516345900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E6-5FA5-AB00-000000008801}",
+      "target": "Network:8fb93a8279883392",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:04.357922500Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-16E6-5FA5-AB00-000000008801}",
+      "target": "Network:3e3e3bd0de98b3b3",
+      "relation": "CONNECTED_TO",
+      "timestamp": "2020-11-06T09:27:04.357878000Z",
       "access_count": 1
     },
     {
@@ -1258,6 +1544,34 @@
       "access_count": 1
     },
     {
+      "source": "Process:{D0D4CC13-1701-5FA5-DC00-000000008801}",
+      "target": "Process:{D0D4CC13-1701-5FA5-DD00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:29.995794400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1700-5FA5-D500-000000008801}",
+      "target": "Process:{D0D4CC13-1701-5FA5-DC00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:29.989285800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1701-5FA5-DA00-000000008801}",
+      "target": "Process:{D0D4CC13-1701-5FA5-DB00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:29.936868100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1700-5FA5-D500-000000008801}",
+      "target": "Process:{D0D4CC13-1701-5FA5-DA00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:29.930200300Z",
+      "access_count": 1
+    },
+    {
       "source": "Process:{D0D4CC13-1700-5FA5-D500-000000008801}",
       "target": "Process:{D0D4CC13-1702-5FA5-E200-000000008801}",
       "relation": "CREATED",
@@ -1276,6 +1590,20 @@
       "target": "Process:{D0D4CC13-1702-5FA5-E000-000000008801}",
       "relation": "CREATED",
       "timestamp": "2020-11-06T09:27:30.032871900Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1702-5FA5-DE00-000000008801}",
+      "target": "Process:{D0D4CC13-1702-5FA5-DF00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:30.016802100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1700-5FA5-D500-000000008801}",
+      "target": "Process:{D0D4CC13-1702-5FA5-DE00-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:30.010687100Z",
       "access_count": 1
     },
     {
@@ -1308,6 +1636,41 @@
     },
     {
       "source": "Process:{D0D4CC13-1704-5FA5-EB00-000000008801}",
+      "target": "Process:{D0D4CC13-1705-5FA5-F400-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:33.995061000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F200-000000008801}",
+      "target": "Process:{D0D4CC13-1705-5FA5-F300-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:33.981703200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1704-5FA5-EB00-000000008801}",
+      "target": "Process:{D0D4CC13-1705-5FA5-F200-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:33.975419800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F000-000000008801}",
+      "target": "Process:{D0D4CC13-1705-5FA5-F100-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:33.944030100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1704-5FA5-EB00-000000008801}",
+      "target": "Process:{D0D4CC13-1705-5FA5-F000-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:33.936879400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1704-5FA5-EB00-000000008801}",
       "target": "Process:{D0D4CC13-1706-5FA5-F800-000000008801}",
       "relation": "CREATED",
       "timestamp": "2020-11-06T09:27:34.464288000Z",
@@ -1328,6 +1691,13 @@
       "access_count": 1
     },
     {
+      "source": "Process:{D0D4CC13-1705-5FA5-F400-000000008801}",
+      "target": "Process:{D0D4CC13-1705-5FA5-F500-000000008801}",
+      "relation": "CREATED",
+      "timestamp": "2020-11-06T09:27:34.001401200Z",
+      "access_count": 1
+    },
+    {
       "source": "Process:{D0D4CC13-16DC-5FA5-8800-000000008801}",
       "target": "Registry:81cd471ee085837b",
       "relation": "QUERY_REGISTRY",
@@ -1335,10 +1705,80 @@
       "access_count": 1
     },
     {
+      "source": "Process:{D0D4CC13-1701-5FA5-DD00-000000008801}",
+      "target": "Registry:f8d48b2c3099a4ec",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-06T09:27:29.995794400Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1701-5FA5-DC00-000000008801}",
+      "target": "Registry:f8d48b2c3099a4ec",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-06T09:27:29.989285800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1701-5FA5-DB00-000000008801}",
+      "target": "Registry:1ee056adf6d36773",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-06T09:27:29.936868100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1701-5FA5-DA00-000000008801}",
+      "target": "Registry:1ee056adf6d36773",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-06T09:27:29.930200300Z",
+      "access_count": 1
+    },
+    {
       "source": "Process:{D0D4CC13-1702-5FA5-DF00-000000008801}",
       "target": "Registry:228a41a2263226e3",
       "relation": "MODIFIED_REGISTRY",
       "timestamp": "2020-11-06T09:27:30.016802100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1702-5FA5-DE00-000000008801}",
+      "target": "Registry:228a41a2263226e3",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-06T09:27:30.010687100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F400-000000008801}",
+      "target": "Registry:228a41a2263226e3",
+      "relation": "MODIFIED_REGISTRY",
+      "timestamp": "2020-11-06T09:27:33.995061000Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F300-000000008801}",
+      "target": "Registry:f8d48b2c3099a4ec",
+      "relation": "DELETE_REGISTRY",
+      "timestamp": "2020-11-06T09:27:33.981703200Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F200-000000008801}",
+      "target": "Registry:f8d48b2c3099a4ec",
+      "relation": "DELETE_REGISTRY",
+      "timestamp": "2020-11-06T09:27:33.975419800Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F100-000000008801}",
+      "target": "Registry:1ee056adf6d36773",
+      "relation": "DELETE_REGISTRY",
+      "timestamp": "2020-11-06T09:27:33.944030100Z",
+      "access_count": 1
+    },
+    {
+      "source": "Process:{D0D4CC13-1705-5FA5-F000-000000008801}",
+      "target": "Registry:1ee056adf6d36773",
+      "relation": "DELETE_REGISTRY",
+      "timestamp": "2020-11-06T09:27:33.936879400Z",
       "access_count": 1
     },
     {

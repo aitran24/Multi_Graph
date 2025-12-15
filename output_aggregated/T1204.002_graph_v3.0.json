@@ -1,0 +1,105 @@
+{
+  "nodes": [
+    {
+      "id": "Process:notepad|f3bcd028",
+      "type": "Process",
+      "properties": {
+        "label": "notepad",
+        "image": "%WINDIR%\\System32\\notepad.exe",
+        "command_line": "\"C:\\Windows\\system32\\notepad.exe\" ",
+        "parent_image": "%WINDIR%\\explorer.exe",
+        "guid": "{8A675139-42DB-5FA5-B806-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:explorer|536d9349",
+      "type": "Process",
+      "properties": {
+        "label": "explorer",
+        "image": "%WINDIR%\\explorer.exe",
+        "guid": "{8A675139-3BB2-5FA5-9B00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:aa9c24f9",
+      "type": "File",
+      "properties": {
+        "path": "%WINDIR%\\System32\\test.bat",
+        "path_normalized": "c:\\windows\\system32\\test.bat"
+      }
+    },
+    {
+      "id": "Process:rundll32|dffe0816",
+      "type": "Process",
+      "properties": {
+        "label": "rundll32",
+        "image": "%WINDIR%\\System32\\rundll32.exe",
+        "command_line": "C:\\Windows\\System32\\rundll32.exe C:\\Windows\\System32\\shell32.dll,SHCreateLocalServerRunDll {9aa46009-3ce0-458a-a354-715610a075e6} -Embedding",
+        "parent_image": "%WINDIR%\\System32\\svchost.exe",
+        "guid": "{8A675139-42FF-5FA5-C106-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:svchost|d581e2cc",
+      "type": "Process",
+      "properties": {
+        "label": "svchost",
+        "image": "%WINDIR%\\System32\\svchost.exe",
+        "guid": "{8A675139-3B4B-5FA5-0C00-000000008801}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:unknown|85463a0e",
+      "type": "Process",
+      "properties": {
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "commandline": "cmd.exe /c %WINDIR%\\System32\\test.bat",
+        "process_guid": "synthetic-cmd-b17ce12f",
+        "parent_process_guid": "{8A675139-3BB2-5FA5-9B00-000000008801}"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "Process:explorer|536d9349",
+      "target": "Process:notepad|f3bcd028",
+      "operations": []
+    },
+    {
+      "source": "Process:notepad|f3bcd028",
+      "target": "File:aa9c24f9",
+      "operations": []
+    },
+    {
+      "source": "Process:svchost|d581e2cc",
+      "target": "Process:rundll32|dffe0816",
+      "operations": []
+    },
+    {
+      "source": "Process:explorer|536d9349",
+      "target": "Process:unknown|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:unknown|85463a0e",
+      "target": "File:aa9c24f9",
+      "operations": []
+    }
+  ],
+  "metadata": {
+    "version": "v3.0-aggregated",
+    "aggregation_stats": {
+      "original_nodes": 6,
+      "original_edges": 5,
+      "removed_noise_nodes": 0,
+      "removed_noise_edges": 0,
+      "merged_nodes": 0,
+      "final_nodes": 6,
+      "final_edges": 5
+    }
+  }
+}
