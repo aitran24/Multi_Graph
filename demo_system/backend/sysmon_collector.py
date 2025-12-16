@@ -68,7 +68,7 @@ BEHAVIORAL_SIGNATURES = {
     "T1482": {
         "name": "Domain Trust Discovery",
         "tactic": "Discovery",
-        "patterns": ["nltest", "domain_trusts", "dsquery", "get-addomain", "get-adtrust", "net view /domain"],
+        "patterns": ["nltest", "domain_trusts", "dsquery", "get-addomain", "get-adtrust", "net view /domain", "t1482_marker"],
         "event_types": [1]
     },
     "T1547.001": {

@@ -191,13 +191,14 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ============ HELPERS ============
-@st.cache_data(ttl=2)
 def load_data():
+    # Do not cache here to ensure dashboard always reads latest file on disk
     try:
         if DATA_FILE.exists():
             with open(DATA_FILE, 'r') as f:
                 return json.load(f)
-    except: pass
+    except:
+        pass
     return {"updated": None, "stats": {}, "events": [], "detections": []}
 
 def get_severity(conf):
@@ -230,8 +231,10 @@ is_online = False
 if last_update:
     try:
         ut = datetime.strptime(last_update, "%Y-%m-%d %H:%M:%S")
-        is_online = (datetime.now() - ut).total_seconds() < 5
-    except: pass
+        # Consider backend online if updated within last 30s (more tolerant)
+        is_online = (datetime.now() - ut).total_seconds() < 30
+    except:
+        pass
 
 has_threat = any(
     parse_ts(d.get("timestamp")) and (datetime.now() - parse_ts(d.get("timestamp"))).total_seconds() < 300

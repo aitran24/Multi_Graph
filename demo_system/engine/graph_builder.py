@@ -154,10 +154,15 @@ class GraphBuilder:
                 cmdline = data.get('CommandLine', '')
                 
                 # Create process node
-                process_id = f"Process:{self.hash_content(image + cmdline)}"
-                G.add_node(process_id, 
+                if process_guid:
+                    proc_key = process_guid[:8]
+                    process_id = f"Process:{proc_key}"
+                else:
+                    process_id = f"Process:{self.hash_content(image + cmdline)}"
+
+                G.add_node(process_id,
                           type='Process',
-                          label=Path(image).name if image else 'unknown',
+                          label=Path(image).stem if image else 'unknown',
                           image=self.generalize_path(image),
                           command_line=self.generalize_path(cmdline),
                           guid=process_guid)
@@ -182,7 +187,7 @@ class GraphBuilder:
                               path=self.generalize_path(target_file))
                     
                     # Edge from process to file
-                    process_id = f"Process:{process_guid[:8]}"
+                    process_id = f"Process:{process_guid[:8]}" if process_guid else f"Process:{self.hash_content(data.get('Image','') + data.get('CommandLine',''))}"
                     if process_id in G.nodes():
                         G.add_edge(process_id, file_id,
                                   operations=['CREATE_FILE'])
@@ -200,7 +205,7 @@ class GraphBuilder:
                               key=self.generalize_path(target_object))
                     
                     # Edge from process to registry
-                    process_id = f"Process:{process_guid[:8]}"
+                    process_id = f"Process:{process_guid[:8]}" if process_guid else f"Process:{self.hash_content(data.get('Image','') + data.get('CommandLine',''))}"
                     if process_id in G.nodes():
                         G.add_edge(process_id, reg_id,
                                   operations=['SET_REGISTRY'])
