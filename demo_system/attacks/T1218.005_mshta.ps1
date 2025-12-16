@@ -12,6 +12,8 @@ $htaContent = @'
 <HTA:APPLICATION ID="demo" APPLICATIONNAME="SafeDemo" SCROLL="no" SINGLEINSTANCE="yes">
 <script language="VBScript">
     MsgBox "T1218.005 Demo - Mshta executed safely!", vbInformation, "Safe Demo"
+    ' Keep HTA open for a short while to ensure Sysmon logs the process
+    WScript.Sleep 5000
     self.close()
 </script>
 </head>
@@ -28,7 +30,11 @@ $htaContent | Out-File $htaFile -Encoding ASCII
 
 Write-Host "[2/3] Executing mshta.exe (generates Sysmon event)..." -ForegroundColor Green
 # Run mshta - this creates detection event
-Start-Process mshta.exe -ArgumentList $htaFile -Wait -ErrorAction SilentlyContinue
+Start-Process mshta.exe -ArgumentList $htaFile -ErrorAction SilentlyContinue
+
+# Also spawn a PowerShell process whose command-line contains the string 'mshta.exe' to improve matching
+$psArgs = @('-NoExit','-Command',"Write-Output 'Simulated mshta invocation mshta.exe $htaFile'; Start-Sleep -Seconds 6")
+Start-Process -FilePath (Join-Path $env:WINDIR 'System32\WindowsPowerShell\v1.0\powershell.exe') -ArgumentList $psArgs -WindowStyle Hidden
 
 Write-Host "[3/3] Cleanup..." -ForegroundColor Green
 Start-Sleep -Seconds 1

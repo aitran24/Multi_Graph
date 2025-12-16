@@ -7,6 +7,7 @@ param(
 
 $attacks = @{
     "T1003.002" = @{Script="T1003.002_sam_dump.ps1"; Name="SAM Dump"; Fixed=$true}
+    "T1003.001" = @{Script="T1003.001_lsass_dump_safe.ps1"; Name="LSASS Dump"; Fixed=$true}
     "T1059.001" = @{Script="T1059.001_powershell_execution.ps1"; Name="PowerShell"; Fixed=$true}
     "T1112" = @{Script="T1112_registry_defense_evasion.ps1"; Name="Registry Mod"; Fixed=$true}
     "T1204.002" = @{Script="T1204.002_malicious_file.ps1"; Name="Malicious File"; Fixed=$false}
@@ -25,13 +26,14 @@ function Test-SingleAttack {
     Write-Host "  TEST: $ID - $($Info.Name)" -ForegroundColor Yellow
     Write-Host ("=" * 80) -ForegroundColor Cyan
     
-    # Run attack
-    Write-Host "`n[1/2] Running attack..." -ForegroundColor Cyan
+    # Record start time, then run attack
+    $startTime = Get-Date
+    Write-Host "`n[1/2] Running attack... (start: $startTime)" -ForegroundColor Cyan
     & ".\$($Info.Script)"
-    
-    # Wait for backend
-    Write-Host "`n[2/2] Waiting for detection (5 seconds)..." -ForegroundColor Cyan
-    Start-Sleep -Seconds 5
+
+    # Wait for backend (give collector extra time)
+    Write-Host "`n[2/2] Waiting for detection (8 seconds)..." -ForegroundColor Cyan
+    Start-Sleep -Seconds 8
     
     # Check result
     Write-Host "`nResult:" -ForegroundColor Cyan
@@ -41,6 +43,22 @@ function Test-SingleAttack {
                     Sort-Object timestamp -Descending | Select-Object -First 1
         
         if ($relevant) {
+            # Parse timestamp and ensure it's recent relative to the attack start time
+            try {
+                $detTime = [datetime]$relevant.timestamp
+            }
+            catch {
+                $detTime = Get-Date 0
+            }
+
+            if ($detTime -lt $startTime.AddSeconds(-5)) {
+                $ageSec = (Get-Date) - $detTime
+                Write-Host "  Status: DETECTED (old record, ignored)" -ForegroundColor Yellow
+                Write-Host "  Timestamp: $($relevant.timestamp) (age: $([int]$ageSec.TotalSeconds)s)" -ForegroundColor Gray
+                Write-Host "  Treating as NOT DETECTED for this run." -ForegroundColor Yellow
+                return $false
+            }
+
             Write-Host "  Status: DETECTED" -ForegroundColor Green
             Write-Host "  Confidence: $($relevant.confidence)%" -ForegroundColor White
             Write-Host "  Patterns: $($relevant.patterns -join ', ')" -ForegroundColor White

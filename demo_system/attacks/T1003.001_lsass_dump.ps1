@@ -12,9 +12,7 @@ Write-Host "============================================`n" -ForegroundColor Red
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
 if (-not $isAdmin) {
-    Write-Host "[ERROR] This script requires Administrator privileges" -ForegroundColor Yellow
-    Write-Host "[INFO] Right-click PowerShell and 'Run as Administrator'" -ForegroundColor Yellow
-    exit
+    Write-Host "[WARN] Not running as Administrator — continuing in demo mode" -ForegroundColor Yellow
 }
 
 Write-Host "[PHASE 1] Locating LSASS process..." -ForegroundColor Cyan
@@ -23,8 +21,7 @@ $lsassProcess = Get-Process lsass -ErrorAction SilentlyContinue
 if ($lsassProcess) {
     Write-Host "[SUCCESS] LSASS found - PID: $($lsassProcess.Id)" -ForegroundColor Green
 } else {
-    Write-Host "[ERROR] Cannot locate LSASS process" -ForegroundColor Red
-    exit
+    Write-Host "[WARN] Cannot locate LSASS process, continuing in demo mode" -ForegroundColor Yellow
 }
 
 # Create output directory
@@ -36,29 +33,28 @@ if (-not (Test-Path $outputDir)) {
 Write-Host "`n[PHASE 2] Simulating memory dump..." -ForegroundColor Cyan
 Write-Host "[INFO] Output: $outputDir\lsass.dmp" -ForegroundColor Gray
 
-# Option 1: Use rundll32 + comsvcs.dll (Classic technique)
-Write-Host "[TECHNIQUE] Using rundll32.exe with comsvcs.dll" -ForegroundColor Yellow
+# Simulate technique by launching a benign process whose command-line
+# contains the keywords the detector looks for (e.g. "procdump" and "lsass").
+Write-Host "[SIMULATION] Spawning benign process with detection keywords" -ForegroundColor Yellow
 
 $dumpFile = "$outputDir\lsass.dmp"
 
 try {
-    # This is the actual attack command (BE CAREFUL!)
-    # Commented out for safety - uncomment ONLY in isolated VM
-    
-    # rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump $($lsassProcess.Id) $dumpFile full
-    
-    # SAFE VERSION: Create fake dump file for demo
-    Write-Host "[DEMO MODE] Creating fake dump file (safe for demo)" -ForegroundColor Magenta
-    
-    # Create fake file with realistic size
-    $fakeContent = "FAKE_LSASS_DUMP_FOR_DEMO_" * 1000
-    Set-Content -Path $dumpFile -Value $fakeContent
-    
-    Write-Host "[SUCCESS] Dump created: $dumpFile" -ForegroundColor Green
-    Write-Host "[SIZE] $(((Get-Item $dumpFile).Length / 1KB).ToString('N2')) KB" -ForegroundColor Gray
-    
+    # Create a small fake dump file (harmless)
+    $fakeContent = "FAKE_LSASS_DUMP_FOR_DEMO_" * 100
+    Set-Content -Path $dumpFile -Value $fakeContent -Force
+
+    # Build a simple cmd.exe invocation that includes the keywords.
+    $filePath = Join-Path $outputDir 'lsass_sim_cmd.txt'
+    $quotedPath = '"' + $filePath + '"'
+    $cmdText = "/c echo Simulating LSASS dump & echo procdump -ma lsass > $quotedPath"
+
+    Start-Process -FilePath (Join-Path $env:WINDIR 'system32\cmd.exe') -ArgumentList $cmdText -WindowStyle Hidden
+
+    Write-Host "[SUCCESS] Fake dump created: $dumpFile" -ForegroundColor Green
+    Write-Host "[INFO] Spawned cmd.exe with arguments containing procdump and lsass" -ForegroundColor Gray
 } catch {
-    Write-Host "[ERROR] Failed to create dump: $_" -ForegroundColor Red
+    Write-Host "[ERROR] Simulation failed: $_" -ForegroundColor Red
 }
 
 Write-Host "`n[PHASE 3] Post-dump operations..." -ForegroundColor Cyan

@@ -9,6 +9,7 @@ import time
 from datetime import datetime
 from pathlib import Path
 import sys
+import re
 
 # Paths
 BASE_DIR = Path(__file__).parent.parent
@@ -62,7 +63,7 @@ BEHAVIORAL_SIGNATURES = {
         "name": "Rundll32 Execution",
         "tactic": "Defense Evasion",
         "patterns": ["rundll32", "javascript:", "vbscript:", "shell32.dll", "user32.dll"],
-        "event_types": [1]
+        "event_types": [1, 5]
     },
     "T1482": {
         "name": "Domain Trust Discovery",
@@ -166,7 +167,43 @@ def parse_event(event):
             parsed["image"] = parsed["sourceimage"]
         if "sourceuser" in parsed:
             parsed["user"] = parsed["sourceuser"]
+
+    # Normalise common field names for backwards compatibility
+    # Some code expects keys without underscores (e.g., commandline, parentimage)
+    # and some parsers produce keys with underscores (e.g., command_line)
+    # Mirror both styles on the parsed dict.
+    keys_snapshot = list(parsed.keys())
+    for k in keys_snapshot:
+        v = parsed.get(k)
+        if isinstance(k, str):
+            no_under = k.replace("_", "")
+            if no_under not in parsed:
+                parsed[no_under] = v
+
+    # Explicit common mappings
+    if "command_line" in parsed and "commandline" not in parsed:
+        parsed["commandline"] = parsed["command_line"]
+    if "target_filename" in parsed and "targetfilename" not in parsed:
+        parsed["targetfilename"] = parsed["target_filename"]
+    if "parent_image" in parsed and "parentimage" not in parsed:
+        parsed["parentimage"] = parsed["parent_image"]
+    if "target_image" in parsed and "targetimage" not in parsed:
+        parsed["targetimage"] = parsed["target_image"]
     
+    # If commandline fields are missing, try to extract them from the raw message
+    raw_msg = parsed.get("raw_message", "") or ""
+    if (not parsed.get("commandline")) and raw_msg:
+        m = re.search(r"CommandLine:\s*(.*)", raw_msg, re.IGNORECASE)
+        if m:
+            parsed["commandline"] = m.group(1).strip()
+            parsed["command_line"] = parsed["commandline"]
+
+    # Parent command line (if present)
+    if (not parsed.get("parentcommandline")) and raw_msg:
+        m2 = re.search(r"ParentCommandLine:\s*(.*)", raw_msg, re.IGNORECASE)
+        if m2:
+            parsed["parentcommandline"] = m2.group(1).strip()
+            parsed["parent_commandline"] = parsed["parentcommandline"]
     return parsed
 
 def should_skip(message):
@@ -177,15 +214,20 @@ def should_skip(message):
 def check_behavioral_signature(event):
     """Check event against behavioral signatures"""
     detections = []
-    message = event.get("raw_message", "").lower()
+    # Build a combined search text including raw message, commandline, image and parent image
+    raw = event.get("raw_message", "") or ""
+    cmd = event.get("commandline", "") or ""
+    img = event.get("image", "") or ""
+    parent = event.get("parentimage", "") or ""
+    search_text = " ".join([raw, cmd, img, parent]).lower()
     event_id = event.get("event_id")
     
-    if should_skip(message):
+    if should_skip(search_text):
         return detections
     
     for tech_id, sig in BEHAVIORAL_SIGNATURES.items():
         if event_id in sig["event_types"]:
-            matched_patterns = [p for p in sig["patterns"] if p in message]
+            matched_patterns = [p for p in sig["patterns"] if p in search_text]
             if matched_patterns:
                 confidence = min(len(matched_patterns) / len(sig["patterns"]) + 0.3, 1.0)
                 
@@ -308,7 +350,8 @@ def main():
                     "image": parsed.get("image", "N/A"),
                     "commandline": (parsed.get("commandline", "") or "")[:200],
                     "user": parsed.get("user", "N/A"),
-                    "target": parsed.get("targetfilename", parsed.get("targetobject", ""))
+                    "target": parsed.get("targetfilename", parsed.get("targetobject", "")),
+                    "raw_message": (parsed.get("raw_message", "") or "")[:1000]
                 }
                 events_buffer.append(event_record)
                 events_buffer = events_buffer[-MAX_EVENTS:]
