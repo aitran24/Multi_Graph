@@ -1,0 +1,7 @@
+streamlit>=1.30.0
+networkx>=3.2
+matplotlib>=3.8.0
+pandas>=2.1.0
+pywin32>=306
+watchdog>=3.0.0
+plotly>=5.18.0

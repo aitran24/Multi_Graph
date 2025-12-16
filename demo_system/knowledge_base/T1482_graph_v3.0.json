@@ -1,0 +1,135 @@
+{
+  "nodes": [
+    {
+      "id": "Process:nltest|63939528",
+      "type": "Process",
+      "properties": {
+        "label": "nltest",
+        "image": "%WINDIR%\\System32\\nltest.exe",
+        "command_line": "nltest  /domain_trusts ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{732C744F-EA4B-600E-797B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:cmd|85463a0e",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{732C744F-EA4B-600E-787B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:powershell|63710f57",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{732C744F-1C72-600B-C805-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:whoami|559d3ee4",
+      "type": "Process",
+      "properties": {
+        "label": "whoami",
+        "image": "%WINDIR%\\System32\\whoami.exe",
+        "command_line": "\"C:\\Windows\\system32\\whoami.exe\"",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{732C744F-EA4B-600E-777B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:dsquery|dc4a89b4",
+      "type": "Process",
+      "properties": {
+        "label": "dsquery",
+        "image": "%WINDIR%\\System32\\dsquery.exe",
+        "command_line": "dsquery  * -filter \"(objectClass=trustedDomain)\" -attr * ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{732C744F-EACC-600E-8C7B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:AdFind|36f85df8",
+      "type": "Process",
+      "properties": {
+        "label": "AdFind",
+        "image": "C:\\AtomicRedTeam\\atomics\\T1087.002\\src\\AdFind.exe",
+        "command_line": "C:\\AtomicRedTeam\\atomics\\T1087.002\\src\\AdFind.exe  -gcb -sc trustdmp ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{732C744F-EAD0-600E-937B-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:845bf50cba7c9d5e",
+      "type": "Network",
+      "properties": {
+        "address": "fe80:0:0:0:f505:ba55:d74d:8172",
+        "port": "9389",
+        "protocol": "tcp"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:nltest|63939528",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:whoami|559d3ee4",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:nltest|63939528",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:dsquery|dc4a89b4",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:powershell|63710f57",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:AdFind|36f85df8",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:845bf50cba7c9d5e",
+      "operations": []
+    }
+  ],
+  "metadata": {
+    "version": "v3.0-aggregated",
+    "aggregation_stats": {
+      "original_nodes": 12,
+      "original_edges": 11,
+      "removed_noise_nodes": 0,
+      "removed_noise_edges": 0,
+      "merged_nodes": 5,
+      "final_nodes": 7,
+      "final_edges": 8
+    }
+  }
+}

@@ -1,0 +1,245 @@
+{
+  "nodes": [
+    {
+      "id": "Process:services|632e8af6",
+      "type": "Process",
+      "properties": {
+        "label": "services",
+        "image": "%WINDIR%\\System32\\services.exe",
+        "guid": "{96128EA2-F1A6-5F7E-0A00-000000007F01}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:svchost|d581e2cc",
+      "type": "Process",
+      "properties": {
+        "label": "svchost",
+        "image": "%WINDIR%\\System32\\svchost.exe",
+        "command_line": "C:\\Windows\\system32\\svchost.exe -k DcomLaunch",
+        "parent_image": "%WINDIR%\\System32\\services.exe",
+        "guid": "{96128EA2-F1A7-5F7E-0C00-000000007F01}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:wininit|002d3879",
+      "type": "Process",
+      "properties": {
+        "label": "wininit",
+        "image": "%WINDIR%\\System32\\wininit.exe",
+        "guid": "{96128EA2-F1A6-5F7E-0700-000000007F01}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:smss|fb3b8631",
+      "type": "Process",
+      "properties": {
+        "label": "smss",
+        "image": "%WINDIR%\\System32\\smss.exe",
+        "guid": "{96128EA2-F1A5-5F7E-0400-000000007F01}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Registry:b23a6a84",
+      "type": "Registry",
+      "properties": {
+        "path": "HKLM\\System\\CurrentControlSet\\Control\\Lsa\\nolmhash"
+      }
+    },
+    {
+      "id": "Process:reg|0254689c",
+      "type": "Process",
+      "properties": {
+        "label": "reg",
+        "image": "%WINDIR%\\System32\\reg.exe",
+        "command_line": "C:\\Windows\\system32\\reg.exe  query hklm\\software\\microsoft\\windows\\softwareinventorylogging /v collectionstate /reg:64",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{96128EA2-F1E4-5F7E-9F00-000000007F01}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:cmd|85463a0e",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{96128EA2-F1E4-5F7E-9E00-000000007F01}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:powershell|63710f57",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -ExecutionPolicy Unrestricted [DECODED: &chcp.com 65001 > $null\n$exec_wrapper_str = $input | Out-String\n$split_parts = $exec_wrapper_str.Split(@(\"`0`0`0`0\"), 2, [StringSplitOptions]::RemoveEmptyEntries)\nIf (-not $split_parts.Length -eq 2) {...]",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{96128EA2-F210-5F7E-DB00-000000007F01}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:winrshost|c19cee50",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{96128EA2-F210-5F7E-D700-000000007F01}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:regedit|26c59d79",
+      "type": "Process",
+      "properties": {
+        "label": "regedit",
+        "image": "%WINDIR%\\regedit.exe",
+        "command_line": "regedit  /E test3.reg \"HKEY_LOCAL_MACHINE\\SYSTEM\"",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{38b9f94a-9201-6787-7b15-000000003803}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:a9bb5ff0",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\security",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\security"
+      }
+    },
+    {
+      "id": "File:f31f0245",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\system",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\system"
+      }
+    },
+    {
+      "id": "File:435d0a29",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\sam",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\sam"
+      }
+    },
+    {
+      "id": "File:e9537700",
+      "type": "File",
+      "properties": {
+        "path": "%%temp%%\\sam",
+        "path_normalized": "%c:\\users\\[user]\\appdata\\local\\temp%\\sam"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "Process:services|632e8af6",
+      "target": "Process:svchost|d581e2cc",
+      "operations": []
+    },
+    {
+      "source": "Process:wininit|002d3879",
+      "target": "Process:services|632e8af6",
+      "operations": []
+    },
+    {
+      "source": "Process:smss|fb3b8631",
+      "target": "Process:wininit|002d3879",
+      "operations": []
+    },
+    {
+      "source": "Process:smss|fb3b8631",
+      "target": "Process:smss|fb3b8631",
+      "operations": []
+    },
+    {
+      "source": "Process:services|632e8af6",
+      "target": "Registry:b23a6a84",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:reg|0254689c",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:powershell|63710f57",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:powershell|63710f57",
+      "operations": []
+    },
+    {
+      "source": "Process:winrshost|c19cee50",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:svchost|d581e2cc",
+      "target": "Process:winrshost|c19cee50",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:regedit|26c59d79",
+      "operations": []
+    },
+    {
+      "source": "Process:reg|0254689c",
+      "target": "Registry:b23a6a84",
+      "operations": []
+    },
+    {
+      "source": "Process:reg|0254689c",
+      "target": "File:a9bb5ff0",
+      "operations": []
+    },
+    {
+      "source": "Process:reg|0254689c",
+      "target": "File:f31f0245",
+      "operations": []
+    },
+    {
+      "source": "Process:reg|0254689c",
+      "target": "File:435d0a29",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "File:e9537700",
+      "operations": []
+    }
+  ],
+  "metadata": {
+    "version": "v3.0-aggregated",
+    "aggregation_stats": {
+      "original_nodes": 32,
+      "original_edges": 29,
+      "removed_noise_nodes": 0,
+      "removed_noise_edges": 0,
+      "merged_nodes": 18,
+      "final_nodes": 14,
+      "final_edges": 18
+    }
+  }
+}

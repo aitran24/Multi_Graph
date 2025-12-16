@@ -1,0 +1,332 @@
+{
+  "nodes": [
+    {
+      "id": "Process:powershell|63710f57",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" ",
+        "parent_image": "%WINDIR%\\explorer.exe",
+        "guid": "{05ADC7E1-7049-603D-4188-00000000AD01}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:explorer|536d9349",
+      "type": "Process",
+      "properties": {
+        "label": "explorer",
+        "image": "%WINDIR%\\explorer.exe",
+        "guid": "{05ADC7E1-1E7A-603D-D07D-00000000AD01}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:cmd|85463a0e",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{05ADC7E1-7061-603D-5088-00000000AD01}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:339afc9c7476a89c",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/f650520c4b1004daf8b3ec08007a0b945b91253a/Exfiltration/Invoke-Mimikatz.ps1"
+      }
+    },
+    {
+      "id": "Network:3b4d936214782ddf",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://raw.githubusercontent.com/BloodHoundAD/BloodHound/804503962b6dc554ad7d324cfa7f2b4a566a14e2/Ingestors/SharpHound.ps1"
+      }
+    },
+    {
+      "id": "Network:bb29c9365029e17a",
+      "type": "Network",
+      "properties": {
+        "address": "185.199.110.133",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "File:8c7dfc2e",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\2\\Default_File_Path.ps1",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\2\\default_file_path.ps1"
+      }
+    },
+    {
+      "id": "Network:41885150bf958763",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "http://bit.ly/L3g1tCrad1e"
+      }
+    },
+    {
+      "id": "Network:d2e6b91bb4f1e6df",
+      "type": "Network",
+      "properties": {
+        "address": "104.23.99.190",
+        "port": "80",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:a3dd3fd592212411",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://raw.githubusercontent.com/enigma0x3/Misc-PowerShell-Stuff/a0dfca7056ef20295b156b8207480dc2465f94c3/Invoke-AppPathBypass.ps1"
+      }
+    },
+    {
+      "id": "Network:aa9f2a318e9ae984",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/test.xml"
+      }
+    },
+    {
+      "id": "Network:be0ac79e7bfd646e",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/test.ps1"
+      }
+    },
+    {
+      "id": "Network:9e05ca7e52f6a19c",
+      "type": "Network",
+      "properties": {
+        "address": "fe80:0:0:0:6167:9038:1edc:47d4",
+        "port": "5985",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "File:ff57186f",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\2\\T1086_PowerShell_Session_Creation_and_Use",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\2\\t1086_powershell_session_creation_and_use"
+      }
+    },
+    {
+      "id": "File:75c98d6b",
+      "type": "File",
+      "properties": {
+        "path": "%USER%%TEMP%\\2\\tmp5998.tmp",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\temp\\2\\tmp5998.tmp"
+      }
+    },
+    {
+      "id": "Network:3ad2bede1715f699",
+      "type": "Network",
+      "properties": {
+        "address": "185.199.109.133",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "File:9ccbd37b",
+      "type": "File",
+      "properties": {
+        "path": "%USER%\\937.exe",
+        "path_normalized": "c:\\users\\[user]\\937.exe"
+      }
+    },
+    {
+      "id": "Network:bce13a4b4f3c1472",
+      "type": "Network",
+      "properties": {
+        "address": "144.217.17.17",
+        "port": "80",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:71cfa4d1f512f84e",
+      "type": "Network",
+      "properties": {
+        "address": "89.39.246.14",
+        "port": "80",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:22a52d1fc34d4189",
+      "type": "Network",
+      "properties": {
+        "address": "103.253.212.191",
+        "port": "80",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:4e0ac868a2323760",
+      "type": "Network",
+      "properties": {
+        "address": "185.199.110.153",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "Process:explorer|536d9349",
+      "target": "Process:powershell|63710f57",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:powershell|63710f57",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:339afc9c7476a89c",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Network:339afc9c7476a89c",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:powershell|63710f57",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:3b4d936214782ddf",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:bb29c9365029e17a",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:41885150bf958763",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:d2e6b91bb4f1e6df",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "File:8c7dfc2e",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:a3dd3fd592212411",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Network:a3dd3fd592212411",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:aa9f2a318e9ae984",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Network:aa9f2a318e9ae984",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:be0ac79e7bfd646e",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Network:be0ac79e7bfd646e",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:9e05ca7e52f6a19c",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "File:ff57186f",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "File:75c98d6b",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:3ad2bede1715f699",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "File:9ccbd37b",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:bce13a4b4f3c1472",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:71cfa4d1f512f84e",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:22a52d1fc34d4189",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Network:4e0ac868a2323760",
+      "operations": []
+    }
+  ],
+  "metadata": {
+    "version": "v3.0-aggregated",
+    "aggregation_stats": {
+      "original_nodes": 95,
+      "original_edges": 120,
+      "removed_noise_nodes": 0,
+      "removed_noise_edges": 0,
+      "merged_nodes": 74,
+      "final_nodes": 21,
+      "final_edges": 26
+    }
+  }
+}

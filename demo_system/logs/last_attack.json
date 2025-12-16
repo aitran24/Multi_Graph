@@ -1,0 +1,6 @@
+{
+    "technique_name":  "Command and Scripting Interpreter: PowerShell",
+    "timestamp":  "2025-12-16 14:09:30",
+    "confidence":  0.87,
+    "technique_id":  "T1059.001"
+}

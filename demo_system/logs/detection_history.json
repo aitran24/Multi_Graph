@@ -1,0 +1,1275 @@
+[
+  {
+    "timestamp": "2025-12-16 11:08:04",
+    "technique_id": "T1547.001",
+    "technique_name": "Registry Run Keys Persistence",
+    "confidence": 96.7,
+    "patterns": [
+      "\\runonce\\",
+      "currentversion\\run"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 13,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 13,
+        "timestamp": "2025-12-16 11:08:02",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "",
+        "target_filename": "HKU\\S-1-5-21-1093302871-2896962403-3392586144-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce\\MultiKG_6474",
+        "details": "C:\\Users\\Admin\\AppData\\Local\\Temp\\malicious_payload.bat",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 11:08:50",
+    "technique_id": "T1547.001",
+    "technique_name": "Registry Run Keys Persistence",
+    "confidence": 96.7,
+    "patterns": [
+      "\\runonce\\",
+      "currentversion\\run"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 13,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 13,
+        "timestamp": "2025-12-16 11:08:49",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "",
+        "target_filename": "HKU\\S-1-5-21-1093302871-2896962403-3392586144-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce\\ConfigUpdate",
+        "details": "powershell.exe -NoProfile -Command Write-Host 'RunOnce executed'",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 11:09:28",
+    "technique_id": "T1482",
+    "technique_name": "Domain Trust Discovery",
+    "confidence": 50.0,
+    "patterns": [
+      "nltest"
+    ],
+    "source": "C:\\Windows\\System32\\nltest.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\system32\\nltest.exe\" /dclist:",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 11:09:26",
+        "image": "C:\\Windows\\System32\\nltest.exe",
+        "commandline": "\"C:\\Windows\\system32\\nltest.exe\" /dclist:",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 11:10:56",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 41.1,
+    "patterns": [
+      "-encodedcommand"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACcATQBhAGwAaQBjAGkAbwB1AHMAIABwAGEAeQBsAG8AYQBkACAAZQB4AGUAYwB1AHQAZQBkACcAOwAgAEcAZQB0AC0AUAByAG8AYwBlAHMAcwAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AZQBxACAAJwBsAHMAYQBzAHMAJwB9ACAAfAAgAFMAZQBsAGUAYwB0AC0ATwBiAGoAZQBjAHQAIABJAGQALABOAGEAbQBlACwAUABhAHQAaAA=",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 11:10:55",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACcATQBhAGwAaQBjAGkAbwB1AHMAIABwAGEAeQBsAG8AYQBkACAAZQB4AGUAYwB1AHQAZQBkACcAOwAgAEcAZQB0AC0AUAByAG8AYwBlAHMAcwAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AZQBxACAAJwBsAHMAYQBzAHMAJwB9ACAAfAAgAFMAZQBsAGUAYwB0AC0ATwBiAGoAZQBjAHQAIABJAGQALABOAGEAbQBlACwAUABhAHQAaAA=",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 11:17:18",
+    "technique_id": "T1003.001",
+    "technique_name": "LSASS Memory Dump",
+    "confidence": 44.3,
+    "patterns": [
+      "lsass.exe"
+    ],
+    "source": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.25110.5-0\\MsMpEng.exe",
+    "event_id": 10,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 10,
+        "timestamp": "2025-12-16 11:17:17",
+        "image": "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\4.18.25110.5-0\\MsMpEng.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "NT AUTHORITY\\SYSTEM",
+        "parent_image": "",
+        "target_image": "C:\\Windows\\system32\\lsass.exe"
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 11:40:58",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 52.2,
+    "patterns": [
+      "-encodedcommand",
+      "-windowstyle hidden"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -encodedCommand DQAKACAAIAAgACAAIwAgAFMAaQBtAHUAbABhAHQAZQAgAHIAZQBjAG8AbgBuAGEAaQBzAHMAYQBuAGMAZQANAAoAIAAgACAAIAAkAGUAbgB2ADoAVQBTAEUAUgBOAEEATQBFAA0ACgAgACAAIAAgACQAZQBuAHYAOgBDAE8ATQBQAFUAVABFAFIATgBBAE0ARQANAAoAIAAgACAAIAB3AGgAbwBhAG0AaQANAAoAIAAgACAAIABuAGUAdAAgAHUAcwBlAHIADQAKAA== -inputFormat xml -outputFormat text",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 11:40:56",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -encodedCommand DQAKACAAIAAgACAAIwAgAFMAaQBtAHUAbABhAHQAZQAgAHIAZQBjAG8AbgBuAGEAaQBzAHMAYQBuAGMAZQANAAoAIAAgACAAIAAkAGUAbgB2ADoAVQBTAEUAUgBOAEEATQBFAA0ACgAgACAAIAAgACQAZQBuAHYAOgBDAE8ATQBQAFUAVABFAFIATgBBAE0ARQANAAoAIAAgACAAIAB3AGgAbwBhAG0AaQANAAoAIAAgACAAIABuAGUAdAAgAHUAcwBlAHIADQAKAA== -inputFormat xml -outputFormat text",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 11:42:49",
+    "technique_id": "T1547.001",
+    "technique_name": "Registry Run Keys Persistence",
+    "confidence": 80.0,
+    "patterns": [
+      "\\runonce\\"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 13,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 13,
+        "timestamp": "2025-12-16 11:42:47",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "",
+        "target_filename": "HKU\\S-1-5-21-1093302871-2896962403-3392586144-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce\\ConfigUpdate",
+        "details": "powershell.exe -NoProfile -Command Write-Host 'RunOnce executed'",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 11:51:28",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 39.1,
+    "patterns": [
+      "-enc"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoP -sta -NonI -W Hidden -Enc VwByAGkAdABlAC0ASABvAHMAdAAgACcARABlAG0AbwAgAHAAYQB5AGwAbwBhAGQAJwA=",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 11:51:27",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoP -sta -NonI -W Hidden -Enc VwByAGkAdABlAC0ASABvAHMAdAAgACcARABlAG0AbwAgAHAAYQB5AGwAbwBhAGQAJwA=",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 11:57:05",
+    "technique_id": "T1218.005",
+    "technique_name": "Mshta Execution",
+    "confidence": 100.0,
+    "patterns": [
+      "mshta"
+    ],
+    "source": "C:\\Windows\\System32\\conhost.exe",
+    "event_id": 1,
+    "command_line": "\\??\\C:\\Windows\\system32\\conhost.exe 0xffffffff -ForceV1",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 11:57:03",
+        "image": "C:\\Windows\\System32\\conhost.exe",
+        "commandline": "\\??\\C:\\Windows\\system32\\conhost.exe 0xffffffff -ForceV1",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Users\\Admin\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\node_modules\\@vscode\\ripgrep\\bin\\rg.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 11:58:06",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 39.1,
+    "patterns": [
+      "-enc"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoP -sta -NonI -W Hidden -Enc VwByAGkAdABlAC0ASABvAHMAdAAgACcARABlAG0AbwAgAHAAYQB5AGwAbwBhAGQAJwA=",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 11:58:05",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoP -sta -NonI -W Hidden -Enc VwByAGkAdABlAC0ASABvAHMAdAAgACcARABlAG0AbwAgAHAAYQB5AGwAbwBhAGQAJwA=",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 11:58:23",
+    "technique_id": "T1547.001",
+    "technique_name": "Registry Run Keys Persistence",
+    "confidence": 80.0,
+    "patterns": [
+      "\\run\\"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 13,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 13,
+        "timestamp": "2025-12-16 11:58:21",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "",
+        "target_filename": "HKU\\S-1-5-21-1093302871-2896962403-3392586144-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\WindowsSecurityUpdate",
+        "details": "C:\\Users\\Admin\\AppData\\Local\\Temp\\malicious_payload.bat",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 11:58:25",
+    "technique_id": "T1547.001",
+    "technique_name": "Registry Run Keys Persistence",
+    "confidence": 80.0,
+    "patterns": [
+      "\\runonce\\"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 13,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 13,
+        "timestamp": "2025-12-16 11:58:23",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "",
+        "target_filename": "HKU\\S-1-5-21-1093302871-2896962403-3392586144-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce\\ConfigUpdate",
+        "details": "powershell.exe -NoProfile -Command Write-Host 'RunOnce executed'",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:07:49",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 39.1,
+    "patterns": [
+      "-enc"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoP -sta -NonI -W Hidden -Enc VwByAGkAdABlAC0ASABvAHMAdAAgACcARABlAG0AbwAgAHAAYQB5AGwAbwBhAGQAJwA=",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 12:07:49",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoP -sta -NonI -W Hidden -Enc VwByAGkAdABlAC0ASABvAHMAdAAgACcARABlAG0AbwAgAHAAYQB5AGwAbwBhAGQAJwA=",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:15:10",
+    "technique_id": "T1112",
+    "technique_name": "Registry Modification",
+    "confidence": 44.3,
+    "patterns": [
+      "multikg"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 13,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 13,
+        "timestamp": "2025-12-16 12:15:10",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "",
+        "target_filename": "HKU\\S-1-5-21-1093302871-2896962403-3392586144-1003\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce\\MultiKG_5320",
+        "details": "C:\\Users\\Admin\\AppData\\Local\\Temp\\malicious_payload.bat",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:34:52",
+    "technique_id": "T1218.005",
+    "technique_name": "Mshta Execution",
+    "confidence": 100.0,
+    "patterns": [
+      "mshta.exe"
+    ],
+    "source": "C:\\Windows\\System32\\mshta.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\system32\\mshta.exe\" C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_mshta_20251216123450.hta",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 12:34:50",
+        "image": "C:\\Windows\\System32\\mshta.exe",
+        "commandline": "\"C:\\Windows\\system32\\mshta.exe\" C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_mshta_20251216123450.hta",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:40:53",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\conhost.exe",
+    "event_id": 1,
+    "command_line": "\\??\\C:\\Windows\\system32\\conhost.exe 0xffffffff -ForceV1",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 12:40:51",
+        "image": "C:\\Windows\\System32\\conhost.exe",
+        "commandline": "\\??\\C:\\Windows\\system32\\conhost.exe 0xffffffff -ForceV1",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Program Files\\Git\\cmd\\git.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:40:59",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\conhost.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:40:57",
+        "image": "C:\\Windows\\System32\\conhost.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:41:08",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:41:06",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:41:15",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\system32\\BackgroundTaskHost.exe",
+    "event_id": 11,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 11,
+        "timestamp": "2025-12-16 12:41:13",
+        "image": "C:\\Windows\\system32\\BackgroundTaskHost.exe",
+        "commandline": "",
+        "target_filename": "C:\\Users\\Admin\\AppData\\Local\\Packages\\Microsoft.AAD.BrokerPlugin_cw5n1h2txyewy\\LocalState\\u_ulgq3e4mmeurcq894teke0ph\\p_g7m2ag339emk5tr0k5uuafh1.~tmp",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:41:15",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:41:12",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:41:39",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\conhost.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:41:36",
+        "image": "C:\\Windows\\System32\\conhost.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:42:06",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\conhost.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:42:04",
+        "image": "C:\\Windows\\System32\\conhost.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:42:06",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\conhost.exe",
+    "event_id": 1,
+    "command_line": "\\??\\C:\\Windows\\system32\\conhost.exe 0xffffffff -ForceV1",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 12:42:03",
+        "image": "C:\\Windows\\System32\\conhost.exe",
+        "commandline": "\\??\\C:\\Windows\\system32\\conhost.exe 0xffffffff -ForceV1",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Program Files\\Git\\cmd\\git.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:42:58",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 85.0,
+    "patterns": [
+      "reg.exe",
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\reg.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:42:57",
+        "image": "C:\\Windows\\System32\\reg.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:43:49",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\conhost.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:43:47",
+        "image": "C:\\Windows\\System32\\conhost.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:44:00",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\conhost.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:43:58",
+        "image": "C:\\Windows\\System32\\conhost.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:44:25",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\conhost.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:44:22",
+        "image": "C:\\Windows\\System32\\conhost.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:45:01",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\conhost.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:44:58",
+        "image": "C:\\Windows\\System32\\conhost.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:45:09",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 57.3,
+    "patterns": [
+      "-encodedcommand",
+      "-enc",
+      "-noprofile"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACcATQBhAGwAaQBjAGkAbwB1AHMAIABwAGEAeQBsAG8AYQBkACAAZQB4AGUAYwB1AHQAZQBkACcAOwAgAEcAZQB0AC0AUAByAG8AYwBlAHMAcwAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AZQBxACAAJwBsAHMAYQBzAHMAJwB9ACAAfAAgAFMAZQBsAGUAYwB0AC0ATwBiAGoAZQBjAHQAIABJAGQALABOAGEAbQBlACwAUABhAHQAaAA=",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 12:45:07",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACcATQBhAGwAaQBjAGkAbwB1AHMAIABwAGEAeQBsAG8AYQBkACAAZQB4AGUAYwB1AHQAZQBkACcAOwAgAEcAZQB0AC0AUAByAG8AYwBlAHMAcwAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AZQBxACAAJwBsAHMAYQBzAHMAJwB9ACAAfAAgAFMAZQBsAGUAYwB0AC0ATwBiAGoAZQBjAHQAIABJAGQALABOAGEAbQBlACwAUABhAHQAaAA=",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:45:12",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:45:10",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:45:26",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\conhost.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:45:23",
+        "image": "C:\\Windows\\System32\\conhost.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:45:44",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 65.0,
+    "patterns": [
+      "\\system"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:45:40",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:49:52",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 57.5,
+    "patterns": [
+      "reg.exe"
+    ],
+    "source": "C:\\Windows\\System32\\reg.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:49:50",
+        "image": "C:\\Windows\\System32\\reg.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:50:09",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 57.5,
+    "patterns": [
+      "reg.exe"
+    ],
+    "source": "C:\\Windows\\System32\\reg.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:50:07",
+        "image": "C:\\Windows\\System32\\reg.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:57:06",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 57.3,
+    "patterns": [
+      "-encodedcommand",
+      "-enc",
+      "-noprofile"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACcATQBhAGwAaQBjAGkAbwB1AHMAIABwAGEAeQBsAG8AYQBkACAAZQB4AGUAYwB1AHQAZQBkACcAOwAgAEcAZQB0AC0AUAByAG8AYwBlAHMAcwAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AZQBxACAAJwBsAHMAYQBzAHMAJwB9ACAAfAAgAFMAZQBsAGUAYwB0AC0ATwBiAGoAZQBjAHQAIABJAGQALABOAGEAbQBlACwAUABhAHQAaAA=",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 12:57:04",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACcATQBhAGwAaQBjAGkAbwB1AHMAIABwAGEAeQBsAG8AYQBkACAAZQB4AGUAYwB1AHQAZQBkACcAOwAgAEcAZQB0AC0AUAByAG8AYwBlAHMAcwAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AZQBxACAAJwBsAHMAYQBzAHMAJwB9ACAAfAAgAFMAZQBsAGUAYwB0AC0ATwBiAGoAZQBjAHQAIABJAGQALABOAGEAbQBlACwAUABhAHQAaAA=",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 12:59:44",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 57.5,
+    "patterns": [
+      "reg.exe"
+    ],
+    "source": "C:\\Windows\\System32\\reg.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 12:59:41",
+        "image": "C:\\Windows\\System32\\reg.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 13:12:56",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 80.0,
+    "patterns": [
+      "powershell.exe"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 13:12:51",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 13:13:07",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 80.0,
+    "patterns": [
+      "powershell.exe"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 13:13:05",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 13:13:18",
+    "technique_id": "T1003.002",
+    "technique_name": "SAM Database Dump",
+    "confidence": 57.5,
+    "patterns": [
+      "reg.exe"
+    ],
+    "source": "C:\\Windows\\System32\\reg.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 13:13:14",
+        "image": "C:\\Windows\\System32\\reg.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 13:13:23",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 80.0,
+    "patterns": [
+      "powershell.exe"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 5,
+    "command_line": "",
+    "matched_events": [
+      {
+        "event_id": 5,
+        "timestamp": "2025-12-16 13:13:18",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 13:29:52",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 74.4,
+    "patterns": [
+      "-encodedcommand",
+      "-enc",
+      "-noprofile",
+      "-noninteractive"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACcATQBhAGwAaQBjAGkAbwB1AHMAIABwAGEAeQBsAG8AYQBkACAAZQB4AGUAYwB1AHQAZQBkACcAOwAgAEcAZQB0AC0AUAByAG8AYwBlAHMAcwAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AZQBxACAAJwBsAHMAYQBzAHMAJwB9ACAAfAAgAFMAZQBsAGUAYwB0AC0ATwBiAGoAZQBjAHQAIABJAGQALABOAGEAbQBlACwAUABhAHQAaAA=",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 13:29:47",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACcATQBhAGwAaQBjAGkAbwB1AHMAIABwAGEAeQBsAG8AYQBkACAAZQB4AGUAYwB1AHQAZQBkACcAOwAgAEcAZQB0AC0AUAByAG8AYwBlAHMAcwAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AZQBxACAAJwBsAHMAYQBzAHMAJwB9ACAAfAAgAFMAZQBsAGUAYwB0AC0ATwBiAGoAZQBjAHQAIABJAGQALABOAGEAbQBlACwAUABhAHQAaAA=",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 13:33:37",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 74.4,
+    "patterns": [
+      "-encodedcommand",
+      "-enc",
+      "-noprofile",
+      "-noninteractive"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACcATQBhAGwAaQBjAGkAbwB1AHMAIABwAGEAeQBsAG8AYQBkACAAZQB4AGUAYwB1AHQAZQBkACcAOwAgAEcAZQB0AC0AUAByAG8AYwBlAHMAcwAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AZQBxACAAJwBsAHMAYQBzAHMAJwB9ACAAfAAgAFMAZQBsAGUAYwB0AC0ATwBiAGoAZQBjAHQAIABJAGQALABOAGEAbQBlACwAUABhAHQAaAA=",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 13:33:33",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACcATQBhAGwAaQBjAGkAbwB1AHMAIABwAGEAeQBsAG8AYQBkACAAZQB4AGUAYwB1AHQAZQBkACcAOwAgAEcAZQB0AC0AUAByAG8AYwBlAHMAcwAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AZQBxACAAJwBsAHMAYQBzAHMAJwB9ACAAfAAgAFMAZQBsAGUAYwB0AC0ATwBiAGoAZQBjAHQAIABJAGQALABOAGEAbQBlACwAUABhAHQAaAA=",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 13:38:36",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 85.6,
+    "patterns": [
+      "-encodedcommand",
+      "-enc",
+      "-noprofile",
+      "bypass",
+      "hidden"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -encodedCommand DQAKACAAIAAgACAAIwAgAFMAaQBtAHUAbABhAHQAZQAgAHIAZQBjAG8AbgBuAGEAaQBzAHMAYQBuAGMAZQANAAoAIAAgACAAIAAkAGUAbgB2ADoAVQBTAEUAUgBOAEEATQBFAA0ACgAgACAAIAAgACQAZQBuAHYAOgBDAE8ATQBQAFUAVABFAFIATgBBAE0ARQANAAoAIAAgACAAIAB3AGgAbwBhAG0AaQANAAoAIAAgACAAIABuAGUAdAAgAHUAcwBlAHIADQAKAA== -inputFormat xml -outputFormat text",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 13:38:31",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -encodedCommand DQAKACAAIAAgACAAIwAgAFMAaQBtAHUAbABhAHQAZQAgAHIAZQBjAG8AbgBuAGEAaQBzAHMAYQBuAGMAZQANAAoAIAAgACAAIAAkAGUAbgB2ADoAVQBTAEUAUgBOAEEATQBFAA0ACgAgACAAIAAgACQAZQBuAHYAOgBDAE8ATQBQAFUAVABFAFIATgBBAE0ARQANAAoAIAAgACAAIAB3AGgAbwBhAG0AaQANAAoAIAAgACAAIABuAGUAdAAgAHUAcwBlAHIADQAKAA== -inputFormat xml -outputFormat text",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 14:09:30",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 66.4,
+    "patterns": [
+      "powershell",
+      "-enc",
+      "-nop",
+      "-w hidden"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoP -sta -NonI -W Hidden -Enc VwByAGkAdABlAC0ASABvAHMAdAAgACcARABlAG0AbwAgAHAAYQB5AGwAbwBhAGQAJwA=",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 14:09:30",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoP -sta -NonI -W Hidden -Enc VwByAGkAdABlAC0ASABvAHMAdAAgACcARABlAG0AbwAgAHAAYQB5AGwAbwBhAGQAJwA=",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 14:11:01",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 39.1,
+    "patterns": [
+      "powershell"
+    ],
+    "source": "C:\\Windows\\System32\\cscript.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141100.vbs",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 14:11:00",
+        "image": "C:\\Windows\\System32\\cscript.exe",
+        "commandline": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141100.vbs",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 14:11:01",
+    "technique_id": "T1204.002",
+    "technique_name": "Malicious File Execution",
+    "confidence": 52.2,
+    "patterns": [
+      "cscript",
+      ".vbs"
+    ],
+    "source": "C:\\Windows\\System32\\cscript.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141100.vbs",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 14:11:00",
+        "image": "C:\\Windows\\System32\\cscript.exe",
+        "commandline": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141100.vbs",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 14:11:24",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 39.1,
+    "patterns": [
+      "powershell"
+    ],
+    "source": "C:\\Windows\\System32\\cscript.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141123.vbs",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 14:11:23",
+        "image": "C:\\Windows\\System32\\cscript.exe",
+        "commandline": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141123.vbs",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 14:11:24",
+    "technique_id": "T1204.002",
+    "technique_name": "Malicious File Execution",
+    "confidence": 52.2,
+    "patterns": [
+      "cscript",
+      ".vbs"
+    ],
+    "source": "C:\\Windows\\System32\\cscript.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141123.vbs",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 14:11:23",
+        "image": "C:\\Windows\\System32\\cscript.exe",
+        "commandline": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141123.vbs",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 14:12:08",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 39.1,
+    "patterns": [
+      "powershell"
+    ],
+    "source": "C:\\Windows\\System32\\net.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\system32\\net.exe\" view /domain",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 14:12:07",
+        "image": "C:\\Windows\\System32\\net.exe",
+        "commandline": "\"C:\\Windows\\system32\\net.exe\" view /domain",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 14:14:56",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 39.1,
+    "patterns": [
+      "powershell"
+    ],
+    "source": "C:\\Windows\\System32\\net.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\system32\\net.exe\" view /domain",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 14:14:54",
+        "image": "C:\\Windows\\System32\\net.exe",
+        "commandline": "\"C:\\Windows\\system32\\net.exe\" view /domain",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  }
+]

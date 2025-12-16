@@ -1,0 +1,73 @@
+<Sysmon schemaversion="4.90">
+  <HashAlgorithms>md5,sha256</HashAlgorithms>
+  <EventFiltering>
+    <!-- Event ID 1 == ProcessCreate - LOG EVERYTHING (no exclusions) -->
+    <ProcessCreate onmatch="exclude">
+    </ProcessCreate>
+
+    <!-- Event ID 3 == NetworkConnect - EXCLUDE (too noisy) -->
+    <NetworkConnect onmatch="include">
+      <!-- Only log suspicious ports if needed -->
+    </NetworkConnect>
+
+    <!-- Event ID 5 == ProcessTerminate - LOG EVERYTHING -->
+    <ProcessTerminate onmatch="exclude"/>
+
+    <!-- Event ID 7 == ImageLoad - EXCLUDE (too noisy) -->
+    <ImageLoad onmatch="include">
+      <!-- Only log specific DLLs if needed -->
+    </ImageLoad>
+
+    <!-- Event ID 8 == CreateRemoteThread - LOG EVERYTHING -->
+    <CreateRemoteThread onmatch="exclude"/>
+
+    <!-- Event ID 10 == ProcessAccess - LOG (important for credential access) -->
+    <ProcessAccess onmatch="exclude">
+      <!-- Exclude some noisy access patterns but keep LSASS access -->
+      <TargetImage condition="excludes">lsass.exe</TargetImage>
+    </ProcessAccess>
+
+    <!-- Event ID 11 == FileCreate - LOG EVERYTHING -->
+    <FileCreate onmatch="exclude">
+      <!-- Exclude temp files from Windows -->
+      <TargetFilename condition="contains">Temporary Internet</TargetFilename>
+    </FileCreate>
+
+    <!-- Event ID 12 == RegistryEvent (Object create and delete) - LOG -->
+    <RegistryEvent onmatch="exclude"/>
+
+    <!-- Event ID 13 == RegistryEvent (Value Set) - LOG EVERYTHING -->
+    <RegistryEvent onmatch="exclude"/>
+
+    <!-- Event ID 14 == RegistryEvent (Key and Value Rename) - LOG -->
+    <RegistryEvent onmatch="exclude"/>
+
+    <!-- Event ID 15 == FileCreateStreamHash - LOG -->
+    <FileCreateStreamHash onmatch="exclude"/>
+
+    <!-- Event ID 17 == PipeEvent (Pipe Created) - LOG -->
+    <PipeEvent onmatch="exclude"/>
+
+    <!-- Event ID 18 == PipeEvent (Pipe Connected) - LOG -->
+    <PipeEvent onmatch="exclude"/>
+
+    <!-- Event ID 19 == WmiEvent (WmiEventFilter activity detected) - LOG -->
+    <WmiEvent onmatch="exclude"/>
+
+    <!-- Event ID 20 == WmiEvent (WmiEventConsumer activity detected) - LOG -->
+    <WmiEvent onmatch="exclude"/>
+
+    <!-- Event ID 21 == WmiEvent (WmiEventConsumerToFilter activity detected) - LOG -->
+    <WmiEvent onmatch="exclude"/>
+
+    <!-- Event ID 22 == DNSQuery - LOG (important for C2 detection) -->
+    <DnsQuery onmatch="exclude">
+      <!-- Exclude Microsoft domains to reduce noise -->
+      <QueryName condition="end with">microsoft.com</QueryName>
+      <QueryName condition="end with">windows.com</QueryName>
+    </DnsQuery>
+
+    <!-- Event ID 23 == FileDelete - LOG -->
+    <FileDelete onmatch="exclude"/>
+  </EventFiltering>
+</Sysmon>
