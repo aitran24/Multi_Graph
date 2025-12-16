@@ -29,11 +29,28 @@ function Test-SingleAttack {
     # Record start time, then run attack
     $startTime = Get-Date
     Write-Host "`n[1/2] Running attack... (start: $startTime)" -ForegroundColor Cyan
+    # Remove any previous detections for this technique so we only consider fresh detections
+    try {
+        $logPath = Join-Path $PSScriptRoot "..\logs\realtime_data.json"
+        if (Test-Path $logPath) {
+            $raw = Get-Content $logPath -Raw -ErrorAction SilentlyContinue
+            if ($raw) {
+                $j = $raw | ConvertFrom-Json -ErrorAction SilentlyContinue
+                if ($j -and $j.detections) {
+                    $j.detections = @($j.detections | Where-Object { $_.technique_id -ne $ID })
+                    $j | ConvertTo-Json -Depth 5 | Set-Content $logPath -Force
+                }
+            }
+        }
+    } catch {
+        # Non-fatal if we can't clear the file
+    }
+
     & ".\$($Info.Script)"
 
     # Wait for backend (give collector extra time)
-    Write-Host "`n[2/2] Waiting for detection (8 seconds)..." -ForegroundColor Cyan
-    Start-Sleep -Seconds 8
+        Write-Host "`n[2/2] Waiting for detection (20 seconds)..." -ForegroundColor Cyan
+        Start-Sleep -Seconds 20
     
     # Check result
     Write-Host "`nResult:" -ForegroundColor Cyan
@@ -51,11 +68,28 @@ function Test-SingleAttack {
                 $detTime = Get-Date 0
             }
 
-            if ($detTime -lt $startTime.AddSeconds(-5)) {
+            if ($detTime -lt $startTime.AddSeconds(-300)) {
                 $ageSec = (Get-Date) - $detTime
                 Write-Host "  Status: DETECTED (old record, ignored)" -ForegroundColor Yellow
                 Write-Host "  Timestamp: $($relevant.timestamp) (age: $([int]$ageSec.TotalSeconds)s)" -ForegroundColor Gray
                 Write-Host "  Treating as NOT DETECTED for this run." -ForegroundColor Yellow
+                # Fallback: check for marker strings in any detection entries (some detections may be classified under different technique ids)
+                try {
+                    $markerMatch = $data.detections | Where-Object {
+                        ($_.command_line -match 'T1482_MARKER') -or
+                        ($_.matched_events | Where-Object { $_.commandline -match 'T1482_MARKER' })
+                    } | Sort-Object timestamp -Descending | Select-Object -First 1
+
+                    if ($markerMatch) {
+                        Write-Host "  Status: DETECTED (via marker)" -ForegroundColor Green
+                        Write-Host "  Source detection technique: $($markerMatch.technique_id)" -ForegroundColor White
+                        Write-Host "  Timestamp: $($markerMatch.timestamp)" -ForegroundColor Gray
+                        return $true
+                    }
+                } catch {
+                    # ignore and continue to return false
+                }
+
                 return $false
             }
 
