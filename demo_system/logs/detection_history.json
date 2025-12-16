@@ -1,421 +1,5 @@
 [
   {
-    "timestamp": "2025-12-16 13:29:52",
-    "technique_id": "T1059.001",
-    "technique_name": "PowerShell Execution",
-    "confidence": 74.4,
-    "patterns": [
-      "-encodedcommand",
-      "-enc",
-      "-noprofile",
-      "-noninteractive"
-    ],
-    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACcATQBhAGwAaQBjAGkAbwB1AHMAIABwAGEAeQBsAG8AYQBkACAAZQB4AGUAYwB1AHQAZQBkACcAOwAgAEcAZQB0AC0AUAByAG8AYwBlAHMAcwAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AZQBxACAAJwBsAHMAYQBzAHMAJwB9ACAAfAAgAFMAZQBsAGUAYwB0AC0ATwBiAGoAZQBjAHQAIABJAGQALABOAGEAbQBlACwAUABhAHQAaAA=",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 13:29:47",
-        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACcATQBhAGwAaQBjAGkAbwB1AHMAIABwAGEAeQBsAG8AYQBkACAAZQB4AGUAYwB1AHQAZQBkACcAOwAgAEcAZQB0AC0AUAByAG8AYwBlAHMAcwAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AZQBxACAAJwBsAHMAYQBzAHMAJwB9ACAAfAAgAFMAZQBsAGUAYwB0AC0ATwBiAGoAZQBjAHQAIABJAGQALABOAGEAbQBlACwAUABhAHQAaAA=",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 13:33:37",
-    "technique_id": "T1059.001",
-    "technique_name": "PowerShell Execution",
-    "confidence": 74.4,
-    "patterns": [
-      "-encodedcommand",
-      "-enc",
-      "-noprofile",
-      "-noninteractive"
-    ],
-    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACcATQBhAGwAaQBjAGkAbwB1AHMAIABwAGEAeQBsAG8AYQBkACAAZQB4AGUAYwB1AHQAZQBkACcAOwAgAEcAZQB0AC0AUAByAG8AYwBlAHMAcwAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AZQBxACAAJwBsAHMAYQBzAHMAJwB9ACAAfAAgAFMAZQBsAGUAYwB0AC0ATwBiAGoAZQBjAHQAIABJAGQALABOAGEAbQBlACwAUABhAHQAaAA=",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 13:33:33",
-        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -NonInteractive -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACcATQBhAGwAaQBjAGkAbwB1AHMAIABwAGEAeQBsAG8AYQBkACAAZQB4AGUAYwB1AHQAZQBkACcAOwAgAEcAZQB0AC0AUAByAG8AYwBlAHMAcwAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAJABfAC4ATgBhAG0AZQAgAC0AZQBxACAAJwBsAHMAYQBzAHMAJwB9ACAAfAAgAFMAZQBsAGUAYwB0AC0ATwBiAGoAZQBjAHQAIABJAGQALABOAGEAbQBlACwAUABhAHQAaAA=",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 13:38:36",
-    "technique_id": "T1059.001",
-    "technique_name": "PowerShell Execution",
-    "confidence": 85.6,
-    "patterns": [
-      "-encodedcommand",
-      "-enc",
-      "-noprofile",
-      "bypass",
-      "hidden"
-    ],
-    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -encodedCommand DQAKACAAIAAgACAAIwAgAFMAaQBtAHUAbABhAHQAZQAgAHIAZQBjAG8AbgBuAGEAaQBzAHMAYQBuAGMAZQANAAoAIAAgACAAIAAkAGUAbgB2ADoAVQBTAEUAUgBOAEEATQBFAA0ACgAgACAAIAAgACQAZQBuAHYAOgBDAE8ATQBQAFUAVABFAFIATgBBAE0ARQANAAoAIAAgACAAIAB3AGgAbwBhAG0AaQANAAoAIAAgACAAIABuAGUAdAAgAHUAcwBlAHIADQAKAA== -inputFormat xml -outputFormat text",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 13:38:31",
-        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -encodedCommand DQAKACAAIAAgACAAIwAgAFMAaQBtAHUAbABhAHQAZQAgAHIAZQBjAG8AbgBuAGEAaQBzAHMAYQBuAGMAZQANAAoAIAAgACAAIAAkAGUAbgB2ADoAVQBTAEUAUgBOAEEATQBFAA0ACgAgACAAIAAgACQAZQBuAHYAOgBDAE8ATQBQAFUAVABFAFIATgBBAE0ARQANAAoAIAAgACAAIAB3AGgAbwBhAG0AaQANAAoAIAAgACAAIABuAGUAdAAgAHUAcwBlAHIADQAKAA== -inputFormat xml -outputFormat text",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 14:09:30",
-    "technique_id": "T1059.001",
-    "technique_name": "PowerShell Execution",
-    "confidence": 66.4,
-    "patterns": [
-      "powershell",
-      "-enc",
-      "-nop",
-      "-w hidden"
-    ],
-    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoP -sta -NonI -W Hidden -Enc VwByAGkAdABlAC0ASABvAHMAdAAgACcARABlAG0AbwAgAHAAYQB5AGwAbwBhAGQAJwA=",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 14:09:30",
-        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoP -sta -NonI -W Hidden -Enc VwByAGkAdABlAC0ASABvAHMAdAAgACcARABlAG0AbwAgAHAAYQB5AGwAbwBhAGQAJwA=",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 14:11:01",
-    "technique_id": "T1059.001",
-    "technique_name": "PowerShell Execution",
-    "confidence": 39.1,
-    "patterns": [
-      "powershell"
-    ],
-    "source": "C:\\Windows\\System32\\cscript.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141100.vbs",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 14:11:00",
-        "image": "C:\\Windows\\System32\\cscript.exe",
-        "commandline": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141100.vbs",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 14:11:01",
-    "technique_id": "T1204.002",
-    "technique_name": "Malicious File Execution",
-    "confidence": 52.2,
-    "patterns": [
-      "cscript",
-      ".vbs"
-    ],
-    "source": "C:\\Windows\\System32\\cscript.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141100.vbs",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 14:11:00",
-        "image": "C:\\Windows\\System32\\cscript.exe",
-        "commandline": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141100.vbs",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 14:11:24",
-    "technique_id": "T1059.001",
-    "technique_name": "PowerShell Execution",
-    "confidence": 39.1,
-    "patterns": [
-      "powershell"
-    ],
-    "source": "C:\\Windows\\System32\\cscript.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141123.vbs",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 14:11:23",
-        "image": "C:\\Windows\\System32\\cscript.exe",
-        "commandline": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141123.vbs",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 14:11:24",
-    "technique_id": "T1204.002",
-    "technique_name": "Malicious File Execution",
-    "confidence": 52.2,
-    "patterns": [
-      "cscript",
-      ".vbs"
-    ],
-    "source": "C:\\Windows\\System32\\cscript.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141123.vbs",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 14:11:23",
-        "image": "C:\\Windows\\System32\\cscript.exe",
-        "commandline": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216141123.vbs",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 14:12:08",
-    "technique_id": "T1059.001",
-    "technique_name": "PowerShell Execution",
-    "confidence": 39.1,
-    "patterns": [
-      "powershell"
-    ],
-    "source": "C:\\Windows\\System32\\net.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Windows\\system32\\net.exe\" view /domain",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 14:12:07",
-        "image": "C:\\Windows\\System32\\net.exe",
-        "commandline": "\"C:\\Windows\\system32\\net.exe\" view /domain",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 14:14:56",
-    "technique_id": "T1059.001",
-    "technique_name": "PowerShell Execution",
-    "confidence": 39.1,
-    "patterns": [
-      "powershell"
-    ],
-    "source": "C:\\Windows\\System32\\net.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Windows\\system32\\net.exe\" view /domain",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 14:14:54",
-        "image": "C:\\Windows\\System32\\net.exe",
-        "commandline": "\"C:\\Windows\\system32\\net.exe\" view /domain",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 14:17:57",
-    "technique_id": "T1059.001",
-    "technique_name": "PowerShell Execution",
-    "confidence": 39.1,
-    "patterns": [
-      "bypass"
-    ],
-    "source": "C:\\Users\\Admin\\AppData\\Local\\AnthropicClaude\\app-1.0.1768\\claude.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Users\\Admin\\AppData\\Local\\AnthropicClaude\\app-1.0.1768\\claude.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --user-data-dir=\"C:\\Users\\Admin\\AppData\\Roaming\\Claude\" --secure-schemes=sentry-ipc --bypasscsp-schemes=sentry-ipc --cors-schemes=sentry-ipc --fetch-schemes=sentry-ipc --field-trial-handle=1752,i,13415076950276605161,7112598824666143203,262144 --enable-features=DocumentPolicyIncludeJSCallStacksInCrashReports,EnableTransparentHwndEnlargement,PdfUseShowSaveFilePicker --disable-features=ScreenAIOCREnabled,SpareRendererForSitePerProcess,WinDelaySpellcheckServiceInit --variations-seed-version --mojo-platform-channel-handle=1804 /prefetch:11",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 14:17:54",
-        "image": "C:\\Users\\Admin\\AppData\\Local\\AnthropicClaude\\app-1.0.1768\\claude.exe",
-        "commandline": "\"C:\\Users\\Admin\\AppData\\Local\\AnthropicClaude\\app-1.0.1768\\claude.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --user-data-dir=\"C:\\Users\\Admin\\AppData\\Roaming\\Claude\" --secure-schemes=sentry-ipc --bypasscsp-schemes=sentry-ipc --cors-schemes=sentry-ipc --fetch-schemes=sentry-ipc --field-trial-handle=1752,i,13415076950276605161,7112598824666143203,262144 --enable-features=DocumentPolicyIncludeJSCallStacksInCrashReports,EnableTransparentHwndEnlargement,PdfUseShowSaveFilePicker --disable-features=ScreenAIOCREnabled,SpareRendererForSitePerProcess,WinDelaySpellcheckServiceInit --variations-seed-version --mojo-platform-channel-handle=1804 /prefetch:11",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Users\\Admin\\AppData\\Local\\AnthropicClaude\\app-1.0.1768\\claude.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 14:21:15",
-    "technique_id": "T1204.002",
-    "technique_name": "Malicious File Execution",
-    "confidence": 41.1,
-    "patterns": [
-      ".js"
-    ],
-    "source": "C:\\Users\\Admin\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Users\\Admin\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" \"c:\\Users\\Admin\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass-main.js\" Username for 'https://github.com':",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 14:21:12",
-        "image": "C:\\Users\\Admin\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
-        "commandline": "\"C:\\Users\\Admin\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" \"c:\\Users\\Admin\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass-main.js\" Username for 'https://github.com':",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 14:21:29",
-    "technique_id": "T1547.001",
-    "technique_name": "Registry Run Keys Persistence",
-    "confidence": 55.0,
-    "patterns": [
-      "startup"
-    ],
-    "source": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=renderer --instant-process --pdf-upsell-enabled --dma-cps-flags=2048 --no-pre-read-main-dll --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags --device-scale-factor=1.25 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=115 --time-ticks-at-unix-epoch=-1765292561928459 --launch-time-ticks=577125760639 --skip-read-main-dll --metrics-shmem-handle=8692,i,5508090133562748021,11316777626845456209,2097152 --field-trial-handle=2348,i,3026412812974680021,9572377275827512412,262144 --variations-seed-version --trace-process-track-uuid=3190709094071684129 --mojo-platform-channel-handle=6368 /prefetch:1",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 14:21:27",
-        "image": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-        "commandline": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=renderer --instant-process --pdf-upsell-enabled --dma-cps-flags=2048 --no-pre-read-main-dll --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags --device-scale-factor=1.25 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=115 --time-ticks-at-unix-epoch=-1765292561928459 --launch-time-ticks=577125760639 --skip-read-main-dll --metrics-shmem-handle=8692,i,5508090133562748021,11316777626845456209,2097152 --field-trial-handle=2348,i,3026412812974680021,9572377275827512412,262144 --variations-seed-version --trace-process-track-uuid=3190709094071684129 --mojo-platform-channel-handle=6368 /prefetch:1",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 14:21:31",
-    "technique_id": "T1547.001",
-    "technique_name": "Registry Run Keys Persistence",
-    "confidence": 55.0,
-    "patterns": [
-      "startup"
-    ],
-    "source": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=renderer --pdf-upsell-enabled --dma-cps-flags=2048 --no-pre-read-main-dll --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags --device-scale-factor=1.25 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=117 --time-ticks-at-unix-epoch=-1765292561928459 --launch-time-ticks=577127478487 --skip-read-main-dll --metrics-shmem-handle=6064,i,1800377329632263912,13257095093987105404,2097152 --field-trial-handle=2348,i,3026412812974680021,9572377275827512412,262144 --variations-seed-version --trace-process-track-uuid=3190709095945767827 --mojo-platform-channel-handle=9148 /prefetch:1",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 14:21:29",
-        "image": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-        "commandline": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=renderer --pdf-upsell-enabled --dma-cps-flags=2048 --no-pre-read-main-dll --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags --device-scale-factor=1.25 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=117 --time-ticks-at-unix-epoch=-1765292561928459 --launch-time-ticks=577127478487 --skip-read-main-dll --metrics-shmem-handle=6064,i,1800377329632263912,13257095093987105404,2097152 --field-trial-handle=2348,i,3026412812974680021,9572377275827512412,262144 --variations-seed-version --trace-process-track-uuid=3190709095945767827 --mojo-platform-channel-handle=9148 /prefetch:1",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 14:21:38",
-    "technique_id": "T1547.001",
-    "technique_name": "Registry Run Keys Persistence",
-    "confidence": 55.0,
-    "patterns": [
-      "startup"
-    ],
-    "source": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-    "event_id": 1,
-    "command_line": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=utility --utility-sub-type=edge_xpay_wallet.mojom.EdgeXPayWalletService --lang=en-US --service-sandbox-type=utility --video-capture-use-gpu-memory-buffer --no-pre-read-main-dll --skip-read-main-dll --metrics-shmem-handle=11904,i,3877703594300904886,2293105116342363043,524288 --field-trial-handle=2348,i,3026412812974680021,9572377275827512412,262144 --variations-seed-version --trace-process-track-uuid=3190709096882809676 --mojo-platform-channel-handle=7564 /prefetch:14",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 14:21:36",
-        "image": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-        "commandline": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=utility --utility-sub-type=edge_xpay_wallet.mojom.EdgeXPayWalletService --lang=en-US --service-sandbox-type=utility --video-capture-use-gpu-memory-buffer --no-pre-read-main-dll --skip-read-main-dll --metrics-shmem-handle=11904,i,3877703594300904886,2293105116342363043,524288 --field-trial-handle=2348,i,3026412812974680021,9572377275827512412,262144 --variations-seed-version --trace-process-track-uuid=3190709096882809676 --mojo-platform-channel-handle=7564 /prefetch:14",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
-    "timestamp": "2025-12-16 14:30:35",
-    "technique_id": "T1003.001",
-    "technique_name": "LSASS Memory Dump",
-    "confidence": 58.6,
-    "patterns": [
-      "lsass",
-      "procdump"
-    ],
-    "source": "C:\\Windows\\System32\\conhost.exe",
-    "event_id": 1,
-    "command_line": "\\??\\C:\\Windows\\system32\\conhost.exe 0xffffffff -ForceV1",
-    "matched_events": [
-      {
-        "event_id": 1,
-        "timestamp": "2025-12-16 14:30:33",
-        "image": "C:\\Windows\\System32\\conhost.exe",
-        "commandline": "\\??\\C:\\Windows\\system32\\conhost.exe 0xffffffff -ForceV1",
-        "target_filename": "",
-        "details": "",
-        "user": "TRAN-LAPPY\\Ai Tran",
-        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "target_image": ""
-      }
-    ]
-  },
-  {
     "timestamp": "2025-12-16 14:30:35",
     "technique_id": "T1059.001",
     "technique_name": "PowerShell Execution",
@@ -1298,6 +882,426 @@
         "timestamp": "2025-12-16 15:31:46",
         "image": "C:\\Windows\\System32\\cscript.exe",
         "commandline": "\"C:\\Windows\\system32\\cscript.exe\" //nologo C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216153146.vbs",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:33:51",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 57.3,
+    "patterns": [
+      "powershell",
+      "bypass",
+      "-nop"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location -LiteralPath 'D:\\nckh\\auditlog\\demo_system\\attacks'; .\\test_individual.ps1 -TechniqueID T1204.002\"",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:33:51",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location -LiteralPath 'D:\\nckh\\auditlog\\demo_system\\attacks'; .\\test_individual.ps1 -TechniqueID T1204.002\"",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:34:56",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 57.3,
+    "patterns": [
+      "powershell",
+      "bypass",
+      "-nop"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location -LiteralPath 'D:\\nckh\\auditlog\\demo_system\\attacks'; .\\test_individual.ps1 -TechniqueID T1059.001\"",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:34:55",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location -LiteralPath 'D:\\nckh\\auditlog\\demo_system\\attacks'; .\\test_individual.ps1 -TechniqueID T1059.001\"",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:37:21",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 57.3,
+    "patterns": [
+      "powershell",
+      "bypass",
+      "-nop"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location -LiteralPath 'D:\\nckh\\auditlog\\demo_system\\attacks'; .\\test_individual.ps1 -TechniqueID T1204.002\"",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:37:19",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location -LiteralPath 'D:\\nckh\\auditlog\\demo_system\\attacks'; .\\test_individual.ps1 -TechniqueID T1204.002\"",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:37:23",
+    "technique_id": "T1204.002",
+    "technique_name": "Malicious File Execution",
+    "confidence": 52.2,
+    "patterns": [
+      "cscript",
+      ".vbs"
+    ],
+    "source": "C:\\Windows\\System32\\timeout.exe",
+    "event_id": 1,
+    "command_line": "timeout  /t 8",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:37:22",
+        "image": "C:\\Windows\\System32\\timeout.exe",
+        "commandline": "timeout  /t 8",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\cmd.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:40:34",
+    "technique_id": "T1547.001",
+    "technique_name": "Registry Run Keys Persistence",
+    "confidence": 55.0,
+    "patterns": [
+      "startup"
+    ],
+    "source": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=renderer --pdf-upsell-enabled --dma-cps-flags=2048 --no-pre-read-main-dll --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags --device-scale-factor=1.25 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=199 --time-ticks-at-unix-epoch=-1765292561928459 --launch-time-ticks=581870805755 --skip-read-main-dll --metrics-shmem-handle=3832,i,11518412463344956827,15191582769359023483,2097152 --field-trial-handle=2348,i,3026412812974680021,9572377275827512412,262144 --variations-seed-version --trace-process-track-uuid=3190709172783199445 --mojo-platform-channel-handle=11584 /prefetch:1",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:40:32",
+        "image": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+        "commandline": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=renderer --pdf-upsell-enabled --dma-cps-flags=2048 --no-pre-read-main-dll --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags --device-scale-factor=1.25 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=199 --time-ticks-at-unix-epoch=-1765292561928459 --launch-time-ticks=581870805755 --skip-read-main-dll --metrics-shmem-handle=3832,i,11518412463344956827,15191582769359023483,2097152 --field-trial-handle=2348,i,3026412812974680021,9572377275827512412,262144 --variations-seed-version --trace-process-track-uuid=3190709172783199445 --mojo-platform-channel-handle=11584 /prefetch:1",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:40:39",
+    "technique_id": "T1547.001",
+    "technique_name": "Registry Run Keys Persistence",
+    "confidence": 55.0,
+    "patterns": [
+      "startup"
+    ],
+    "source": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=renderer --pdf-upsell-enabled --dma-cps-flags=2048 --no-pre-read-main-dll --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags --device-scale-factor=1.25 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=203 --time-ticks-at-unix-epoch=-1765292561928459 --launch-time-ticks=581875933032 --skip-read-main-dll --metrics-shmem-handle=10236,i,9209037293117187225,9045767530163492748,2097152 --field-trial-handle=2348,i,3026412812974680021,9572377275827512412,262144 --variations-seed-version --trace-process-track-uuid=3190709176531366841 --mojo-platform-channel-handle=7228 /prefetch:1",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:40:37",
+        "image": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+        "commandline": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=renderer --pdf-upsell-enabled --dma-cps-flags=2048 --no-pre-read-main-dll --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags --device-scale-factor=1.25 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=203 --time-ticks-at-unix-epoch=-1765292561928459 --launch-time-ticks=581875933032 --skip-read-main-dll --metrics-shmem-handle=10236,i,9209037293117187225,9045767530163492748,2097152 --field-trial-handle=2348,i,3026412812974680021,9572377275827512412,262144 --variations-seed-version --trace-process-track-uuid=3190709176531366841 --mojo-platform-channel-handle=7228 /prefetch:1",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:41:03",
+    "technique_id": "T1547.001",
+    "technique_name": "Registry Run Keys Persistence",
+    "confidence": 55.0,
+    "patterns": [
+      "startup"
+    ],
+    "source": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=renderer --pdf-upsell-enabled --dma-cps-flags=2048 --no-pre-read-main-dll --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags --device-scale-factor=1.25 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=211 --time-ticks-at-unix-epoch=-1765292561928459 --launch-time-ticks=581900353789 --ssd-no-pressure-read-main-dll --metrics-shmem-handle=12832,i,3053887521179385986,2943300598963948881,2097152 --field-trial-handle=2348,i,3026412812974680021,9572377275827512412,262144 --variations-seed-version --trace-process-track-uuid=3190709184027701633 --mojo-platform-channel-handle=13288 /prefetch:1",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:41:02",
+        "image": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+        "commandline": "\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --type=renderer --pdf-upsell-enabled --dma-cps-flags=2048 --no-pre-read-main-dll --video-capture-use-gpu-memory-buffer --lang=en-US --js-flags --device-scale-factor=1.25 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=211 --time-ticks-at-unix-epoch=-1765292561928459 --launch-time-ticks=581900353789 --ssd-no-pressure-read-main-dll --metrics-shmem-handle=12832,i,3053887521179385986,2943300598963948881,2097152 --field-trial-handle=2348,i,3026412812974680021,9572377275827512412,262144 --variations-seed-version --trace-process-track-uuid=3190709184027701633 --mojo-platform-channel-handle=13288 /prefetch:1",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:44:26",
+    "technique_id": "T1204.002",
+    "technique_name": "Malicious File Execution",
+    "confidence": 52.2,
+    "patterns": [
+      "cscript",
+      ".vbs"
+    ],
+    "source": "C:\\Windows\\System32\\timeout.exe",
+    "event_id": 1,
+    "command_line": "timeout  /t 8",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:44:25",
+        "image": "C:\\Windows\\System32\\timeout.exe",
+        "commandline": "timeout  /t 8",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\cmd.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:44:26",
+    "technique_id": "T1204.002",
+    "technique_name": "Malicious File Execution",
+    "confidence": 52.2,
+    "patterns": [
+      "cscript",
+      ".vbs"
+    ],
+    "source": "C:\\Windows\\System32\\cscript.exe",
+    "event_id": 1,
+    "command_line": "cscript  //nologo \"C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216154424.vbs\"",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:44:24",
+        "image": "C:\\Windows\\System32\\cscript.exe",
+        "commandline": "cscript  //nologo \"C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216154424.vbs\"",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\cmd.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:44:43",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 57.3,
+    "patterns": [
+      "powershell",
+      "bypass",
+      "-nop"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location -LiteralPath 'D:\\nckh\\auditlog\\demo_system\\attacks'; .\\test_individual.ps1 -TechniqueID T1204.002\"",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:44:42",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location -LiteralPath 'D:\\nckh\\auditlog\\demo_system\\attacks'; .\\test_individual.ps1 -TechniqueID T1204.002\"",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:44:57",
+    "technique_id": "T1204.002",
+    "technique_name": "Malicious File Execution",
+    "confidence": 52.2,
+    "patterns": [
+      "cscript",
+      ".vbs"
+    ],
+    "source": "C:\\Windows\\System32\\cscript.exe",
+    "event_id": 1,
+    "command_line": "cscript  //nologo \"C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216154457.vbs\"",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:44:57",
+        "image": "C:\\Windows\\System32\\cscript.exe",
+        "commandline": "cscript  //nologo \"C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216154457.vbs\"",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\cmd.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:44:57",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 57.3,
+    "patterns": [
+      "powershell",
+      "bypass",
+      "-nop"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location -LiteralPath 'D:\\nckh\\auditlog\\demo_system\\attacks'; .\\test_individual.ps1 -TechniqueID T1204.002\"",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:44:56",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location -LiteralPath 'D:\\nckh\\auditlog\\demo_system\\attacks'; .\\test_individual.ps1 -TechniqueID T1204.002\"",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:45:10",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 57.3,
+    "patterns": [
+      "powershell",
+      "bypass",
+      "-nop"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location -LiteralPath 'D:\\nckh\\auditlog\\demo_system\\attacks'; .\\test_individual.ps1 -TechniqueID T1204.002\"",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:45:09",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location -LiteralPath 'D:\\nckh\\auditlog\\demo_system\\attacks'; .\\test_individual.ps1 -TechniqueID T1204.002\"",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:45:11",
+    "technique_id": "T1204.002",
+    "technique_name": "Malicious File Execution",
+    "confidence": 52.2,
+    "patterns": [
+      "cscript",
+      ".vbs"
+    ],
+    "source": "C:\\Windows\\System32\\timeout.exe",
+    "event_id": 1,
+    "command_line": "timeout  /t 8",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:45:10",
+        "image": "C:\\Windows\\System32\\timeout.exe",
+        "commandline": "timeout  /t 8",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\cmd.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:46:05",
+    "technique_id": "T1204.002",
+    "technique_name": "Malicious File Execution",
+    "confidence": 52.2,
+    "patterns": [
+      "cscript",
+      ".vbs"
+    ],
+    "source": "C:\\Windows\\System32\\cscript.exe",
+    "event_id": 1,
+    "command_line": "cscript  //nologo \"C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216154604.vbs\"",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:46:04",
+        "image": "C:\\Windows\\System32\\cscript.exe",
+        "commandline": "cscript  //nologo \"C:\\Users\\Admin\\AppData\\Local\\Temp\\demo_macro_20251216154604.vbs\"",
+        "target_filename": "",
+        "details": "",
+        "user": "TRAN-LAPPY\\Ai Tran",
+        "parent_image": "C:\\Windows\\System32\\cmd.exe",
+        "target_image": ""
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-12-16 15:46:05",
+    "technique_id": "T1059.001",
+    "technique_name": "PowerShell Execution",
+    "confidence": 57.3,
+    "patterns": [
+      "powershell",
+      "bypass",
+      "-nop"
+    ],
+    "source": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "event_id": 1,
+    "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location -LiteralPath 'D:\\nckh\\auditlog\\demo_system\\attacks'; .\\test_individual.ps1 -TechniqueID T1204.002\"",
+    "matched_events": [
+      {
+        "event_id": 1,
+        "timestamp": "2025-12-16 15:46:03",
+        "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -ExecutionPolicy Bypass -Command \"Set-Location -LiteralPath 'D:\\nckh\\auditlog\\demo_system\\attacks'; .\\test_individual.ps1 -TechniqueID T1204.002\"",
         "target_filename": "",
         "details": "",
         "user": "TRAN-LAPPY\\Ai Tran",
