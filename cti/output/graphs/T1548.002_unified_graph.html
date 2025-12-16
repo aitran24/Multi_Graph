@@ -1,0 +1,673 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/css/tom-select.min.css" integrity="sha512-43fHB3GLgZfz8QXl1RPQ8O66oIgv3po9cJ5erMt1c4QISq9dYb195T3vr5ImnJPXuVroKcGBPXBFKETW8jrPNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/js/tom-select.complete.js" integrity="sha512-jeF9CfnvzDiw9G9xiksVjxR2lib44Gnovvkv+3CgCG6NXCD4gqlA5nDAVW5WjpA+i+/zKsUWV5xNEbW1X/HH0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+
+        
+
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 100%;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    
+        <style>
+            /* Reset CSS */
+            * { box-sizing: border-box; }
+            body, html { 
+                margin: 0; 
+                padding: 0; 
+                width: 100vw; 
+                height: 100vh; 
+                overflow: hidden; 
+                background-color: #222222; 
+            }
+            
+            /* Container chính */
+            .card {
+                position: relative;
+                width: 100% !important;
+                height: 100% !important;
+                border: none !important;
+                background: transparent !important;
+            }
+            
+            .card-body {
+                padding: 0 !important;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* Đồ thị */
+            #mynetwork { 
+                position: absolute; 
+                top: 0; 
+                left: 0; 
+                width: 100% !important; 
+                height: 100% !important; 
+                border: none !important; 
+                outline: none !important;
+                z-index: 1; /* Nằm dưới */
+            }
+
+            /* Menu chọn (Nổi lên trên) */
+            #select-menu {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                z-index: 9999; /* Luôn nằm trên cùng */
+                background: rgba(40, 40, 40, 0.8); /* Nền tối mờ */
+                padding: 10px;
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+                border: 1px solid #444;
+                width: auto !important; /* Ghi đè bootstrap */
+                max-width: 400px;
+            }
+            
+            /* Tinh chỉnh các phần tử bên trong menu cho đẹp */
+            .card-header { border: none !important; background: transparent !important; padding: 0 !important; }
+            .row { margin: 0 !important; display: flex; flex-direction: column; gap: 10px; }
+            .col-10, .col-2 { width: 100% !important; padding: 0 !important; max-width: none !important; flex: none !important;}
+            
+            /* Nút Reset */
+            .btn-primary {
+                width: 100%;
+                background-color: #ff6666 !important;
+                border-color: #ff6666 !important;
+                font-weight: bold;
+            }
+            .btn-primary:hover { background-color: #ff4444 !important; }
+            
+            /* TomSelect (Dropdown) */
+            .ts-control {
+                background-color: #333 !important;
+                color: white !important;
+                border: 1px solid #555 !important;
+            }
+            .ts-dropdown {
+                background-color: #333 !important;
+                color: white !important;
+                border: 1px solid #555 !important;
+            }
+            .ts-dropdown .option { color: white !important; }
+            .ts-dropdown .active { background-color: #555 !important; }
+            .item { color: white !important; }
+
+        </style>
+        </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="U_0">U_0</option>
+                                
+                                    <option value="U_1">U_1</option>
+                                
+                                    <option value="U_2">U_2</option>
+                                
+                                    <option value="U_3">U_3</option>
+                                
+                                    <option value="U_4">U_4</option>
+                                
+                                    <option value="U_5">U_5</option>
+                                
+                                    <option value="U_6">U_6</option>
+                                
+                                    <option value="U_7">U_7</option>
+                                
+                                    <option value="U_8">U_8</option>
+                                
+                                    <option value="U_9">U_9</option>
+                                
+                                    <option value="U_10">U_10</option>
+                                
+                                    <option value="U_11">U_11</option>
+                                
+                                    <option value="U_12">U_12</option>
+                                
+                                    <option value="U_13">U_13</option>
+                                
+                                    <option value="U_14">U_14</option>
+                                
+                                    <option value="U_16">U_16</option>
+                                
+                                    <option value="U_17">U_17</option>
+                                
+                                    <option value="U_18">U_18</option>
+                                
+                                    <option value="U_19">U_19</option>
+                                
+                                    <option value="U_20">U_20</option>
+                                
+                                    <option value="U_21">U_21</option>
+                                
+                                    <option value="U_23">U_23</option>
+                                
+                                    <option value="U_25">U_25</option>
+                                
+                                    <option value="U_26">U_26</option>
+                                
+                                    <option value="U_27">U_27</option>
+                                
+                                    <option value="U_28">U_28</option>
+                                
+                                    <option value="U_29">U_29</option>
+                                
+                                    <option value="U_30">U_30</option>
+                                
+                                    <option value="U_31">U_31</option>
+                                
+                                    <option value="U_32">U_32</option>
+                                
+                                    <option value="U_33">U_33</option>
+                                
+                                    <option value="U_34">U_34</option>
+                                
+                                    <option value="U_35">U_35</option>
+                                
+                                    <option value="U_36">U_36</option>
+                                
+                                    <option value="U_37">U_37</option>
+                                
+                                    <option value="U_38">U_38</option>
+                                
+                                    <option value="U_39">U_39</option>
+                                
+                                    <option value="U_40">U_40</option>
+                                
+                                    <option value="U_41">U_41</option>
+                                
+                                    <option value="U_42">U_42</option>
+                                
+                                    <option value="U_43">U_43</option>
+                                
+                                    <option value="U_44">U_44</option>
+                                
+                                    <option value="U_45">U_45</option>
+                                
+                                    <option value="U_46">U_46</option>
+                                
+                                    <option value="U_47">U_47</option>
+                                
+                                    <option value="U_48">U_48</option>
+                                
+                                    <option value="U_49">U_49</option>
+                                
+                                    <option value="U_50">U_50</option>
+                                
+                                    <option value="U_51">U_51</option>
+                                
+                                    <option value="U_52">U_52</option>
+                                
+                                    <option value="U_53">U_53</option>
+                                
+                                    <option value="U_55">U_55</option>
+                                
+                                    <option value="U_56">U_56</option>
+                                
+                                    <option value="U_57">U_57</option>
+                                
+                                    <option value="U_58">U_58</option>
+                                
+                                    <option value="U_59">U_59</option>
+                                
+                                    <option value="U_60">U_60</option>
+                                
+                                    <option value="U_61">U_61</option>
+                                
+                                    <option value="U_62">U_62</option>
+                                
+                                    <option value="U_64">U_64</option>
+                                
+                                    <option value="U_65">U_65</option>
+                                
+                                    <option value="U_66">U_66</option>
+                                
+                                    <option value="U_67">U_67</option>
+                                
+                                    <option value="U_68">U_68</option>
+                                
+                                    <option value="U_69">U_69</option>
+                                
+                                    <option value="U_70">U_70</option>
+                                
+                                    <option value="U_71">U_71</option>
+                                
+                                    <option value="U_72">U_72</option>
+                                
+                                    <option value="U_73">U_73</option>
+                                
+                                    <option value="U_74">U_74</option>
+                                
+                                    <option value="U_75">U_75</option>
+                                
+                                    <option value="U_76">U_76</option>
+                                
+                                    <option value="U_77">U_77</option>
+                                
+                                    <option value="U_78">U_78</option>
+                                
+                                    <option value="U_79">U_79</option>
+                                
+                                    <option value="U_80">U_80</option>
+                                
+                                    <option value="U_81">U_81</option>
+                                
+                                    <option value="U_82">U_82</option>
+                                
+                                    <option value="U_83">U_83</option>
+                                
+                                    <option value="U_84">U_84</option>
+                                
+                                    <option value="U_85">U_85</option>
+                                
+                                    <option value="U_86">U_86</option>
+                                
+                                    <option value="U_87">U_87</option>
+                                
+                                    <option value="U_88">U_88</option>
+                                
+                                    <option value="U_89">U_89</option>
+                                
+                                    <option value="U_90">U_90</option>
+                                
+                                    <option value="U_91">U_91</option>
+                                
+                                    <option value="U_92">U_92</option>
+                                
+                                    <option value="U_93">U_93</option>
+                                
+                                    <option value="U_94">U_94</option>
+                                
+                                    <option value="U_95">U_95</option>
+                                
+                                    <option value="U_96">U_96</option>
+                                
+                                    <option value="U_98">U_98</option>
+                                
+                                    <option value="U_99">U_99</option>
+                                
+                                    <option value="U_100">U_100</option>
+                                
+                                    <option value="U_102">U_102</option>
+                                
+                                    <option value="U_103">U_103</option>
+                                
+                                    <option value="U_104">U_104</option>
+                                
+                                    <option value="U_105">U_105</option>
+                                
+                                    <option value="U_106">U_106</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#ff6666", "font": {"color": "white"}, "id": "U_0", "label": "Attacker / Threat Group", "shape": "dot", "size": 60, "title": "\u003cb\u003eID:\u003c/b\u003e U_0\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Attacker\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 0\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBlackEnergy\u003cbr\u003eRTM\u003cbr\u003eLockBit 3.0\u003cbr\u003eCobalt Strike\u003cbr\u003eGelsemium\u003cbr\u003eZeroT\u003cbr\u003eSaint Bot\u003cbr\u003eAttacker\u003cbr\u003eDarkGate\u003cbr\u003eAPT38\u003cbr\u003eWarzoneRAT\u003cbr\u003eEvilnum\u003cbr\u003eAPT37\u003cbr\u003eBRONZE BUTLER\u003cbr\u003eMuddyWater"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_1", "label": "User Access Control (UAC)", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_1\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eUser Access Control (UAC)"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_2", "label": "Backward-compatibility setting", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_2\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBackward-compatibility setting"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_3", "label": "Malicious Program", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_3\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalicious Program"}, {"color": "#7be141", "font": {"color": "white"}, "id": "U_4", "label": "User", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_4\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e User\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eUser"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_5", "label": "Fake Error Message", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_5\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eFake Error Message"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_6", "label": "UAC bypass prompt", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_6\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eUAC bypass prompt"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_7", "label": "Component Object Model (COM) interface", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_7\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eComponent Object Model (COM) interface"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_8", "label": "Malicious Code", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_8\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalicious Code"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_9", "label": "Windows UAC", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_9\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWindows UAC"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_10", "label": "Known UAC Bypass Techniques", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_10\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eKnown UAC Bypass Techniques"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_11", "label": "Gelsemium Process", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_11\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eGelsemium Process"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_12", "label": "eventvwr.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_12\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eeventvwr.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_13", "label": "Malicious File", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_13\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalicious File"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_14", "label": "fodhelper.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_14\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e -1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003efodhelper.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_16", "label": "UAC bypass techniques", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_16\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e -1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eUAC bypass techniques"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_17", "label": "User Account Control (UAC)", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_17\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e -1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eUser Account Control (UAC)"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_18", "label": "ieinstal.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_18\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eieinstal.exe"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_19", "label": "sdclt.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_19\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e -1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003esdclt.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_20", "label": "IFileOperation exploit", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_20\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e -1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eIFileOperation exploit"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_21", "label": "Pupy", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_21\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePupy"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_23", "label": "DLL", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_23\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDLL"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_25", "label": "appPaths", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_25\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eappPaths"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_26", "label": "PoshC2", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_26\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePoshC2"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_27", "label": "UAC", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_27\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eUAC"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_28", "label": "KONNI", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_28\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eKONNI"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_29", "label": "Token", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_29\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eToken"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_30", "label": "RPC", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_30\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eRPC"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_31", "label": "Sakula", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_31\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSakula"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_32", "label": "UAC bypass code", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_32\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eUAC bypass code"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_33", "label": "ShimRat", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_33\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eShimRat"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_34", "label": "cryptbase.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_34\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ecryptbase.dll"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_35", "label": "migwiz.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_35\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003emigwiz.exe"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_36", "label": "User Access Control window", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_36\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eUser Access Control window"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_37", "label": "BlackCat", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_37\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBlackCat"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_38", "label": "LockBit 2.0", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_38\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLockBit 2.0"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_39", "label": "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows NT\\CurrentVersion\\ICM\\Calibration", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_39\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eHKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows NT\\CurrentVersion\\ICM\\Calibration"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_40", "label": "powershell.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_40\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003epowershell.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_41", "label": "Initial Dropper", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_41\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eInitial Dropper"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_42", "label": "Next Payload", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_42\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eNext Payload"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_43", "label": "Windows 10 specific tool", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_43\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWindows 10 specific tool"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_44", "label": "xxmm", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_44\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003exxmm"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_45", "label": "Qilin", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_45\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eQilin"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_46", "label": "Stolen Tokens", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_46\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eStolen Tokens"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_47", "label": "Elevated Process", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_47\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eElevated Process"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_48", "label": "AutoIt backdoor", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_48\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eAutoIt backdoor"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_49", "label": "FinFisher", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_49\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eFinFisher"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_50", "label": "Bad Rabbit", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_50\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBad Rabbit"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_51", "label": "Downdelph", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_51\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDowndelph"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_52", "label": "RedirectEXE shim database", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_52\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eRedirectEXE shim database"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_53", "label": "Koadic", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_53\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eKoadic"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_55", "label": "Avaddon", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_55\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eAvaddon"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_56", "label": "CMSTPLUA COM interface", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_56\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCMSTPLUA COM interface"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_57", "label": "QuasarRAT", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_57\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eQuasarRAT"}, {"color": "#7be141", "font": {"color": "white"}, "id": "U_58", "label": "Target User", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_58\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e User\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eTarget User"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_59", "label": "Admin Command", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_59\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eAdmin Command"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_60", "label": "Winnti for Windows", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_60\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWinnti for Windows"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_61", "label": "sysprep.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_61\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003esysprep.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_62", "label": "WastedLocker", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_62\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWastedLocker"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_64", "label": "PipeMon Installer", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_64\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePipeMon Installer"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_65", "label": "Payload", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_65\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePayload"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_66", "label": "Lokibot", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_66\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLokibot"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_67", "label": "H1N1", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_67\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eH1N1"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_68", "label": "wusa.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_68\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ewusa.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_69", "label": "Malicious DLL", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_69\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalicious DLL"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_70", "label": "PLAINTEE", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_70\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePLAINTEE"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_71", "label": "Remcos", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_71\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eRemcos"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_72", "label": "Ramsay", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_72\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eRamsay"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_73", "label": "UACMe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_73\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eUACMe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_74", "label": "BitPaymer", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_74\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e -1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBitPaymer"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_75", "label": "HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_75\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e -1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eHKCU\\Software\\Classes\\ms-settings\\shell\\open\\command"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_76", "label": "HKCU\\Software\\Classes\\mscfile\\shell\\open\\command", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_76\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e -1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eHKCU\\Software\\Classes\\mscfile\\shell\\open\\command"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_77", "label": "eventvwr.msc", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_77\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e -1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eeventvwr.msc"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_78", "label": "Fodhelper", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_78\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eFodhelper"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_79", "label": "NTWDBLIB.DLL", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_79\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eNTWDBLIB.DLL"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_80", "label": "cliconfig.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_80\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ecliconfig.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_81", "label": "CSPY Downloader", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_81\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCSPY Downloader"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_82", "label": "SilentCleanup task", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_82\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSilentCleanup task"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_83", "label": "Bumblebee", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_83\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBumblebee"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_84", "label": "Post Exploitation Tools", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_84\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePost Exploitation Tools"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_85", "label": "Threat Group-3390 tool", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_85\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eThreat Group-3390 tool"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_86", "label": "Grandoreiro", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_86\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eGrandoreiro"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_87", "label": ".MSC file handler", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_87\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003e.MSC file handler"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_88", "label": "Clambling", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_88\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eClambling"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_89", "label": "passuac.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_89\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003epassuac.dll"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_90", "label": "Shamoon", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_90\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eShamoon"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_91", "label": "Registry", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_91\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eRegistry"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_92", "label": "SILENTTRINITY", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_92\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSILENTTRINITY"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_93", "label": "Window\u0027s Device Manager", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_93\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWindow\u0027s Device Manager"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_94", "label": "Manage Optional Features", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_94\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eManage Optional Features"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_95", "label": ".msc file extension", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_95\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003e.msc file extension"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_96", "label": "AppleJeus", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_96\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eAppleJeus"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_98", "label": "UAC prompt", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_98\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eUAC prompt"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_99", "label": "InvisiMole", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_99\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eInvisiMole"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_100", "label": "Elevated COM object", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_100\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eElevated COM object"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_102", "label": "User Account Control", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_102\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eUser Account Control"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_103", "label": "SilentCleanup", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_103\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSilentCleanup"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_104", "label": "Malicious Process", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_104\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalicious Process"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_105", "label": "CMSTPLUA COM interface", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_105\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCMSTPLUA COM interface"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_106", "label": "UAC Bypass Modules", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_106\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eUAC Bypass Modules"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "bypasses, bypasses", "title": "bypasses, bypasses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "exploits", "title": "exploits", "to": "U_2"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "executes", "title": "executes", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "shows_to", "title": "shows_to", "to": "U_5"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "shows_to", "title": "shows_to", "to": "U_6"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "socially_engineers", "title": "socially_engineers", "to": "U_4"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "executes", "title": "executes", "to": "U_8"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_10"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "bypasses", "title": "bypasses", "to": "U_9"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "elevates_privileges_of", "title": "elevates_privileges_of", "to": "U_11"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_12"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses, uses", "title": "uses, uses", "to": "U_14"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "escalates_privileges", "title": "escalates_privileges", "to": "U_0"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_16"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "bypasses", "title": "bypasses", "to": "U_17"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_18"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_19"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_20"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_21"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_26"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_28"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_31"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_33"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_37"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_38"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_40"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_41"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_43"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_44"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_45"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_48"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_49"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_50"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_51"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_53"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_55"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_57"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_60"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_62"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_64"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_66"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_67"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_70"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_71"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_72"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_78"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_80"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_82"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_83"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_85"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_86"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_88"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_90"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_92"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_96"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_99"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "bypasses", "title": "bypasses", "to": "U_102"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_103"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_105"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "contains", "title": "contains", "to": "U_106"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "bypasses", "title": "bypasses", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_5", "label": "is_shown_to", "title": "is_shown_to", "to": "U_4"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_6", "label": "is_shown_to", "title": "is_shown_to", "to": "U_4"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_12", "label": "executes", "title": "executes", "to": "U_13"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_14", "label": "executes", "title": "executes", "to": "U_104"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_21", "label": "hijacks", "title": "hijacks", "to": "U_23"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_21", "label": "uses", "title": "uses", "to": "U_25"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_21", "label": "bypasses", "title": "bypasses", "to": "U_9"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_21", "label": "uses", "title": "uses", "to": "U_12"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_26", "label": "bypasses", "title": "bypasses", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_28", "label": "bypasses", "title": "bypasses", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_28", "label": "impersonates", "title": "impersonates", "to": "U_29"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_28", "label": "uses", "title": "uses", "to": "U_30"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_31", "label": "contains", "title": "contains", "to": "U_32"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_33", "label": "hijacks", "title": "hijacks", "to": "U_34"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_33", "label": "prevents", "title": "prevents", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_34", "label": "is_loaded_by", "title": "is_loaded_by", "to": "U_35"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_37", "label": "bypasses", "title": "bypasses", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_38", "label": "bypasses", "title": "bypasses", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_38", "label": "creates", "title": "creates", "to": "U_39"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_40", "label": "bypasses", "title": "bypasses", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_41", "label": "executes", "title": "executes", "to": "U_42"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_41", "label": "bypasses", "title": "bypasses", "to": "U_9"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_43", "label": "bypasses", "title": "bypasses", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_44", "label": "bypasses", "title": "bypasses", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_45", "label": "uses", "title": "uses", "to": "U_46"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_45", "label": "launches", "title": "launches", "to": "U_47"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_48", "label": "escalates_privileges_for", "title": "escalates_privileges_for", "to": "U_0"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_49", "label": "escalates_privileges_for", "title": "escalates_privileges_for", "to": "U_0"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_50", "label": "escalates_privileges_for", "title": "escalates_privileges_for", "to": "U_0"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_51", "label": "uses", "title": "uses", "to": "U_52"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_53", "label": "leverages", "title": "leverages", "to": "U_12"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_53", "label": "leverages", "title": "leverages", "to": "U_19"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_55", "label": "uses", "title": "uses", "to": "U_56"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_57", "label": "prompts", "title": "prompts", "to": "U_58"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_58", "label": "executes", "title": "executes", "to": "U_59"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_60", "label": "leverages", "title": "leverages", "to": "U_61"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_62", "label": "escalates_privileges_for", "title": "escalates_privileges_for", "to": "U_0"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_64", "label": "bypasses", "title": "bypasses", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_64", "label": "installs", "title": "installs", "to": "U_65"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_66", "label": "bypasses", "title": "bypasses", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_67", "label": "bypasses", "title": "bypasses", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_67", "label": "hijacks", "title": "hijacks", "to": "U_68"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_68", "label": "loads", "title": "loads", "to": "U_69"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_70", "label": "bypasses", "title": "bypasses", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_71", "label": "bypasses", "title": "bypasses", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_72", "label": "uses", "title": "uses", "to": "U_73"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_74", "label": "modifies", "title": "modifies", "to": "U_75"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_74", "label": "modifies", "title": "modifies", "to": "U_76"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_74", "label": "launches", "title": "launches", "to": "U_77"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_77", "label": "launches", "title": "launches", "to": "U_74"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_80", "label": "uses", "title": "uses", "to": "U_79"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_82", "label": "executes", "title": "executes", "to": "U_81"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_83", "label": "deploys", "title": "deploys", "to": "U_84"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_86", "label": "modifies", "title": "modifies", "to": "U_87"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_88", "label": "uses", "title": "uses", "to": "U_89"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_90", "label": "modifies", "title": "modifies", "to": "U_91"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_92", "label": "uses", "title": "uses", "to": "U_93"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_92", "label": "uses", "title": "uses", "to": "U_94"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_92", "label": "modifies", "title": "modifies", "to": "U_95"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_96", "label": "triggers", "title": "triggers", "to": "U_98"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_98", "label": "prompts", "title": "prompts", "to": "U_4"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_99", "label": "creates", "title": "creates", "to": "U_100"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_103", "label": "executes", "title": "executes", "to": "U_65"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_106", "label": "bypasses", "title": "bypasses", "to": "U_102"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.1,
+            "damping": 0.09,
+            "gravitationalConstant": -3000,
+            "springConstant": 0.04,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

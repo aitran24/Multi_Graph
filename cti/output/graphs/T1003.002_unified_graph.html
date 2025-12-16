@@ -1,0 +1,589 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/css/tom-select.min.css" integrity="sha512-43fHB3GLgZfz8QXl1RPQ8O66oIgv3po9cJ5erMt1c4QISq9dYb195T3vr5ImnJPXuVroKcGBPXBFKETW8jrPNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/js/tom-select.complete.js" integrity="sha512-jeF9CfnvzDiw9G9xiksVjxR2lib44Gnovvkv+3CgCG6NXCD4gqlA5nDAVW5WjpA+i+/zKsUWV5xNEbW1X/HH0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+
+        
+
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 100%;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    
+        <style>
+            /* Reset CSS */
+            * { box-sizing: border-box; }
+            body, html { 
+                margin: 0; 
+                padding: 0; 
+                width: 100vw; 
+                height: 100vh; 
+                overflow: hidden; 
+                background-color: #222222; 
+            }
+            
+            /* Container chính */
+            .card {
+                position: relative;
+                width: 100% !important;
+                height: 100% !important;
+                border: none !important;
+                background: transparent !important;
+            }
+            
+            .card-body {
+                padding: 0 !important;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* Đồ thị */
+            #mynetwork { 
+                position: absolute; 
+                top: 0; 
+                left: 0; 
+                width: 100% !important; 
+                height: 100% !important; 
+                border: none !important; 
+                outline: none !important;
+                z-index: 1; /* Nằm dưới */
+            }
+
+            /* Menu chọn (Nổi lên trên) */
+            #select-menu {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                z-index: 9999; /* Luôn nằm trên cùng */
+                background: rgba(40, 40, 40, 0.8); /* Nền tối mờ */
+                padding: 10px;
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+                border: 1px solid #444;
+                width: auto !important; /* Ghi đè bootstrap */
+                max-width: 400px;
+            }
+            
+            /* Tinh chỉnh các phần tử bên trong menu cho đẹp */
+            .card-header { border: none !important; background: transparent !important; padding: 0 !important; }
+            .row { margin: 0 !important; display: flex; flex-direction: column; gap: 10px; }
+            .col-10, .col-2 { width: 100% !important; padding: 0 !important; max-width: none !important; flex: none !important;}
+            
+            /* Nút Reset */
+            .btn-primary {
+                width: 100%;
+                background-color: #ff6666 !important;
+                border-color: #ff6666 !important;
+                font-weight: bold;
+            }
+            .btn-primary:hover { background-color: #ff4444 !important; }
+            
+            /* TomSelect (Dropdown) */
+            .ts-control {
+                background-color: #333 !important;
+                color: white !important;
+                border: 1px solid #555 !important;
+            }
+            .ts-dropdown {
+                background-color: #333 !important;
+                color: white !important;
+                border: 1px solid #555 !important;
+            }
+            .ts-dropdown .option { color: white !important; }
+            .ts-dropdown .active { background-color: #555 !important; }
+            .item { color: white !important; }
+
+        </style>
+        </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="U_0">U_0</option>
+                                
+                                    <option value="U_1">U_1</option>
+                                
+                                    <option value="U_2">U_2</option>
+                                
+                                    <option value="U_3">U_3</option>
+                                
+                                    <option value="U_4">U_4</option>
+                                
+                                    <option value="U_5">U_5</option>
+                                
+                                    <option value="U_7">U_7</option>
+                                
+                                    <option value="U_8">U_8</option>
+                                
+                                    <option value="U_9">U_9</option>
+                                
+                                    <option value="U_10">U_10</option>
+                                
+                                    <option value="U_12">U_12</option>
+                                
+                                    <option value="U_13">U_13</option>
+                                
+                                    <option value="U_14">U_14</option>
+                                
+                                    <option value="U_15">U_15</option>
+                                
+                                    <option value="U_16">U_16</option>
+                                
+                                    <option value="U_17">U_17</option>
+                                
+                                    <option value="U_18">U_18</option>
+                                
+                                    <option value="U_19">U_19</option>
+                                
+                                    <option value="U_20">U_20</option>
+                                
+                                    <option value="U_21">U_21</option>
+                                
+                                    <option value="U_22">U_22</option>
+                                
+                                    <option value="U_23">U_23</option>
+                                
+                                    <option value="U_24">U_24</option>
+                                
+                                    <option value="U_25">U_25</option>
+                                
+                                    <option value="U_26">U_26</option>
+                                
+                                    <option value="U_27">U_27</option>
+                                
+                                    <option value="U_28">U_28</option>
+                                
+                                    <option value="U_29">U_29</option>
+                                
+                                    <option value="U_30">U_30</option>
+                                
+                                    <option value="U_31">U_31</option>
+                                
+                                    <option value="U_32">U_32</option>
+                                
+                                    <option value="U_33">U_33</option>
+                                
+                                    <option value="U_34">U_34</option>
+                                
+                                    <option value="U_35">U_35</option>
+                                
+                                    <option value="U_36">U_36</option>
+                                
+                                    <option value="U_37">U_37</option>
+                                
+                                    <option value="U_39">U_39</option>
+                                
+                                    <option value="U_40">U_40</option>
+                                
+                                    <option value="U_41">U_41</option>
+                                
+                                    <option value="U_42">U_42</option>
+                                
+                                    <option value="U_43">U_43</option>
+                                
+                                    <option value="U_47">U_47</option>
+                                
+                                    <option value="U_48">U_48</option>
+                                
+                                    <option value="U_49">U_49</option>
+                                
+                                    <option value="U_50">U_50</option>
+                                
+                                    <option value="U_51">U_51</option>
+                                
+                                    <option value="U_52">U_52</option>
+                                
+                                    <option value="U_53">U_53</option>
+                                
+                                    <option value="U_54">U_54</option>
+                                
+                                    <option value="U_55">U_55</option>
+                                
+                                    <option value="U_56">U_56</option>
+                                
+                                    <option value="U_57">U_57</option>
+                                
+                                    <option value="U_58">U_58</option>
+                                
+                                    <option value="U_59">U_59</option>
+                                
+                                    <option value="U_60">U_60</option>
+                                
+                                    <option value="U_61">U_61</option>
+                                
+                                    <option value="U_62">U_62</option>
+                                
+                                    <option value="U_63">U_63</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#ff6666", "font": {"color": "white"}, "id": "U_0", "label": "Attacker / Threat Group", "shape": "dot", "size": 56, "title": "\u003cb\u003eID:\u003c/b\u003e U_0\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Attacker\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 0\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDaggerfly\u003cbr\u003eAttacker\u003cbr\u003eGALLIUM\u003cbr\u003eAdversary\u003cbr\u003eAPT29\u003cbr\u003eFIN13\u003cbr\u003eAPT41\u003cbr\u003eDragonfly\u003cbr\u003eKe3chang\u003cbr\u003eAgrius\u003cbr\u003eNight Dragon threat actors\u003cbr\u003eAPT5\u003cbr\u003emenuPass\u003cbr\u003eThreat Group-3390\u003cbr\u003eAPT28"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_1", "label": "Process (Various)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_1\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eReg.exe\u003cbr\u003ereg.exe"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_2", "label": "SAM hive", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_2\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSAM hive"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_3", "label": "CrackMapExec", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_3\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCrackMapExec"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_4", "label": "SAM", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_4\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSAM"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_5", "label": "gsecdump", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_5\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003egsecdump"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_7", "label": "Registry Hives", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_7\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eRegistry Hives"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_8", "label": "Koadic", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_8\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eKoadic"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_9", "label": "SAM/SECURITY hive", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_9\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSAM/SECURITY hive"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_10", "label": "SYSTEM hive", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_10\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSYSTEM hive"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_12", "label": "pwdump", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_12\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003epwdump"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_13", "label": "SecretsDump", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_13\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSecretsDump"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_14", "label": "File (Generic)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_14\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003epassword hashes\u003cbr\u003ePassword Hashes"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_15", "label": "gsecdump", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_15\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003egsecdump"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_16", "label": "File (Generic)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_16\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCredentials\u003cbr\u003ecredentials"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_17", "label": "HOPLIGHT", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_17\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eHOPLIGHT"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_18", "label": "SAM database", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_18\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSAM database"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_19", "label": "credentials and passwords", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_19\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ecredentials and passwords"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_20", "label": "SAM file", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_20\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSAM file"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_21", "label": "account hashes", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_21\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eaccount hashes"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_22", "label": "Mimikatz", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_22\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMimikatz"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_23", "label": "SAM table", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_23\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSAM table"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_24", "label": "File (Generic)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_24\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eAccount and password information\u003cbr\u003eaccount and password information"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_25", "label": "reg save", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_25\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ereg save"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_26", "label": "volume shadow copies", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_26\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003evolume shadow copies"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_27", "label": "Security Account Manager (SAM)", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_27\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSecurity Account Manager (SAM)"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_28", "label": "registry", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_28\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eregistry"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_29", "label": "Remsec", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_29\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eRemsec"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_30", "label": "SAM Registry hive", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_30\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSAM Registry hive"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_31", "label": "wmiexec.vbs", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_31\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ewmiexec.vbs"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_32", "label": "secretsdump.py", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_32\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003esecretsdump.py"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_33", "label": "CozyCar", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_33\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCozyCar"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_34", "label": "Password stealer module", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_34\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePassword stealer module"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_35", "label": "NTLM stealer module", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_35\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eNTLM stealer module"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_36", "label": "Stored Credentials", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_36\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eStored Credentials"}, {"color": "#7be141", "font": {"color": "white"}, "id": "U_37", "label": "Victim", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_37\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e User\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eVictim"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_39", "label": "Domain Controller", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_39\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDomain Controller"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_40", "label": "SECURITY hive", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_40\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSECURITY hive"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_41", "label": "Mivast", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_41\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMivast"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_42", "label": "NTLM password information", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_42\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eNTLM password information"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_43", "label": "Impacket", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_43\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eImpacket"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_47", "label": "Custom Tool", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_47\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCustom Tool"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_48", "label": "HKLM\\SYSTEM", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_48\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eHKLM\\SYSTEM"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_49", "label": "system.hiv", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_49\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003esystem.hiv"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_50", "label": "HKLM\\SAM", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_50\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eHKLM\\SAM"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_51", "label": "sam.hiv", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_51\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003esam.hiv"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_52", "label": "HKLM\\SECURITY", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_52\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eHKLM\\SECURITY"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_53", "label": "security.hiv", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_53\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003esecurity.hiv"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_54", "label": "POWERTON", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_54\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePOWERTON"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_55", "label": "CosmicDuke", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_55\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCosmicDuke"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_56", "label": "Windows account hashes", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_56\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWindows account hashes"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_57", "label": "Cobalt Strike", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_57\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCobalt Strike"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_58", "label": "Hashed Passwords", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_58\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eHashed Passwords"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_59", "label": "IceApple", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_59\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eIceApple"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_60", "label": "HKLM\\SAM\\SAM\\Domains\\Account\\F", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_60\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eHKLM\\SAM\\SAM\\Domains\\Account\\F"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_61", "label": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\*\\V", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_61\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eHKLM\\SAM\\SAM\\Domains\\Account\\Users\\*\\V"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_62", "label": "Security Account Manager", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_62\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSecurity Account Manager"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_63", "label": "Fgdump", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_63\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eFgdump"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses, executes", "title": "uses, executes", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_5"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_8"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_12"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "executes", "title": "executes", "to": "U_13"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_15"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_17"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "dumps", "title": "dumps", "to": "U_20"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_22"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_25"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "exploits", "title": "exploits", "to": "U_26"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "copies", "title": "copies", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_29"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "exfiltrates", "title": "exfiltrates", "to": "U_30"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_31"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_32"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_33"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_41"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_43"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_47"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_54"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_55"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_57"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "executes", "title": "executes", "to": "U_59"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "executes", "title": "executes", "to": "U_63"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "retrieves, copies", "title": "retrieves, copies", "to": "U_2"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "copies", "title": "copies", "to": "U_10"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "dumps_from, acquires_from", "title": "dumps_from, acquires_from", "to": "U_16"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "dumps, extracts, saves", "title": "dumps, extracts, saves", "to": "U_2"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "saves", "title": "saves", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "extracts, saves", "title": "extracts, saves", "to": "U_10"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "saves", "title": "saves", "to": "U_40"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "creates_from", "title": "creates_from", "to": "U_49"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "creates_from", "title": "creates_from", "to": "U_51"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "creates_from", "title": "creates_from", "to": "U_53"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "reads_from", "title": "reads_from", "to": "U_62"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_3", "label": "dumps", "title": "dumps", "to": "U_4"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_5", "label": "dumps", "title": "dumps", "to": "U_4"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_8", "label": "dumps", "title": "dumps", "to": "U_9"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_12", "label": "dumps", "title": "dumps", "to": "U_4"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_13", "label": "dumps", "title": "dumps", "to": "U_14"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_13", "label": "dumps", "title": "dumps", "to": "U_24"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_15", "label": "dumps, dumps", "title": "dumps, dumps", "to": "U_16"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_15", "label": "dumps", "title": "dumps", "to": "U_21"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_16", "label": "from", "title": "from", "to": "U_39"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_16", "label": "from", "title": "from", "to": "U_2"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_16", "label": "from", "title": "from", "to": "U_40"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_17", "label": "accesses", "title": "accesses", "to": "U_18"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_17", "label": "harvests", "title": "harvests", "to": "U_19"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_20", "label": "contains", "title": "contains", "to": "U_16"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_22", "label": "accesses", "title": "accesses", "to": "U_23"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_22", "label": "dumps, dumps", "title": "dumps, dumps", "to": "U_24"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_25", "label": "copies_from", "title": "copies_from", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_27", "label": "located_in", "title": "located_in", "to": "U_28"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_29", "label": "dumps", "title": "dumps", "to": "U_18"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_31", "label": "dumps", "title": "dumps", "to": "U_16"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_32", "label": "dumps", "title": "dumps", "to": "U_16"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_33", "label": "contains", "title": "contains", "to": "U_34"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_33", "label": "contains", "title": "contains", "to": "U_35"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_33", "label": "harvests", "title": "harvests", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_36", "label": "from", "title": "from", "to": "U_37"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_41", "label": "gathers", "title": "gathers", "to": "U_42"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_43", "label": "contains", "title": "contains", "to": "U_13"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_43", "label": "contains", "title": "contains", "to": "U_22"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_49", "label": "from", "title": "from", "to": "U_48"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_51", "label": "from", "title": "from", "to": "U_50"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_53", "label": "from", "title": "from", "to": "U_52"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_54", "label": "dumps", "title": "dumps", "to": "U_14"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_55", "label": "collects", "title": "collects", "to": "U_56"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_57", "label": "recovers", "title": "recovers", "to": "U_58"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_59", "label": "reads_from", "title": "reads_from", "to": "U_60"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_59", "label": "reads_from", "title": "reads_from", "to": "U_61"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_63", "label": "reads_from", "title": "reads_from", "to": "U_62"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.1,
+            "damping": 0.09,
+            "gravitationalConstant": -3000,
+            "springConstant": 0.04,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

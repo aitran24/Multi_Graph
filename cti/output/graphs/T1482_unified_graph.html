@@ -1,0 +1,553 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/css/tom-select.min.css" integrity="sha512-43fHB3GLgZfz8QXl1RPQ8O66oIgv3po9cJ5erMt1c4QISq9dYb195T3vr5ImnJPXuVroKcGBPXBFKETW8jrPNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/js/tom-select.complete.js" integrity="sha512-jeF9CfnvzDiw9G9xiksVjxR2lib44Gnovvkv+3CgCG6NXCD4gqlA5nDAVW5WjpA+i+/zKsUWV5xNEbW1X/HH0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+
+        
+
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 100%;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    
+        <style>
+            /* Reset CSS */
+            * { box-sizing: border-box; }
+            body, html { 
+                margin: 0; 
+                padding: 0; 
+                width: 100vw; 
+                height: 100vh; 
+                overflow: hidden; 
+                background-color: #222222; 
+            }
+            
+            /* Container chính */
+            .card {
+                position: relative;
+                width: 100% !important;
+                height: 100% !important;
+                border: none !important;
+                background: transparent !important;
+            }
+            
+            .card-body {
+                padding: 0 !important;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* Đồ thị */
+            #mynetwork { 
+                position: absolute; 
+                top: 0; 
+                left: 0; 
+                width: 100% !important; 
+                height: 100% !important; 
+                border: none !important; 
+                outline: none !important;
+                z-index: 1; /* Nằm dưới */
+            }
+
+            /* Menu chọn (Nổi lên trên) */
+            #select-menu {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                z-index: 9999; /* Luôn nằm trên cùng */
+                background: rgba(40, 40, 40, 0.8); /* Nền tối mờ */
+                padding: 10px;
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+                border: 1px solid #444;
+                width: auto !important; /* Ghi đè bootstrap */
+                max-width: 400px;
+            }
+            
+            /* Tinh chỉnh các phần tử bên trong menu cho đẹp */
+            .card-header { border: none !important; background: transparent !important; padding: 0 !important; }
+            .row { margin: 0 !important; display: flex; flex-direction: column; gap: 10px; }
+            .col-10, .col-2 { width: 100% !important; padding: 0 !important; max-width: none !important; flex: none !important;}
+            
+            /* Nút Reset */
+            .btn-primary {
+                width: 100%;
+                background-color: #ff6666 !important;
+                border-color: #ff6666 !important;
+                font-weight: bold;
+            }
+            .btn-primary:hover { background-color: #ff4444 !important; }
+            
+            /* TomSelect (Dropdown) */
+            .ts-control {
+                background-color: #333 !important;
+                color: white !important;
+                border: 1px solid #555 !important;
+            }
+            .ts-dropdown {
+                background-color: #333 !important;
+                color: white !important;
+                border: 1px solid #555 !important;
+            }
+            .ts-dropdown .option { color: white !important; }
+            .ts-dropdown .active { background-color: #555 !important; }
+            .item { color: white !important; }
+
+        </style>
+        </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="U_0">U_0</option>
+                                
+                                    <option value="U_1">U_1</option>
+                                
+                                    <option value="U_2">U_2</option>
+                                
+                                    <option value="U_3">U_3</option>
+                                
+                                    <option value="U_5">U_5</option>
+                                
+                                    <option value="U_6">U_6</option>
+                                
+                                    <option value="U_8">U_8</option>
+                                
+                                    <option value="U_9">U_9</option>
+                                
+                                    <option value="U_10">U_10</option>
+                                
+                                    <option value="U_11">U_11</option>
+                                
+                                    <option value="U_12">U_12</option>
+                                
+                                    <option value="U_13">U_13</option>
+                                
+                                    <option value="U_14">U_14</option>
+                                
+                                    <option value="U_15">U_15</option>
+                                
+                                    <option value="U_17">U_17</option>
+                                
+                                    <option value="U_18">U_18</option>
+                                
+                                    <option value="U_19">U_19</option>
+                                
+                                    <option value="U_20">U_20</option>
+                                
+                                    <option value="U_21">U_21</option>
+                                
+                                    <option value="U_23">U_23</option>
+                                
+                                    <option value="U_24">U_24</option>
+                                
+                                    <option value="U_27">U_27</option>
+                                
+                                    <option value="U_28">U_28</option>
+                                
+                                    <option value="U_29">U_29</option>
+                                
+                                    <option value="U_30">U_30</option>
+                                
+                                    <option value="U_31">U_31</option>
+                                
+                                    <option value="U_32">U_32</option>
+                                
+                                    <option value="U_33">U_33</option>
+                                
+                                    <option value="U_34">U_34</option>
+                                
+                                    <option value="U_35">U_35</option>
+                                
+                                    <option value="U_36">U_36</option>
+                                
+                                    <option value="U_37">U_37</option>
+                                
+                                    <option value="U_38">U_38</option>
+                                
+                                    <option value="U_40">U_40</option>
+                                
+                                    <option value="U_41">U_41</option>
+                                
+                                    <option value="U_42">U_42</option>
+                                
+                                    <option value="U_43">U_43</option>
+                                
+                                    <option value="U_44">U_44</option>
+                                
+                                    <option value="U_45">U_45</option>
+                                
+                                    <option value="U_46">U_46</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#ff6666", "font": {"color": "white"}, "id": "U_0", "label": "Attacker / Threat Group", "shape": "dot", "size": 54, "title": "\u003cb\u003eID:\u003c/b\u003e U_0\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Attacker\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 0\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eEmpire\u003cbr\u003eBlackByte\u003cbr\u003eBazar\u003cbr\u003eIcedID\u003cbr\u003ePikabot\u003cbr\u003eAttacker\u003cbr\u003eAkira\u003cbr\u003eChimera\u003cbr\u003eSocGholish\u003cbr\u003eLeviathan\u003cbr\u003eLotus Blossom\u003cbr\u003eEarth Lusca\u003cbr\u003eStorm-0501\u003cbr\u003eStorm-1811\u003cbr\u003eAPT29"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_1", "label": "Domain", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_1\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDomain"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_2", "label": "Active Directory", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_2\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eActive Directory"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_3", "label": "Process (Various)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_3\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eNltest.exe\u003cbr\u003enltest.exe"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_5", "label": "Windows Domain", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_5\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWindows Domain"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_6", "label": "AdFind.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_6\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eAdFind.exe"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_8", "label": "Rubeus.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_8\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eRubeus.exe"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_9", "label": "Compromised System", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_9\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCompromised System"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_10", "label": "AdFind.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_10\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eAdFind.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_11", "label": "MgBot", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_11\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMgBot"}, {"color": "#7be141", "font": {"color": "white"}, "id": "U_12", "label": "Domain Users", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_12\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e User\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDomain Users"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_13", "label": "nltest.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_13\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003enltest.exe"}, {"color": "#d279d2", "font": {"color": "white"}, "id": "U_14", "label": "Trusted Domains", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_14\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Network\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eTrusted Domains"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_15", "label": "QakBot", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_15\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eQakBot"}, {"color": "#d279d2", "font": {"color": "white"}, "id": "U_17", "label": "Domain Trusts", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_17\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Network\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDomain Trusts"}, {"color": "#d279d2", "font": {"color": "white"}, "id": "U_18", "label": "Domain Controllers", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_18\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Network\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDomain Controllers"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_19", "label": "Brute Ratel C4", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_19\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBrute Ratel C4"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_20", "label": "LDAP Service", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_20\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLDAP Service"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_21", "label": "BloodHound.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_21\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBloodHound.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_23", "label": "Latrodectus", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_23\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLatrodectus"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_24", "label": "cmd.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_24\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ecmd.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_27", "label": "BADHATCH", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_27\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBADHATCH"}, {"color": "#d279d2", "font": {"color": "white"}, "id": "U_28", "label": "Domain Trust Relationships", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_28\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Network\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDomain Trust Relationships"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_29", "label": "DUSTTRAP", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_29\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDUSTTRAP"}, {"color": "#d279d2", "font": {"color": "white"}, "id": "U_30", "label": "Active Directory", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_30\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Network\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eActive Directory"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_31", "label": "PoshC2", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_31\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePoshC2"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_32", "label": "PoshC2 Modules", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_32\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePoshC2 Modules"}, {"color": "#7be141", "font": {"color": "white"}, "id": "U_33", "label": "Domain Accounts", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_33\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e User\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDomain Accounts"}, {"color": "#d279d2", "font": {"color": "white"}, "id": "U_34", "label": "Domain Access", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_34\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Network\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDomain Access"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_35", "label": "Get-AcceptedDomain", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_35\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eGet-AcceptedDomain"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_36", "label": "Exchange Management Shell", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_36\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eExchange Management Shell"}, {"color": "#d279d2", "font": {"color": "white"}, "id": "U_37", "label": "Federated Domains", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_37\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Network\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eFederated Domains"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_38", "label": "Web Shell", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_38\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWeb Shell"}, {"color": "#d279d2", "font": {"color": "white"}, "id": "U_40", "label": "Trust Relationships", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_40\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Network\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eTrust Relationships"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_41", "label": "dsquery.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_41\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003edsquery.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_42", "label": "PowerSploit", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_42\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePowerSploit"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_43", "label": "Get-NetDomainTrust", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_43\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eGet-NetDomainTrust"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_44", "label": "Get-NetForestTrust", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_44\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eGet-NetForestTrust"}, {"color": "#d279d2", "font": {"color": "white"}, "id": "U_45", "label": "Forest Trusts", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_45\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Network\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eForest Trusts"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_46", "label": "TrickBot", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_46\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eTrickBot"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "enumerates_trusts_from", "title": "enumerates_trusts_from", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "enumerates", "title": "enumerates", "to": "U_2"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "executes, uses", "title": "executes, uses", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "gathers_information_from", "title": "gathers_information_from", "to": "U_5"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys, uses", "title": "uses/deploys, uses", "to": "U_6"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_8"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "profiles", "title": "profiles", "to": "U_9"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_10"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_11"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_13"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_15"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_19"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_21"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_23"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_29"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_31"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "enumerates", "title": "enumerates", "to": "U_33"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "enumerates", "title": "enumerates", "to": "U_34"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_38"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_41"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_42"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_46"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_3", "label": "retrieves", "title": "retrieves", "to": "U_14"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_3", "label": "obtains_information_from", "title": "obtains_information_from", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_3", "label": "enumerates_trusts_from", "title": "enumerates_trusts_from", "to": "U_2"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_3", "label": "identifies", "title": "identifies", "to": "U_40"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_3", "label": "gathers_info_on", "title": "gathers_info_on", "to": "U_17"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_6", "label": "discovers", "title": "discovers", "to": "U_37"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_6", "label": "gathers_information_from, enumerates_trusts_from", "title": "gathers_information_from, enumerates_trusts_from", "to": "U_2"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_8", "label": "gathers_information_from", "title": "gathers_information_from", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_10", "label": "queries", "title": "queries", "to": "U_2"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_11", "label": "collects_information_from", "title": "collects_information_from", "to": "U_12"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_13", "label": "enumerates", "title": "enumerates", "to": "U_14"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_13", "label": "obtains_information_from", "title": "obtains_information_from", "to": "U_18"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_13", "label": "discovers, discovers", "title": "discovers, discovers", "to": "U_17"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_13", "label": "discovers", "title": "discovers", "to": "U_28"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_15", "label": "executes", "title": "executes", "to": "U_13"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_19", "label": "sends_queries_to", "title": "sends_queries_to", "to": "U_20"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_19", "label": "uses", "title": "uses", "to": "U_13"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_20", "label": "discovers", "title": "discovers", "to": "U_17"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_21", "label": "maps", "title": "maps", "to": "U_17"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_23", "label": "executes", "title": "executes", "to": "U_24"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_24", "label": "executes", "title": "executes", "to": "U_13"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_27", "label": "uses", "title": "uses", "to": "U_13"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_29", "label": "identifies_info_from", "title": "identifies_info_from", "to": "U_30"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_31", "label": "contains", "title": "contains", "to": "U_32"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_32", "label": "enumerates", "title": "enumerates", "to": "U_17"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_36", "label": "executes", "title": "executes", "to": "U_35"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_38", "label": "executes", "title": "executes", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_41", "label": "gathers_info_on", "title": "gathers_info_on", "to": "U_17"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_42", "label": "contains", "title": "contains", "to": "U_43"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_42", "label": "contains", "title": "contains", "to": "U_44"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_43", "label": "enumerates", "title": "enumerates", "to": "U_17"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_44", "label": "enumerates", "title": "enumerates", "to": "U_45"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_46", "label": "utilizes", "title": "utilizes", "to": "U_3"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.1,
+            "damping": 0.09,
+            "gravitationalConstant": -3000,
+            "springConstant": 0.04,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

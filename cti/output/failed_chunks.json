@@ -1,0 +1,16 @@
+{
+    "T1112": [
+        [
+            "[IPsec Helper](https://attack.mitre.org/software/S1132) can make arbitrary changes to registry keys based on provided input.(Citation: SentinelOne Agrius 2021)",
+            "[Lokibot](https://attack.mitre.org/software/S0447) has modified the Registry as part of its UAC bypass process.(Citation: Talos Lokibot Jan 2021) ",
+            "[ZxShell](https://attack.mitre.org/software/S0412) can create Registry entries to enable services to run.(Citation: Talos ZxShell Oct 2014)",
+            "[KONNI](https://attack.mitre.org/software/S0356) has modified registry keys of ComSysApp, Svchost, and xmlProv on the machine to gain persistence.(Citation: Medium KONNI Jan 2020)(Citation: Malwarebytes Konni Aug 2021) ",
+            "[Embargo](https://attack.mitre.org/software/S1247) has modified and deleted Registry keys to add services, and to disable Security Solutions such as Windows Defender.(Citation: ESET Embargo Ransomware October 2024)",
+            "[Wizard Spider](https://attack.mitre.org/groups/G0102) has modified the Registry key <code>HKLM\\System\\CurrentControlSet\\Control\\SecurityProviders\\WDigest</code> by setting the <code>UseLogonCredential</code> registry value to <code>1</code> in order to force credentials to be stored in clear text in memory. [Wizard Spider](https://attack.mitre.org/groups/G0102) has also modified the WDigest registry key to allow plaintext credentials to be cached in memory.(Citation: CrowdStrike Grim Spider May 2019)(Citation: Mandiant FIN12 Oct 2021)",
+            "[APT32](https://attack.mitre.org/groups/G0050)'s backdoor has modified the Windows Registry to store the backdoor's configuration. (Citation: ESET OceanLotus Mar 2019)\t",
+            "[Aquatic Panda](https://attack.mitre.org/groups/G0143) modified the victim registry to enable the `RestrictedAdmin` mode feature, allowing for pass the hash behaviors to function via RDP.(Citation: Crowdstrike HuntReport 2022)",
+            "[Pysa](https://attack.mitre.org/software/S0583) has modified the registry key “SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System” and added the ransom note.(Citation: CERT-FR PYSA April 2020) ",
+            "During [Operation Honeybee](https://attack.mitre.org/campaigns/C0006), the threat actors used batch files that modified registry keys.(Citation: McAfee Honeybee)"
+        ]
+    ]
+}

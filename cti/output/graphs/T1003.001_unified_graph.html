@@ -1,0 +1,671 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/css/tom-select.min.css" integrity="sha512-43fHB3GLgZfz8QXl1RPQ8O66oIgv3po9cJ5erMt1c4QISq9dYb195T3vr5ImnJPXuVroKcGBPXBFKETW8jrPNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/js/tom-select.complete.js" integrity="sha512-jeF9CfnvzDiw9G9xiksVjxR2lib44Gnovvkv+3CgCG6NXCD4gqlA5nDAVW5WjpA+i+/zKsUWV5xNEbW1X/HH0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+
+        
+
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 100%;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    
+        <style>
+            /* Reset CSS */
+            * { box-sizing: border-box; }
+            body, html { 
+                margin: 0; 
+                padding: 0; 
+                width: 100vw; 
+                height: 100vh; 
+                overflow: hidden; 
+                background-color: #222222; 
+            }
+            
+            /* Container chính */
+            .card {
+                position: relative;
+                width: 100% !important;
+                height: 100% !important;
+                border: none !important;
+                background: transparent !important;
+            }
+            
+            .card-body {
+                padding: 0 !important;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* Đồ thị */
+            #mynetwork { 
+                position: absolute; 
+                top: 0; 
+                left: 0; 
+                width: 100% !important; 
+                height: 100% !important; 
+                border: none !important; 
+                outline: none !important;
+                z-index: 1; /* Nằm dưới */
+            }
+
+            /* Menu chọn (Nổi lên trên) */
+            #select-menu {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                z-index: 9999; /* Luôn nằm trên cùng */
+                background: rgba(40, 40, 40, 0.8); /* Nền tối mờ */
+                padding: 10px;
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+                border: 1px solid #444;
+                width: auto !important; /* Ghi đè bootstrap */
+                max-width: 400px;
+            }
+            
+            /* Tinh chỉnh các phần tử bên trong menu cho đẹp */
+            .card-header { border: none !important; background: transparent !important; padding: 0 !important; }
+            .row { margin: 0 !important; display: flex; flex-direction: column; gap: 10px; }
+            .col-10, .col-2 { width: 100% !important; padding: 0 !important; max-width: none !important; flex: none !important;}
+            
+            /* Nút Reset */
+            .btn-primary {
+                width: 100%;
+                background-color: #ff6666 !important;
+                border-color: #ff6666 !important;
+                font-weight: bold;
+            }
+            .btn-primary:hover { background-color: #ff4444 !important; }
+            
+            /* TomSelect (Dropdown) */
+            .ts-control {
+                background-color: #333 !important;
+                color: white !important;
+                border: 1px solid #555 !important;
+            }
+            .ts-dropdown {
+                background-color: #333 !important;
+                color: white !important;
+                border: 1px solid #555 !important;
+            }
+            .ts-dropdown .option { color: white !important; }
+            .ts-dropdown .active { background-color: #555 !important; }
+            .item { color: white !important; }
+
+        </style>
+        </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="U_0">U_0</option>
+                                
+                                    <option value="U_1">U_1</option>
+                                
+                                    <option value="U_2">U_2</option>
+                                
+                                    <option value="U_3">U_3</option>
+                                
+                                    <option value="U_5">U_5</option>
+                                
+                                    <option value="U_7">U_7</option>
+                                
+                                    <option value="U_8">U_8</option>
+                                
+                                    <option value="U_9">U_9</option>
+                                
+                                    <option value="U_10">U_10</option>
+                                
+                                    <option value="U_11">U_11</option>
+                                
+                                    <option value="U_12">U_12</option>
+                                
+                                    <option value="U_13">U_13</option>
+                                
+                                    <option value="U_14">U_14</option>
+                                
+                                    <option value="U_15">U_15</option>
+                                
+                                    <option value="U_16">U_16</option>
+                                
+                                    <option value="U_17">U_17</option>
+                                
+                                    <option value="U_18">U_18</option>
+                                
+                                    <option value="U_20">U_20</option>
+                                
+                                    <option value="U_21">U_21</option>
+                                
+                                    <option value="U_22">U_22</option>
+                                
+                                    <option value="U_23">U_23</option>
+                                
+                                    <option value="U_24">U_24</option>
+                                
+                                    <option value="U_25">U_25</option>
+                                
+                                    <option value="U_26">U_26</option>
+                                
+                                    <option value="U_27">U_27</option>
+                                
+                                    <option value="U_28">U_28</option>
+                                
+                                    <option value="U_29">U_29</option>
+                                
+                                    <option value="U_30">U_30</option>
+                                
+                                    <option value="U_32">U_32</option>
+                                
+                                    <option value="U_33">U_33</option>
+                                
+                                    <option value="U_34">U_34</option>
+                                
+                                    <option value="U_35">U_35</option>
+                                
+                                    <option value="U_36">U_36</option>
+                                
+                                    <option value="U_37">U_37</option>
+                                
+                                    <option value="U_38">U_38</option>
+                                
+                                    <option value="U_39">U_39</option>
+                                
+                                    <option value="U_40">U_40</option>
+                                
+                                    <option value="U_41">U_41</option>
+                                
+                                    <option value="U_42">U_42</option>
+                                
+                                    <option value="U_43">U_43</option>
+                                
+                                    <option value="U_44">U_44</option>
+                                
+                                    <option value="U_46">U_46</option>
+                                
+                                    <option value="U_47">U_47</option>
+                                
+                                    <option value="U_48">U_48</option>
+                                
+                                    <option value="U_50">U_50</option>
+                                
+                                    <option value="U_53">U_53</option>
+                                
+                                    <option value="U_54">U_54</option>
+                                
+                                    <option value="U_55">U_55</option>
+                                
+                                    <option value="U_56">U_56</option>
+                                
+                                    <option value="U_57">U_57</option>
+                                
+                                    <option value="U_58">U_58</option>
+                                
+                                    <option value="U_61">U_61</option>
+                                
+                                    <option value="U_62">U_62</option>
+                                
+                                    <option value="U_63">U_63</option>
+                                
+                                    <option value="U_64">U_64</option>
+                                
+                                    <option value="U_65">U_65</option>
+                                
+                                    <option value="U_66">U_66</option>
+                                
+                                    <option value="U_67">U_67</option>
+                                
+                                    <option value="U_68">U_68</option>
+                                
+                                    <option value="U_71">U_71</option>
+                                
+                                    <option value="U_72">U_72</option>
+                                
+                                    <option value="U_73">U_73</option>
+                                
+                                    <option value="U_74">U_74</option>
+                                
+                                    <option value="U_75">U_75</option>
+                                
+                                    <option value="U_76">U_76</option>
+                                
+                                    <option value="U_77">U_77</option>
+                                
+                                    <option value="U_79">U_79</option>
+                                
+                                    <option value="U_80">U_80</option>
+                                
+                                    <option value="U_81">U_81</option>
+                                
+                                    <option value="U_83">U_83</option>
+                                
+                                    <option value="U_84">U_84</option>
+                                
+                                    <option value="U_86">U_86</option>
+                                
+                                    <option value="U_87">U_87</option>
+                                
+                                    <option value="U_89">U_89</option>
+                                
+                                    <option value="U_90">U_90</option>
+                                
+                                    <option value="U_91">U_91</option>
+                                
+                                    <option value="U_93">U_93</option>
+                                
+                                    <option value="U_94">U_94</option>
+                                
+                                    <option value="U_96">U_96</option>
+                                
+                                    <option value="U_97">U_97</option>
+                                
+                                    <option value="U_98">U_98</option>
+                                
+                                    <option value="U_99">U_99</option>
+                                
+                                    <option value="U_100">U_100</option>
+                                
+                                    <option value="U_101">U_101</option>
+                                
+                                    <option value="U_102">U_102</option>
+                                
+                                    <option value="U_103">U_103</option>
+                                
+                                    <option value="U_104">U_104</option>
+                                
+                                    <option value="U_105">U_105</option>
+                                
+                                    <option value="U_106">U_106</option>
+                                
+                                    <option value="U_107">U_107</option>
+                                
+                                    <option value="U_108">U_108</option>
+                                
+                                    <option value="U_109">U_109</option>
+                                
+                                    <option value="U_110">U_110</option>
+                                
+                                    <option value="U_111">U_111</option>
+                                
+                                    <option value="U_112">U_112</option>
+                                
+                                    <option value="U_114">U_114</option>
+                                
+                                    <option value="U_115">U_115</option>
+                                
+                                    <option value="U_116">U_116</option>
+                                
+                                    <option value="U_117">U_117</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#ff6666", "font": {"color": "white"}, "id": "U_0", "label": "Attacker / Threat Group", "shape": "dot", "size": 60, "title": "\u003cb\u003eID:\u003c/b\u003e U_0\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Attacker\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 0\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eIndrik Spider\u003cbr\u003eThreat Actor\u003cbr\u003eOilRig\u003cbr\u003eCleaver\u003cbr\u003eLeafminer\u003cbr\u003eThreat Group-3390\u003cbr\u003eAttacker\u003cbr\u003eAPT1\u003cbr\u003eLeviathan\u003cbr\u003eFIN8\u003cbr\u003eHAFNIUM\u003cbr\u003eBlue Mockingbird\u003cbr\u003eVolt Typhoon\u003cbr\u003eWhitefly\u003cbr\u003eAPT33"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_1", "label": "Cobalt Strike", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_1\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCobalt Strike"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_2", "label": "File (Generic)", "shape": "dot", "size": 26, "title": "\u003cb\u003eID:\u003c/b\u003e U_2\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eprocdump\u003cbr\u003eProcdump\u003cbr\u003eProcDump"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_3", "label": "File (Generic)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_3\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCredentials\u003cbr\u003ecredentials"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_5", "label": "Process (Various)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_5\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMemory\u003cbr\u003ememory"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_7", "label": "Mimikatz", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_7\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMimikatz"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_8", "label": "Outlook Web Access", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_8\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eOutlook Web Access"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_9", "label": "Windows Credential Editor", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_9\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWindows Credential Editor"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_10", "label": "File (Generic)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_10\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLaZagne\u003cbr\u003eLazagne"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_11", "label": "Login and password information", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_11\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLogin and password information"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_12", "label": "Wrapikatz", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_12\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWrapikatz"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_13", "label": "Domain Controller", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_13\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDomain Controller"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_14", "label": "SILENTTRINITY", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_14\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSILENTTRINITY"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_15", "label": "LSASS", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_15\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLSASS"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_16", "label": "MiniDumpWriteDump Win32 API", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_16\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMiniDumpWriteDump Win32 API"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_17", "label": "Memory Dump", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_17\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMemory Dump"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_18", "label": "Task Manager", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_18\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eTask Manager"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_20", "label": "LSASS Memory Dump", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_20\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLSASS Memory Dump"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_21", "label": "WCE", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_21\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWCE"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_22", "label": "File (Generic)", "shape": "dot", "size": 26, "title": "\u003cb\u003eID:\u003c/b\u003e U_22\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003epassword hashes\u003cbr\u003ePassword hashes\u003cbr\u003ePassword Hashes"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_23", "label": "Invoke-Mimikatz", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_23\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eInvoke-Mimikatz"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_24", "label": "Windows Credentials Editor (WCE)", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_24\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWindows Credentials Editor (WCE)"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_25", "label": "File (Generic)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_25\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eAccount and password information\u003cbr\u003eAccount and Password Information"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_26", "label": "Process (Various)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_26\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLSASS process\u003cbr\u003elsass process"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_27", "label": "LSASS process memory", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_27\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLSASS process memory"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_28", "label": "Process (Various)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_28\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLSASS memory\u003cbr\u003eLSASS Memory"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_29", "label": "Lslsass", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_29\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLslsass"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_30", "label": "Lizar", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_30\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLizar"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_32", "label": "Hashed credentials", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_32\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eHashed credentials"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_33", "label": "LSASS process memory space", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_33\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLSASS process memory space"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_34", "label": "Memory dumps", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_34\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMemory dumps"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_35", "label": "LSASS process memory", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_35\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLSASS process memory"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_36", "label": "Process (Various)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_36\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLSASS.exe\u003cbr\u003elsass.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_37", "label": "Bad Rabbit", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_37\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBad Rabbit"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_38", "label": "Windows Credential Dumper", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_38\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWindows Credential Dumper"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_39", "label": "lssas.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_39\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003elssas.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_40", "label": "CozyCar", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_40\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCozyCar"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_41", "label": "Stored Credentials", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_41\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eStored Credentials"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_42", "label": "Impacket", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_42\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eImpacket"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_43", "label": "SecretsDump", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_43\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSecretsDump"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_44", "label": "Mimikatz module", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_44\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMimikatz module"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_46", "label": "Modified Mimikatz", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_46\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eModified Mimikatz"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_47", "label": "PowerShell-based Mimikatz", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_47\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePowerShell-based Mimikatz"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_48", "label": "NotPetya", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_48\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eNotPetya"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_50", "label": "Pupy", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_50\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePupy"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_53", "label": "powershell.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_53\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003epowershell.exe"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_54", "label": "taskmgr.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_54\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003etaskmgr.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_55", "label": "NTLM password hashes", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_55\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eNTLM password hashes"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_56", "label": "Mimikatz.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_56\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMimikatz.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_57", "label": "RDP mapped drive", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_57\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eRDP mapped drive"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_58", "label": "Spawned Job", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_58\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSpawned Job"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_61", "label": "PoshC2", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_61\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePoshC2"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_62", "label": "wce.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_62\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ewce.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_63", "label": "File (*.exe)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_63\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eprocdump.exe\u003cbr\u003eProcDump.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_64", "label": "domain credentials", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_64\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003edomain credentials"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_65", "label": "comsvcs.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_65\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ecomsvcs.dll"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_66", "label": "Microsoft Active Directory Domain Controller", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_66\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMicrosoft Active Directory Domain Controller"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_67", "label": "hashes of credentials", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_67\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ehashes of credentials"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_68", "label": "voStro.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_68\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003evoStro.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_71", "label": "MiniDump", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_71\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMiniDump"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_72", "label": "Process Memory Dump", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_72\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eProcess Memory Dump"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_73", "label": "Cleartext Credentials", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_73\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCleartext Credentials"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_74", "label": "Emotet", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_74\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eEmotet"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_75", "label": "Keyloggers", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_75\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eKeyloggers"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_76", "label": "prodump", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_76\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eprodump"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_77", "label": "Net Crawler", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_77\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eNet Crawler"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_79", "label": "Cached Credentials", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_79\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCached Credentials"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_80", "label": "Farse6.1", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_80\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eFarse6.1"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_81", "label": "Qilin", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_81\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eQilin"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_83", "label": "Legitimate Credentials", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_83\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLegitimate Credentials"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_84", "label": "Pysa", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_84\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePysa"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_86", "label": "plainpwd tool", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_86\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eplainpwd tool"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_87", "label": "System Memory", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_87\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSystem Memory"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_89", "label": "procdump64.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_89\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eprocdump64.exe"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_90", "label": "Credential Dumping Tool", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_90\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCredential Dumping Tool"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_91", "label": "hashdump", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_91\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ehashdump"}, {"color": "#7be141", "font": {"color": "white"}, "id": "U_93", "label": "User Accounts", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_93\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e User\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eUser Accounts"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_94", "label": "Empire", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_94\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eEmpire"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_96", "label": "Daserf", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_96\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDaserf"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_97", "label": "Mafalda", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_97\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMafalda"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_98", "label": "Custom Password Retrieval Tools", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_98\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCustom Password Retrieval Tools"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_99", "label": "MiniDump function", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_99\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMiniDump function"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_100", "label": "Sliver", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_100\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSliver"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_101", "label": "procdump command", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_101\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eprocdump command"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_102", "label": "Olympic Destroyer", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_102\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eOlympic Destroyer"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_103", "label": "Malware Module", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_103\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalware Module"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_104", "label": "PsExec.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_104\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePsExec.exe"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_105", "label": "Windows Management Instrumentation", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_105\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWindows Management Instrumentation"}, {"color": "#d279d2", "font": {"color": "white"}, "id": "U_106", "label": "Network", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_106\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Network\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eNetwork"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_107", "label": "Windows Task Manager", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_107\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWindows Task Manager"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_108", "label": "passwords", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_108\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003epasswords"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_109", "label": "Okrum", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_109\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eOkrum"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_110", "label": "MimikatzLite", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_110\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMimikatzLite"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_111", "label": "PowerSploit", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_111\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePowerSploit"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_112", "label": "Exfiltration modules", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_112\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eExfiltration modules"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_114", "label": "SecHack", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_114\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSecHack"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_115", "label": "GreyEnergy", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_115\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eGreyEnergy"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_116", "label": "Windows credentials", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_116\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWindows credentials"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_117", "label": "Victim Machine", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_117\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 4\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eVictim Machine"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses, uses/deploys", "title": "uses, uses/deploys", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses, deploys", "title": "uses, deploys", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_9"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_10"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_12"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_14"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_18"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_21"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_23"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_24"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_29"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_30"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "accesses", "title": "accesses", "to": "U_32"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_37"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_38"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_40"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_42"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_46"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_47"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_48"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_50"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_54"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_56"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_61"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses, uses/deploys", "title": "uses, uses/deploys", "to": "U_62"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_63"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_65"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "steals", "title": "steals", "to": "U_64"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_68"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_71"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "searches_in", "title": "searches_in", "to": "U_72"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_74"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_75"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_76"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_77"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_80"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_81"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_83"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_84"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_86"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_89"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_90"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_91"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "authenticates_to", "title": "authenticates_to", "to": "U_93"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_94"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_96"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_97"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "deploys", "title": "deploys", "to": "U_98"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_99"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_100"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_102"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_107"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_109"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_111"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_114"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_115"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_2"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "creates", "title": "creates", "to": "U_20"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_22"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "dumps_credentials_from", "title": "dumps_credentials_from", "to": "U_28"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "dumps_memory_of", "title": "dumps_memory_of", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "uses", "title": "uses", "to": "U_2"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "spawns", "title": "spawns", "to": "U_58"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_2", "label": "dumps, dumps", "title": "dumps, dumps", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_2", "label": "reads_from, dumps_credentials_from", "title": "reads_from, dumps_credentials_from", "to": "U_5"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_2", "label": "dumps", "title": "dumps", "to": "U_22"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_2", "label": "dumps", "title": "dumps", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_2", "label": "obtains", "title": "obtains", "to": "U_34"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_3", "label": "from", "title": "from", "to": "U_13"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_3", "label": "from", "title": "from", "to": "U_28"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_3", "label": "from", "title": "from", "to": "U_34"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "steals_from", "title": "steals_from", "to": "U_8"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "retrieves", "title": "retrieves", "to": "U_11"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "parses", "title": "parses", "to": "U_34"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "dumps_memory_from", "title": "dumps_memory_from", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "harvests_credentials_from", "title": "harvests_credentials_from", "to": "U_39"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "captures", "title": "captures", "to": "U_83"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "creates", "title": "creates", "to": "U_25"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "dumps_credentials_from, reads_from", "title": "dumps_credentials_from, reads_from", "to": "U_5"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "steals, dumps, retrieves, obtains, extracts, harvests, captures, gathers, harvests, gathers_from_memory, gathers, steals, harvests", "title": "steals, dumps, retrieves, obtains, extracts, harvests, captures, gathers, harvests, gathers_from_memory, gathers, steals, harvests", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "harvests", "title": "harvests", "to": "U_41"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "extracts", "title": "extracts", "to": "U_79"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "dumps_credentials_from, dumps_credentials_from", "title": "dumps_credentials_from, dumps_credentials_from", "to": "U_28"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "dumps_memory_of", "title": "dumps_memory_of", "to": "U_15"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_9", "label": "dumps_credentials_from", "title": "dumps_credentials_from", "to": "U_5"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_9", "label": "dumps, steals", "title": "dumps, steals", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_9", "label": "extracts", "title": "extracts", "to": "U_79"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_10", "label": "retrieves", "title": "retrieves", "to": "U_11"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_10", "label": "accesses", "title": "accesses", "to": "U_5"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_10", "label": "dumps", "title": "dumps", "to": "U_25"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_10", "label": "dumps_memory_of", "title": "dumps_memory_of", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_10", "label": "obtains_from", "title": "obtains_from", "to": "U_108"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_10", "label": "dumps", "title": "dumps", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_12", "label": "dumps_from", "title": "dumps_from", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_14", "label": "calls", "title": "calls", "to": "U_16"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_16", "label": "accesses", "title": "accesses", "to": "U_15"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_16", "label": "creates", "title": "creates", "to": "U_17"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_18", "label": "writes", "title": "writes", "to": "U_20"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_18", "label": "dumps_memory_of", "title": "dumps_memory_of", "to": "U_15"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_21", "label": "dumps", "title": "dumps", "to": "U_22"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_22", "label": "from", "title": "from", "to": "U_26"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_23", "label": "harvests", "title": "harvests", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_24", "label": "harvests", "title": "harvests", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_27", "label": "from", "title": "from", "to": "U_26"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_29", "label": "dumps", "title": "dumps", "to": "U_22"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_30", "label": "runs", "title": "runs", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_32", "label": "from", "title": "from", "to": "U_33"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_34", "label": "from", "title": "from", "to": "U_35"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_36", "label": "dumps_credentials_from", "title": "dumps_credentials_from", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_37", "label": "uses", "title": "uses", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_38", "label": "harvests", "title": "harvests", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_40", "label": "executes", "title": "executes", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_42", "label": "contains", "title": "contains", "to": "U_43"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_42", "label": "contains", "title": "contains", "to": "U_44"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_43", "label": "dumps", "title": "dumps", "to": "U_25"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_44", "label": "collects_from", "title": "collects_from", "to": "U_116"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_44", "label": "creates", "title": "creates", "to": "U_20"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_44", "label": "dumps", "title": "dumps", "to": "U_25"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_44", "label": "dumps_memory_of", "title": "dumps_memory_of", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_46", "label": "dumps, gathers", "title": "dumps, gathers", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_47", "label": "dumps", "title": "dumps", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_48", "label": "contains", "title": "contains", "to": "U_46"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_50", "label": "uses", "title": "uses", "to": "U_53"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_53", "label": "executes", "title": "executes", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_53", "label": "executes", "title": "executes", "to": "U_10"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_54", "label": "accesses_memory_of, dumps_memory_of", "title": "accesses_memory_of, dumps_memory_of", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_54", "label": "obtains", "title": "obtains", "to": "U_55"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_56", "label": "hosted_on", "title": "hosted_on", "to": "U_57"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_56", "label": "dumps_memory_of", "title": "dumps_memory_of", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_56", "label": "dumps_credentials_from", "title": "dumps_credentials_from", "to": "U_66"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_56", "label": "harvests, dumps", "title": "harvests, dumps", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_58", "label": "dumps", "title": "dumps", "to": "U_22"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_58", "label": "injects_into", "title": "injects_into", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_61", "label": "contains", "title": "contains", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_62", "label": "dumps", "title": "dumps", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_63", "label": "dumps_memory_of", "title": "dumps_memory_of", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_63", "label": "obtains", "title": "obtains", "to": "U_67"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_63", "label": "dumps, gathers", "title": "dumps, gathers", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_63", "label": "dumps_memory_of", "title": "dumps_memory_of", "to": "U_15"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_65", "label": "dumps_memory_of", "title": "dumps_memory_of", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_65", "label": "dumps_credentials_from", "title": "dumps_credentials_from", "to": "U_87"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_68", "label": "steals", "title": "steals", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_71", "label": "creates", "title": "creates", "to": "U_72"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_72", "label": "contains", "title": "contains", "to": "U_73"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_74", "label": "executes", "title": "executes", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_75", "label": "dumps", "title": "dumps", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_76", "label": "dumps_from", "title": "dumps_from", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_76", "label": "obtains", "title": "obtains", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_77", "label": "uses", "title": "uses", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_77", "label": "uses", "title": "uses", "to": "U_9"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_80", "label": "extracts_from", "title": "extracts_from", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_80", "label": "obtains", "title": "obtains", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_80", "label": "based_on", "title": "based_on", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_81", "label": "uses", "title": "uses", "to": "U_44"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_84", "label": "uses", "title": "uses", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_86", "label": "dumps_credentials_from", "title": "dumps_credentials_from", "to": "U_87"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_86", "label": "is_variant_of", "title": "is_variant_of", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_89", "label": "dumps_credentials_from", "title": "dumps_credentials_from", "to": "U_28"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_90", "label": "injects_into", "title": "injects_into", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_91", "label": "dumps_credentials_from", "title": "dumps_credentials_from", "to": "U_5"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_94", "label": "contains", "title": "contains", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_96", "label": "uses", "title": "uses", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_96", "label": "uses", "title": "uses", "to": "U_9"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_97", "label": "reads_from", "title": "reads_from", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_97", "label": "dumps", "title": "dumps", "to": "U_22"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_99", "label": "dumps_memory_of", "title": "dumps_memory_of", "to": "U_15"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_100", "label": "contains", "title": "contains", "to": "U_101"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_101", "label": "harvests", "title": "harvests", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_101", "label": "retrieves_memory_from", "title": "retrieves_memory_from", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_102", "label": "contains", "title": "contains", "to": "U_103"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_102", "label": "uses", "title": "uses", "to": "U_104"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_102", "label": "uses", "title": "uses", "to": "U_105"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_102", "label": "propagates_on", "title": "propagates_on", "to": "U_106"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_103", "label": "reads_from", "title": "reads_from", "to": "U_15"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_103", "label": "obtains", "title": "obtains", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_107", "label": "dumps_memory_of", "title": "dumps_memory_of", "to": "U_15"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_108", "label": "location", "title": "location", "to": "U_5"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_109", "label": "uses", "title": "uses", "to": "U_110"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_110", "label": "dumps", "title": "dumps", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_111", "label": "contains", "title": "contains", "to": "U_112"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_112", "label": "uses", "title": "uses", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_114", "label": "harvests", "title": "harvests", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_115", "label": "contains", "title": "contains", "to": "U_44"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_116", "label": "location", "title": "location", "to": "U_117"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.1,
+            "damping": 0.09,
+            "gravitationalConstant": -3000,
+            "springConstant": 0.04,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

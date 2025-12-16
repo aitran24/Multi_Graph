@@ -1,0 +1,816 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/css/tom-select.min.css" integrity="sha512-43fHB3GLgZfz8QXl1RPQ8O66oIgv3po9cJ5erMt1c4QISq9dYb195T3vr5ImnJPXuVroKcGBPXBFKETW8jrPNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/js/tom-select.complete.js" integrity="sha512-jeF9CfnvzDiw9G9xiksVjxR2lib44Gnovvkv+3CgCG6NXCD4gqlA5nDAVW5WjpA+i+/zKsUWV5xNEbW1X/HH0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+
+        
+
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 100%;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 100%;
+                 height: 100%;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+
+             
+        </style>
+    
+        <style>
+            /* Reset CSS */
+            * { box-sizing: border-box; }
+            body, html { 
+                margin: 0; 
+                padding: 0; 
+                width: 100vw; 
+                height: 100vh; 
+                overflow: hidden; 
+                background-color: #222222; 
+            }
+            
+            /* Container chính */
+            .card {
+                position: relative;
+                width: 100% !important;
+                height: 100% !important;
+                border: none !important;
+                background: transparent !important;
+            }
+            
+            .card-body {
+                padding: 0 !important;
+                width: 100%;
+                height: 100%;
+            }
+
+            /* Đồ thị */
+            #mynetwork { 
+                position: absolute; 
+                top: 0; 
+                left: 0; 
+                width: 100% !important; 
+                height: 100% !important; 
+                border: none !important; 
+                outline: none !important;
+                z-index: 1; /* Nằm dưới */
+            }
+
+            /* Menu chọn (Nổi lên trên) */
+            #select-menu {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                z-index: 9999; /* Luôn nằm trên cùng */
+                background: rgba(40, 40, 40, 0.8); /* Nền tối mờ */
+                padding: 10px;
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+                border: 1px solid #444;
+                width: auto !important; /* Ghi đè bootstrap */
+                max-width: 400px;
+            }
+            
+            /* Tinh chỉnh các phần tử bên trong menu cho đẹp */
+            .card-header { border: none !important; background: transparent !important; padding: 0 !important; }
+            .row { margin: 0 !important; display: flex; flex-direction: column; gap: 10px; }
+            .col-10, .col-2 { width: 100% !important; padding: 0 !important; max-width: none !important; flex: none !important;}
+            
+            /* Nút Reset */
+            .btn-primary {
+                width: 100%;
+                background-color: #ff6666 !important;
+                border-color: #ff6666 !important;
+                font-weight: bold;
+            }
+            .btn-primary:hover { background-color: #ff4444 !important; }
+            
+            /* TomSelect (Dropdown) */
+            .ts-control {
+                background-color: #333 !important;
+                color: white !important;
+                border: 1px solid #555 !important;
+            }
+            .ts-dropdown {
+                background-color: #333 !important;
+                color: white !important;
+                border: 1px solid #555 !important;
+            }
+            .ts-dropdown .option { color: white !important; }
+            .ts-dropdown .active { background-color: #555 !important; }
+            .item { color: white !important; }
+
+        </style>
+        </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="U_0">U_0</option>
+                                
+                                    <option value="U_1">U_1</option>
+                                
+                                    <option value="U_2">U_2</option>
+                                
+                                    <option value="U_3">U_3</option>
+                                
+                                    <option value="U_4">U_4</option>
+                                
+                                    <option value="U_5">U_5</option>
+                                
+                                    <option value="U_6">U_6</option>
+                                
+                                    <option value="U_7">U_7</option>
+                                
+                                    <option value="U_9">U_9</option>
+                                
+                                    <option value="U_11">U_11</option>
+                                
+                                    <option value="U_12">U_12</option>
+                                
+                                    <option value="U_13">U_13</option>
+                                
+                                    <option value="U_14">U_14</option>
+                                
+                                    <option value="U_15">U_15</option>
+                                
+                                    <option value="U_16">U_16</option>
+                                
+                                    <option value="U_17">U_17</option>
+                                
+                                    <option value="U_19">U_19</option>
+                                
+                                    <option value="U_20">U_20</option>
+                                
+                                    <option value="U_21">U_21</option>
+                                
+                                    <option value="U_22">U_22</option>
+                                
+                                    <option value="U_23">U_23</option>
+                                
+                                    <option value="U_24">U_24</option>
+                                
+                                    <option value="U_25">U_25</option>
+                                
+                                    <option value="U_26">U_26</option>
+                                
+                                    <option value="U_27">U_27</option>
+                                
+                                    <option value="U_28">U_28</option>
+                                
+                                    <option value="U_29">U_29</option>
+                                
+                                    <option value="U_30">U_30</option>
+                                
+                                    <option value="U_31">U_31</option>
+                                
+                                    <option value="U_32">U_32</option>
+                                
+                                    <option value="U_33">U_33</option>
+                                
+                                    <option value="U_34">U_34</option>
+                                
+                                    <option value="U_35">U_35</option>
+                                
+                                    <option value="U_36">U_36</option>
+                                
+                                    <option value="U_37">U_37</option>
+                                
+                                    <option value="U_38">U_38</option>
+                                
+                                    <option value="U_39">U_39</option>
+                                
+                                    <option value="U_40">U_40</option>
+                                
+                                    <option value="U_41">U_41</option>
+                                
+                                    <option value="U_42">U_42</option>
+                                
+                                    <option value="U_43">U_43</option>
+                                
+                                    <option value="U_45">U_45</option>
+                                
+                                    <option value="U_46">U_46</option>
+                                
+                                    <option value="U_47">U_47</option>
+                                
+                                    <option value="U_48">U_48</option>
+                                
+                                    <option value="U_49">U_49</option>
+                                
+                                    <option value="U_50">U_50</option>
+                                
+                                    <option value="U_51">U_51</option>
+                                
+                                    <option value="U_52">U_52</option>
+                                
+                                    <option value="U_53">U_53</option>
+                                
+                                    <option value="U_54">U_54</option>
+                                
+                                    <option value="U_55">U_55</option>
+                                
+                                    <option value="U_56">U_56</option>
+                                
+                                    <option value="U_57">U_57</option>
+                                
+                                    <option value="U_58">U_58</option>
+                                
+                                    <option value="U_59">U_59</option>
+                                
+                                    <option value="U_60">U_60</option>
+                                
+                                    <option value="U_61">U_61</option>
+                                
+                                    <option value="U_62">U_62</option>
+                                
+                                    <option value="U_64">U_64</option>
+                                
+                                    <option value="U_65">U_65</option>
+                                
+                                    <option value="U_66">U_66</option>
+                                
+                                    <option value="U_67">U_67</option>
+                                
+                                    <option value="U_68">U_68</option>
+                                
+                                    <option value="U_69">U_69</option>
+                                
+                                    <option value="U_70">U_70</option>
+                                
+                                    <option value="U_71">U_71</option>
+                                
+                                    <option value="U_72">U_72</option>
+                                
+                                    <option value="U_73">U_73</option>
+                                
+                                    <option value="U_74">U_74</option>
+                                
+                                    <option value="U_75">U_75</option>
+                                
+                                    <option value="U_77">U_77</option>
+                                
+                                    <option value="U_78">U_78</option>
+                                
+                                    <option value="U_79">U_79</option>
+                                
+                                    <option value="U_80">U_80</option>
+                                
+                                    <option value="U_81">U_81</option>
+                                
+                                    <option value="U_82">U_82</option>
+                                
+                                    <option value="U_83">U_83</option>
+                                
+                                    <option value="U_84">U_84</option>
+                                
+                                    <option value="U_86">U_86</option>
+                                
+                                    <option value="U_87">U_87</option>
+                                
+                                    <option value="U_88">U_88</option>
+                                
+                                    <option value="U_89">U_89</option>
+                                
+                                    <option value="U_90">U_90</option>
+                                
+                                    <option value="U_91">U_91</option>
+                                
+                                    <option value="U_92">U_92</option>
+                                
+                                    <option value="U_93">U_93</option>
+                                
+                                    <option value="U_94">U_94</option>
+                                
+                                    <option value="U_95">U_95</option>
+                                
+                                    <option value="U_96">U_96</option>
+                                
+                                    <option value="U_97">U_97</option>
+                                
+                                    <option value="U_98">U_98</option>
+                                
+                                    <option value="U_99">U_99</option>
+                                
+                                    <option value="U_100">U_100</option>
+                                
+                                    <option value="U_101">U_101</option>
+                                
+                                    <option value="U_102">U_102</option>
+                                
+                                    <option value="U_103">U_103</option>
+                                
+                                    <option value="U_104">U_104</option>
+                                
+                                    <option value="U_105">U_105</option>
+                                
+                                    <option value="U_106">U_106</option>
+                                
+                                    <option value="U_107">U_107</option>
+                                
+                                    <option value="U_108">U_108</option>
+                                
+                                    <option value="U_109">U_109</option>
+                                
+                                    <option value="U_110">U_110</option>
+                                
+                                    <option value="U_111">U_111</option>
+                                
+                                    <option value="U_112">U_112</option>
+                                
+                                    <option value="U_113">U_113</option>
+                                
+                                    <option value="U_114">U_114</option>
+                                
+                                    <option value="U_115">U_115</option>
+                                
+                                    <option value="U_116">U_116</option>
+                                
+                                    <option value="U_117">U_117</option>
+                                
+                                    <option value="U_118">U_118</option>
+                                
+                                    <option value="U_119">U_119</option>
+                                
+                                    <option value="U_120">U_120</option>
+                                
+                                    <option value="U_121">U_121</option>
+                                
+                                    <option value="U_122">U_122</option>
+                                
+                                    <option value="U_123">U_123</option>
+                                
+                                    <option value="U_124">U_124</option>
+                                
+                                    <option value="U_125">U_125</option>
+                                
+                                    <option value="U_126">U_126</option>
+                                
+                                    <option value="U_127">U_127</option>
+                                
+                                    <option value="U_128">U_128</option>
+                                
+                                    <option value="U_129">U_129</option>
+                                
+                                    <option value="U_130">U_130</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#ff6666", "font": {"color": "white"}, "id": "U_0", "label": "Attacker / Threat Group", "shape": "dot", "size": 60, "title": "\u003cb\u003eID:\u003c/b\u003e U_0\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Attacker\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 0\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLazarus Group\u003cbr\u003eInvisiMole\u003cbr\u003eThreat Actors\u003cbr\u003eLatrodectus\u003cbr\u003ePUNCHBUGGY\u003cbr\u003eBoomBox\u003cbr\u003eADVSTORESHELL\u003cbr\u003eBriba\u003cbr\u003eMegaCortex\u003cbr\u003eSVCReady\u003cbr\u003eGreyEnergy\u003cbr\u003eStreamEx\u003cbr\u003eEmissary\u003cbr\u003eAttacker\u003cbr\u003ePrikormka"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_1", "label": "Process (Various)", "shape": "dot", "size": 26, "title": "\u003cb\u003eID:\u003c/b\u003e U_1\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003erundll32.exe\u003cbr\u003eRunDLL32.exe\u003cbr\u003eRundll32.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_2", "label": "thumbnail.db", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_2\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ethumbnail.db"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_3", "label": "Cobalt Strike Beacon loader.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_3\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCobalt Strike Beacon loader.dll"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_4", "label": "Downloaded DLL", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_4\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDownloaded DLL"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_5", "label": "Malicious DLL", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_5\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalicious DLL"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_6", "label": "rundll32.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_6\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003erundll32.exe"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_7", "label": "Registry (Various)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_7\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eRegistry Value\u003cbr\u003eRegistry value"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_9", "label": "Registry (Various)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_9\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eRegistry Run Key\u003cbr\u003eRegistry Run key"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_11", "label": "Encryption DLL", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_11\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eEncryption DLL"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_12", "label": "PsExec", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_12\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePsExec"}, {"color": "#7be141", "font": {"color": "white"}, "id": "U_13", "label": "NTAUTHORITY\\SYSTEM", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_13\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e User\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eNTAUTHORITY\\SYSTEM"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_14", "label": "Exported Function", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_14\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eExported Function"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_15", "label": "PowerDuke", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_15\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePowerDuke"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_16", "label": "Kapeka.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_16\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eKapeka.dll"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_17", "label": "Mosquito\u0027s launcher", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_17\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMosquito\u0027s launcher"}, {"color": "#ffb366", "font": {"color": "white"}, "id": "U_19", "label": "Registry Key value", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_19\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eRegistry Key value"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_20", "label": "Main Backdoor", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_20\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMain Backdoor"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_21", "label": "Prikormka DLL", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_21\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePrikormka DLL"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_22", "label": "Gamaredon Group Malware", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_22\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eGamaredon Group Malware"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_23", "label": "Malicious Component", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_23\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalicious Component"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_24", "label": "PolyglotDuke", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_24\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePolyglotDuke"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_25", "label": "Elise Variant", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_25\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eElise Variant"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_26", "label": "Malicious.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_26\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalicious.dll"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_27", "label": "Malware", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_27\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalware"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_28", "label": "Payload", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_28\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePayload"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_29", "label": "Attor Installer Plugin", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_29\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eAttor Installer Plugin"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_30", "label": "Dispatcher", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_30\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDispatcher"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_31", "label": "FunnyDream Components", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_31\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eFunnyDream Components"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_32", "label": "Malicious Scripts", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_32\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalicious Scripts"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_33", "label": "MiniDump", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_33\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMiniDump"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_34", "label": "lsass.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_34\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003elsass.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_35", "label": "EnvyScout", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_35\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eEnvyScout"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_36", "label": "Malicious File", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_36\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalicious File"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_37", "label": "IcedID Loader", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_37\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eIcedID Loader"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_38", "label": "StrelaStealer.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_38\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eStrelaStealer.dll"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_39", "label": "Backdoor.Oldrea", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_39\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBackdoor.Oldrea"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_40", "label": "svchost.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_40\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003esvchost.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_41", "label": "VNC server software", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_41\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eVNC server software"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_42", "label": "Tool", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_42\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eTool"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_43", "label": "comsvcs.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_43\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ecomsvcs.dll"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_45", "label": "Mispadu", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_45\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMispadu"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_46", "label": "injector.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_46\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003einjector.dll"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_47", "label": "DDKONG", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_47\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDDKONG"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_48", "label": "gh0st RAT variant", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_48\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003egh0st RAT variant"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_49", "label": "SDBbot", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_49\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSDBbot"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_50", "label": "XMRIG miner DLLs", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_50\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eXMRIG miner DLLs"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_51", "label": "ransomware commands", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_51\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eransomware commands"}, {"color": "#d279d2", "font": {"color": "white"}, "id": "U_52", "label": "WebDAV", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_52\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Network\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWebDAV"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_53", "label": "Winnti for Windows installer", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_53\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eWinnti for Windows installer"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_54", "label": "DLL", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_54\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDLL"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_55", "label": "CozyCar dropper", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_55\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCozyCar dropper"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_56", "label": "copy of rundll32.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_56\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ecopy of rundll32.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_57", "label": "main CozyCar component", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_57\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003emain CozyCar component"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_58", "label": "DEADEYE", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_58\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDEADEYE"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_59", "label": "SHELL32.DLL", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_59\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSHELL32.DLL"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_60", "label": "APT32 malware", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_60\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eAPT32 malware"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_61", "label": "initial infection process", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_61\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003einitial infection process"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_62", "label": "Heyoka Backdoor", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_62\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e -1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eHeyoka Backdoor"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_64", "label": "Mongall", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_64\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e -1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMongall"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_65", "label": "SUNBURST", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_65\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSUNBURST"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_66", "label": "payloads", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_66\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003epayloads"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_67", "label": "Bumblebee", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_67\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBumblebee"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_68", "label": "loader component", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_68\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eloader component"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_69", "label": "Malicious Payload", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_69\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalicious Payload"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_70", "label": "C:\\Windows\\infpub.dat", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_70\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eC:\\Windows\\infpub.dat"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_71", "label": "Vminst", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_71\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eVminst"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_72", "label": "Cobalt Strike", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_72\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCobalt Strike"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_73", "label": "Shellcode", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_73\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eShellcode"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_74", "label": "File (Generic)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_74\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eLoader\u003cbr\u003eloader"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_75", "label": "Ninja Loader Component", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_75\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eNinja Loader Component"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_77", "label": "file (Various)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_77\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBackdoor\u003cbr\u003ebackdoor"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_78", "label": "File (Generic)", "shape": "dot", "size": 24, "title": "\u003cb\u003eID:\u003c/b\u003e U_78\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSupplied DLL\u003cbr\u003esupplied DLL"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_79", "label": "CHOPSTICK", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_79\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCHOPSTICK"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_80", "label": "C:\\Windows\\twain_64.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_80\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eC:\\Windows\\twain_64.dll"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_81", "label": "first stage dropper.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_81\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003efirst stage dropper.dll"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_82", "label": "batch script", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_82\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ebatch script"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_83", "label": "DLL payload", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_83\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDLL payload"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_84", "label": "Bisonal", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_84\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBisonal"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_86", "label": "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\vert", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_86\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e registry\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eHKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\vert"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_87", "label": "c:\\windows\\temp\\pvcu.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_87\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 4\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ec:\\windows\\temp\\pvcu.dll"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_88", "label": "USBferry", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_88\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eUSBferry"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_89", "label": "Raspberry Robin", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_89\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eRaspberry Robin"}, {"color": "#d279d2", "font": {"color": "white"}, "id": "U_90", "label": "C2 Infrastructure", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_90\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Network\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eC2 Infrastructure"}, {"color": "#d279d2", "font": {"color": "white"}, "id": "U_91", "label": "Tor nodes IP addresses", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_91\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Network\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 4\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eTor nodes IP addresses"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_92", "label": "Pteranodon", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_92\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePteranodon"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_93", "label": "NativeZone", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_93\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eNativeZone"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_94", "label": "Sakula", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_94\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSakula"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_95", "label": "cmd.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_95\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ecmd.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_96", "label": "various DLL files", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_96\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 4\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003evarious DLL files"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_97", "label": "Installer", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_97\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eInstaller"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_98", "label": "Troll Stealer.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_98\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eTroll Stealer.dll"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_99", "label": "DLLs", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_99\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eDLLs"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_100", "label": "named pipes", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_100\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003enamed pipes"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_101", "label": "module", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_101\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003emodule"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_102", "label": "core DLL file", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_102\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ecore DLL file"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_103", "label": "dropper program", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_103\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003edropper program"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_104", "label": "malicious installers", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_104\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003emalicious installers"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_105", "label": "downloaded DLLs", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_105\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003edownloaded DLLs"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_106", "label": "Commands", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_106\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCommands"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_107", "label": "Scripts", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_107\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eScripts"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_108", "label": "Binaries", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_108\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBinaries"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_109", "label": "Control Panel Item files", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_109\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eControl Panel Item files"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_110", "label": "renamed_rundll32.exe", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_110\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003erenamed_rundll32.exe"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_111", "label": "Malicious DLLs", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_111\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalicious DLLs"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_112", "label": "Malicious Files", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_112\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalicious Files"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_113", "label": "CORESHELL.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_113\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCORESHELL.dll"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_114", "label": "Flame", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_114\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eFlame"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_115", "label": "Koadic Stagers", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_115\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eKoadic Stagers"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_116", "label": "wmic", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_116\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ewmic"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_117", "label": "NotPetya File", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_117\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eNotPetya File"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_118", "label": "JHUHUGIT", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_118\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eJHUHUGIT"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_119", "label": "New Process", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_119\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eNew Process"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_120", "label": "Keylogging Binary.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_120\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eKeylogging Binary.dll"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_121", "label": "VirtualBox Components", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_121\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eVirtualBox Components"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_122", "label": "Cobalt Strike Beacon files", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_122\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eCobalt Strike Beacon files"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_123", "label": "Malicious .dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_123\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMalicious .dll"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_124", "label": "Brute Ratel C4.dll", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_124\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eBrute Ratel C4.dll"}, {"color": "#d279d2", "font": {"color": "white"}, "id": "U_125", "label": "C2 Server", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_125\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Network\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eC2 Server"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_126", "label": "Pikabot payload", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_126\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePikabot payload"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_127", "label": "Squirrelwaffle", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_127\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eSquirrelwaffle"}, {"color": "#66b3ff", "font": {"color": "white"}, "id": "U_128", "label": "Koadic", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_128\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e Process\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 1\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eKoadic"}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "U_129", "label": "Payload File", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_129\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e file\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 3\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003ePayload File"}, {"color": "#ffff66", "font": {"color": "white"}, "id": "U_130", "label": "Mimikatz", "shape": "dot", "size": 22, "title": "\u003cb\u003eID:\u003c/b\u003e U_130\u003cbr\u003e\u003cb\u003eType:\u003c/b\u003e File\u003cbr\u003e\u003cb\u003eLevel:\u003c/b\u003e 2\u003cbr\u003e\u003cb\u003eSources:\u003c/b\u003e 0\u003cbr\u003e\u003chr\u003e\u003cb\u003eVariants:\u003c/b\u003e\u003cbr\u003eMimikatz"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "executes, uses, uses/deploys, uses_for_execution, executes_via", "title": "executes, uses, uses/deploys, uses_for_execution, executes_via", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "modifies, uses_for_persistence", "title": "modifies, uses_for_persistence", "to": "U_7"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "modifies", "title": "modifies", "to": "U_9"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_12"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_17"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_22"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_25"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_28"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_29"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_35"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_40"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "installs, executes", "title": "installs, executes", "to": "U_41"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_42"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_45"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_47"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_49"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_53"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_55"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_58"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_60"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_65"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_67"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_77"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "drops", "title": "drops", "to": "U_82"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_84"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_88"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_89"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_92"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_93"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_94"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_97"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_100"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "contains", "title": "contains", "to": "U_101"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_110"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses", "title": "uses", "to": "U_116"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_0", "label": "uses/deploys", "title": "uses/deploys", "to": "U_128"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "loads", "title": "loads", "to": "U_2"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "loads", "title": "loads", "to": "U_3"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "loads", "title": "loads", "to": "U_4"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "loads, executes, loads, executes", "title": "loads, executes, loads, executes", "to": "U_5"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "loads", "title": "loads", "to": "U_11"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "calls", "title": "calls", "to": "U_14"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "loads", "title": "loads", "to": "U_15"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_16"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "loads", "title": "loads", "to": "U_21"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_24"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_26"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_27"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_31"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_32"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_33"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_37"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_38"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_39"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "loads", "title": "loads", "to": "U_43"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_46"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_48"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_50"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "deploys", "title": "deploys", "to": "U_51"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "uses", "title": "uses", "to": "U_52"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_69"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_70"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "loads", "title": "loads", "to": "U_71"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "loads", "title": "loads", "to": "U_72"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "loads", "title": "loads", "to": "U_73"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_74"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_75"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_79"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_80"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_81"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_83"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes, executes", "title": "executes, executes", "to": "U_99"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "runs", "title": "runs", "to": "U_102"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_103"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_104"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_105"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_106"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_107"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_108"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_109"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_112"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_113"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_114"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_115"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "installs", "title": "installs", "to": "U_117"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_118"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "creates", "title": "creates", "to": "U_119"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "proxies_execution_of", "title": "proxies_execution_of", "to": "U_120"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_121"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "launches", "title": "launches", "to": "U_122"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "drops", "title": "drops", "to": "U_124"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "connects_to", "title": "connects_to", "to": "U_125"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_126"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_127"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_130"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "runs_as", "title": "runs_as", "to": "U_13"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "launches", "title": "launches", "to": "U_23"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "loads", "title": "loads", "to": "U_30"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_36"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "loads", "title": "loads", "to": "U_54"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_59"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_61"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_66"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_68"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_78"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "connects_to", "title": "connects_to", "to": "U_90"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_98"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_123"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_129"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_62"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_64"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_87"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_96"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_1", "label": "executes", "title": "executes", "to": "U_28"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "contains, references", "title": "contains, references", "to": "U_6"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_7", "label": "invokes", "title": "invokes", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_9", "label": "contains", "title": "contains", "to": "U_6"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_9", "label": "executes, invokes", "title": "executes, invokes", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_12", "label": "executes_as", "title": "executes_as", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_17", "label": "modifies", "title": "modifies", "to": "U_19"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_19", "label": "used_to_start", "title": "used_to_start", "to": "U_20"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_19", "label": "references", "title": "references", "to": "U_6"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_22", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_25", "label": "copies_to", "title": "copies_to", "to": "U_26"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_28", "label": "injects_into", "title": "injects_into", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_29", "label": "schedules", "title": "schedules", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_33", "label": "dumps_memory_of", "title": "dumps_memory_of", "to": "U_34"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_35", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_40", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_42", "label": "executes", "title": "executes", "to": "U_5"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_43", "label": "accesses", "title": "accesses", "to": "U_34"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_43", "label": "creates", "title": "creates", "to": "U_33"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_45", "label": "contains", "title": "contains", "to": "U_46"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_47", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_49", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_53", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_55", "label": "copies", "title": "copies", "to": "U_6"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_55", "label": "uses", "title": "uses", "to": "U_56"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_56", "label": "executes", "title": "executes", "to": "U_57"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_58", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_60", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_62", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_64", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_65", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_67", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_77", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_82", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_84", "label": "modifies", "title": "modifies", "to": "U_86"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_86", "label": "contains", "title": "contains", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_88", "label": "executes", "title": "executes", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_89", "label": "executes", "title": "executes", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_90", "label": "contains", "title": "contains", "to": "U_91"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_92", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_93", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_94", "label": "executes", "title": "executes", "to": "U_95"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_95", "label": "executes", "title": "executes", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_97", "label": "drops", "title": "drops", "to": "U_98"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_97", "label": "uses", "title": "uses", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_101", "label": "downloads", "title": "downloads", "to": "U_99"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_101", "label": "leverages", "title": "leverages", "to": "U_1"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_110", "label": "executes", "title": "executes", "to": "U_111"}, {"arrows": "to", "color": {"color": "white", "opacity": 0.5}, "from": "U_128", "label": "uses", "title": "uses", "to": "U_1"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.1,
+            "damping": 0.09,
+            "gravitationalConstant": -3000,
+            "springConstant": 0.04,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
